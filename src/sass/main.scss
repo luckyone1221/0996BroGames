@@ -104,8 +104,10 @@ $output-bourbon-deprecation-warnings: false;
 
 //@import '../pug/blocks/**/*.scss';
 @import '../blocks/Header/_Header.scss';
+@import '../blocks/Header/_MobMenu.scss';
 
 
+@import '../blocks/MainPage/_MainPage.scss';
 @import '../blocks/MainPage/_MainPage.scss';
 
 // @import '../pug/blocks/form-wrap/form-wrap.scss';

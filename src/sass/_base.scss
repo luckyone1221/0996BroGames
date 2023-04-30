@@ -5,11 +5,18 @@
 	pointer-events: none;
 	z-index: 1000;
 	overflow: hidden;
-	width: 100%;
-	height: 100%;
-	background-position: center 0;
+
+
+	img{
+		display: block;
+		margin: 0 auto;
+		width: auto;
+		height: 100%;
+		object-position: center 0;
+	}
+
 	opacity: 0;
-	// opacity: 0.7;
+	//opacity: 0.7;
 } 
 
 body,
@@ -90,10 +97,10 @@ body {
     /* Other browsers */
     overscroll-behavior: none;
 
-		&::before {
-			z-index: 999;
-			opacity: 0.76;
-		}
+		//&::before {
+		//	z-index: 999;
+		//	opacity: 0.76;
+		//}
 	}
 }
 
@@ -597,4 +604,9 @@ iframe {
 			counter-increment: num;
 		}
 	}
+}
+
+//
+.main-wrapper{
+	padding-top: var(--header-h);
 }
