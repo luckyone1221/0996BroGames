@@ -1,0 +1,34 @@
+.sDigits{
+  padding: rem(140) 0 rem(60);
+  @include media-breakpoint-up(md){
+    padding: rem(197) 0 rem(60);
+  }
+
+  &__row{
+    --bs-gutter-x: #{rem(12)};
+    --bs-gutter-y: #{rem(12)};
+  }
+  &__box{
+    background: #0B0B0B;
+    border-radius: rem(12);
+    padding: rem(30) rem(16);
+    min-height: 100%;
+    text-align: center;
+  }
+  &__title{
+    font-weight: 600;
+    font-size: rem(46);
+    line-height: calc(56/46);
+
+    color: $white;
+    margin-bottom: rem(4);
+  }
+  &__subtitle{
+    font-weight: 500;
+    line-height: calc(20/16);
+    text-transform: capitalize;
+    color: $primary;
+  }
+  &__{}
+  &__{}
+}

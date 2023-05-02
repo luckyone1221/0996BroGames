@@ -1,0 +1,120 @@
+.sPreOrder{
+  position: relative;
+  z-index: 1;
+
+  @include media-breakpoint-up(xxl){
+    --sPT: #{rem(97)};
+    --sPB: #{rem(90)};
+    --sTPB: #{rem(24)};
+  }
+
+  &__box{
+    @include media-breakpoint-up(lg){
+      border-radius: rem(20);
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+      --box-px: #{rem(32)};
+      padding: rem(60) var(--box-px) rem(40);
+    }
+    @include media-breakpoint-up(xxl){
+      --box-px: #{rem(60)};
+      padding: rem(94) var(--box-px) rem(80);
+    }
+  }
+  &__bg{
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    img{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  .section-title{
+    @include media-breakpoint-up(xl){
+      max-width: 416px;
+    }
+  }
+  &__slider{
+    overflow: visible;
+    @include media-breakpoint-up(lg){
+      margin: 0 calc(var(--box-px) * -1);
+      position: relative;
+      left: var(--box-px);
+
+      //&:after,
+      &:before{
+        content: '';
+        position: absolute;
+        pointer-events: none;
+        z-index: 2;
+        top: 0;
+        width: calc(var(--box-px) + 5px);
+        height: 100%;
+      }
+
+      &:before{
+        left: calc(100% - var(--box-px)*2 + 1px);
+        background: linear-gradient(90deg, rgba(20,17,17,0) 0%, rgba(20,17,17,1) 100%);
+      }
+    }
+    @include media-breakpoint-up(md){
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .swiper-wrapper{
+      order: 1;
+      margin-bottom: 22px;
+    }
+    .swiper-slide{
+      height: auto;
+
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+
+      width: 70vw;
+      @include media-breakpoint-up(sm){
+        width: calc(100%/2 - 32px*1/2);
+      }
+      @include media-breakpoint-up(lg){
+        width: calc(100%/3 - 32px*2/3);
+      }
+      @include media-breakpoint-up(xl){
+        width: calc(100%/4 - 32px*3/4);
+      }
+    }
+    .swiper-pagination{
+      @include media-breakpoint-down(sm){
+        display: none;
+      }
+      @include media-breakpoint-up(md){
+        width: auto;
+        order: 9;
+        margin-right: 11px;
+      }
+      justify-content: flex-start;
+    }
+  }
+  .swiper-tp-btn{
+    &.prev{
+      order: 8;
+      margin-right: 10px;
+    }
+    &.next{
+      order: 10;
+    }
+  }
+  &__{}
+  &__{}
+}
