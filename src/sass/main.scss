@@ -103,16 +103,20 @@ $output-bourbon-deprecation-warnings: false;
 @import "base";
 
 //@import '../pug/blocks/**/*.scss';
+@import '../blocks/Footer/_Footer.scss';
 @import '../blocks/Header/_Header.scss';
 @import '../blocks/Header/_MobMenu.scss';
 
 
-//@import '../blocks/MainPage/_MainPage.scss';
+//main page
 @import '../blocks/HeaderBlock/_HeaderBlock.scss';
 @import '../blocks/sDigits/_sDigits.scss';
 @import '../blocks/Catalog/_sCatalog.scss';
 @import '../blocks/PreOrder/_PreOrder.scss';
 @import '../blocks/Recent/_Recent.scss';
+@import '../blocks/WhyUs/_WhyUs.scss';
+@import '../blocks/Review/_Review.scss';
+@import '../blocks/Fresh/_Fresh.scss';
 
 // @import '../pug/blocks/form-wrap/form-wrap.scss';
 

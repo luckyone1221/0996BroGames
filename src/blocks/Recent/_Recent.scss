@@ -33,7 +33,7 @@
       flex-direction: column;
       align-items: stretch;
 
-      width: 70vw;
+      width: var(--slide-w, 50vw);
       @include media-breakpoint-up(sm){
         width: calc(100%/2 - 32px*1/2);
       }

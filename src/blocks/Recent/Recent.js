@@ -24,14 +24,27 @@ export const Recent = (props) => {
         </div>
         <Swiper
           modules={[Pagination]}
-          spaceBetween={32}
+          breakpoints={{
+            0: {
+              spaceBetween: 16,
+            },
+            576: {
+              spaceBetween: 32,
+            },
+            992: {
+              spaceBetween: 32,
+            },
+            1200: {
+              spaceBetween: 32,
+            },
+          }}
           slidesPerView={"auto"}
           className={'sResent__slider'}
           onSwiper={setSlider}
           pagination={{ clickable: true }}
         >
           {emptyArray.map((item, index) => {
-            return <SwiperSlide>
+            return <SwiperSlide key={index}>
               <ProdCard
                 href="#"
                 img={slideImg1}

@@ -27,15 +27,29 @@ export const PreOrder = (props) => {
           </div>
           <Swiper
             modules={[Pagination]}
-            spaceBetween={32}
+            breakpoints={{
+              0: {
+                spaceBetween: 16,
+              },
+              576: {
+                spaceBetween: 32,
+              },
+              992: {
+                spaceBetween: 32,
+              },
+              1200: {
+                spaceBetween: 32,
+              },
+            }}
             slidesPerView={"auto"}
             className={'sPreOrder__slider'}
             onSwiper={setSlider}
             pagination={{ clickable: true }}
           >
             {emptyArray.map((item, index) => {
-              return <SwiperSlide>
+              return <SwiperSlide key={index}>
                 <ProdCard
+                  key={index}
                   href="#"
                   img={slideImg1}
                   tagsArr={['Accounts', 'PS']}
@@ -53,16 +67,16 @@ export const PreOrder = (props) => {
 }
 
 export const TransparentChevrons = (props) => {
-  let {slider} = props;
+  let {slider, displayClasses} = props;
 
   return(
     <>
-      <div className="swiper-tp-btn d-none d-md-flex prev" onClick={() => {
+      <div className={`swiper-tp-btn ${displayClasses ? displayClasses : 'd-none d-md-flex'} prev`} onClick={() => {
         slider.slidePrev();
       }}>
         <ChevronLeft/>
       </div>
-      <div className="swiper-tp-btn d-none d-md-flex next" onClick={() => {
+      <div className={`swiper-tp-btn ${displayClasses ? displayClasses : 'd-none d-md-flex'} next`} onClick={() => {
         slider.slideNext();
       }}>
         <ChevronRight/>

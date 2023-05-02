@@ -78,29 +78,31 @@ export const Catalog = (props) => {
         </div>
         <Swiper
           modules={[Grid]}
-          spaceBetween={32}
           className={'sCatalog__slider'}
-          updateOnWindowResize={true}
           breakpoints={{
             0: {
+              spaceBetween: 16,
               slidesPerView: "auto",
               grid: {
                 rows: 1
               }
             },
             576: {
+              spaceBetween: 32,
               slidesPerView: 2,
               grid: {
                 rows: 1
               }
             },
             992: {
+              spaceBetween: 32,
               slidesPerView: 3,
               grid: {
                 rows: 2
               }
             },
             1200: {
+              spaceBetween: 32,
               slidesPerView: 4,
               grid: {
                 rows: 2
@@ -120,8 +122,9 @@ export const Catalog = (props) => {
             </Link>
           </SwiperSlide>
           {emptyArray.map((item, index) => {
-            return <SwiperSlide>
+            return <SwiperSlide key={index}>
               <ProdCard
+                key={index}
                 href="#"
                 addClasses={'fixed-h'}
                 img={slideImg1}
@@ -147,7 +150,7 @@ export const ProdCard = (props) => {
         <div className="prodCard__tags">
           <div className="prodCard__tags-row row">
             {tagsArr.map((tag, index) => {
-              return <div className="col-auto">
+              return <div className="col-auto" key={index}>
                 <TagBox txt={tag}/>
               </div>
             })}

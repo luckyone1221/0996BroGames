@@ -6,6 +6,10 @@ import {Digits} from "../sDigits/sDigits";
 import {Catalog} from "../Catalog/Catalog";
 import {PreOrder} from "../PreOrder/PreOrder";
 import {Recent} from "../Recent/Recent";
+import {WhyUs} from "../WhyUs/WhyUs";
+import {Review} from "../Review/Review";
+import {Fresh} from "../Fresh/Fresh";
+import {Footer} from "../Footer/Footer";
 
 export const MainPage = (props) => {
   return(
@@ -17,6 +21,10 @@ export const MainPage = (props) => {
         <Catalog/>
         <PreOrder/>
         <Recent/>
+        <WhyUs/>
+        <Review/>
+        <Fresh/>
+        <Footer/>
       </main>
       <PixelPerfect img={ppImg}/>
     </div>
