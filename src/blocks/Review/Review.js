@@ -92,7 +92,7 @@ const ReviewItem = (props) => {
         </div>
         <div className="col-auto">
           <div className="sReview__fb-img">
-            <img src={feedBackImg} alt=""/>
+            <img loading="lazy" src={feedBackImg} alt=""/>
           </div>
         </div>
       </div>
@@ -100,7 +100,7 @@ const ReviewItem = (props) => {
       <div className="sReview__bot-row row align-items-center">
         <div className="col-auto">
           <div className="sReview__game-img">
-            <img src={gameImg} alt=""/>
+            <img loading="lazy" src={gameImg} alt=""/>
           </div>
         </div>
         <div className="col">

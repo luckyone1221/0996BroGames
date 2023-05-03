@@ -20,7 +20,7 @@ export const PreOrder = (props) => {
       <div className="container">
         <div className="sPreOrder__box">
           <div className="sPreOrder__bg">
-            <img src={PreOrderBg} alt=""/>
+            <img loading="lazy" src={PreOrderBg} alt=""/>
           </div>
           <div className="section-title">
             <h2>Pre-order your new games</h2>

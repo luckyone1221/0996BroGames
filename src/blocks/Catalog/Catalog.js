@@ -114,7 +114,7 @@ export const Catalog = (props) => {
           <SwiperSlide>
             <Link className="prodCard sCatalog__steam-card">
               <div className="sCatalog__steam-img">
-                <img src={steam} alt=""/>
+                <img loading="lazy" src={steam} alt=""/>
               </div>
               <div className="sCatalog__steam-txt">
                 Пополнение кошелька
@@ -146,7 +146,7 @@ export const ProdCard = (props) => {
   return(
     <Link className={`prodCard ${addClasses ? addClasses : ''}`} to={href}>
       <div className="prodCard__img-box">
-        <img src={img} alt=""/>
+        <img loading="lazy" src={img} alt=""/>
         <div className="prodCard__tags">
           <div className="prodCard__tags-row row">
             {tagsArr.map((tag, index) => {

@@ -31,7 +31,7 @@ export const WhyUsItem = (props) => {
     <div className="col-6 col-lg-3">
       <div className="WhyUs__item">
         <div className="WhyUs__img">
-          <img src={img} alt=""/>
+          <img loading="lazy" src={img} alt=""/>
         </div>
         <div className="WhyUs__title">{title}</div>
       </div>

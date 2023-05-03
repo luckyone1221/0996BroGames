@@ -11,7 +11,7 @@ export const Footer = (props) => {
         <div className="footer__row row align-items-center">
           <div className="footer__col--left col col-lg-auto">
             <Link className="footer__logo" to="/">
-              <img src={logo} alt=""/>
+              <img loading="lazy" src={logo} alt=""/>
               <span className="footer__logo-txt">BroGames</span>
             </Link>
           </div>

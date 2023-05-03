@@ -12,9 +12,8 @@
     width: 100vw;
   }
 
-
   &.fixed{
-    box-shadow: 0px 10px 10px -10px rgba($black, .25);
+    box-shadow: 0px 0px 12px 0px rgba($black, .5);
   }
 
   &__row{

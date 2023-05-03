@@ -118,6 +118,17 @@ $output-bourbon-deprecation-warnings: false;
 @import '../blocks/Review/_Review.scss';
 @import '../blocks/Fresh/_Fresh.scss';
 
+//about page
+@import '../blocks/BroHeaderBlock/_BroHeaderBlock.scss';
+@import '../blocks/ImgBox/_ImgBox.scss';
+@import '../blocks/SaveWater/_SaveWater.scss';
+@import '../blocks/WhatWeDo/_WhatWeDo.scss';
+@import '../blocks/HowItWorks/_HowItWorks.scss';
+
+//
+@import '../blocks/PolicyPage/_PolicyPage.scss';
+
+
 // @import '../pug/blocks/form-wrap/form-wrap.scss';
 
 // @import '../pug/blocks/topLine/_topLine.scss';

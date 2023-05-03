@@ -1,0 +1,19 @@
+.sPolicy{
+
+  &__container{
+    @include media-breakpoint-up(lg){
+      max-width: calc(720px + #{$container-padding-x}) !important;
+    }
+  }
+  h1, h2{
+    font-size: rem(24);
+    @include media-breakpoint-up(sm){
+      font-size: rem(32);
+    }
+    margin-bottom: rem(24);
+  }
+  &__box{
+    margin-bottom: rem(48);
+  }
+  &__{}
+}

@@ -14,10 +14,14 @@
 
 
 	--slide-w: 50vw;
-	--sPT: #{rem(40)};
-	--sPB: #{rem(40)};
+	--sPT: #{rem(45)};
+	--sPB: #{rem(45)};
 	--sTPB: #{rem(30)};
-
+	@include media-breakpoint-up(xxl){
+		--sPT: #{rem(90)};
+		--sPB: #{rem(90)};
+		--sTPB: #{rem(40)};
+	}
 
 	--fancybox-content-color: var(--bs-body-color);
 		--swiperArrowSize: #{rem(68)};

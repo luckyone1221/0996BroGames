@@ -107,7 +107,7 @@ const FreshItem = (props) => {
         {img && (
           <div className="sFresh__i-col sFresh__i-col--img col-md-auto">
             <div className="sFresh__i-img">
-              <img src={img} alt=""/>
+              <img loading="lazy" src={img} alt=""/>
             </div>
           </div>
         )}
@@ -115,7 +115,7 @@ const FreshItem = (props) => {
           <div className="sFresh__author-row row">
             <div className="col-auto">
               <div className="sFresh__avatar">
-                <img src={avatar} alt=""/>
+                <img loading="lazy" src={avatar} alt=""/>
               </div>
             </div>
             <div className="col">

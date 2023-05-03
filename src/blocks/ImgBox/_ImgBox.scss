@@ -1,0 +1,63 @@
+.sImg{
+  --sPT: #{rem(60)};
+  @include media-breakpoint-up(lg){
+    --sPT: #{rem(180px)};
+    --sPB: #{rem(90)};
+  }
+
+  &__row{
+    --bs-gutter-x: #{rem(32)};
+    --bs-gutter-y: #{rem(40)};
+
+    //1,3...
+    & > *:nth-child(odd){
+      --txt-m: 0 0 #{rem(40)} 0;
+      @include media-breakpoint-up(xxl){
+        --txt-m: 0 0 #{rem(69)} 0;
+      }
+    }
+    & > *:nth-child(even){
+      --box-f-direction: column-reverse;
+
+      --txt-m: #{rem(40)} 0 0 auto;
+      @include media-breakpoint-up(xxl){
+        --txt-m: #{rem(69)} 0 0 auto;
+      }
+    }
+  }
+  &__box{
+    display: flex;
+    align-items: stretch;
+
+    flex-direction: column-reverse;
+    @include media-breakpoint-up(md){
+      flex-direction: var(--box-f-direction, column);
+    }
+  }
+  &__txt{
+    //margin-top: rem(32);
+    @include media-breakpoint-up(md){
+      max-width: calc(488/592 * 100%);
+      margin: var(--txt-m);
+    }
+
+    font-size: rem(16);
+    @include media-breakpoint-up(lg){
+      font-size: rem(20);
+    }
+  }
+  &__img{
+    @extend .accept-ratio-frame;
+    padding-top: calc(524/592 * 100%);
+    border-radius: rem(12);
+
+    margin-bottom: rem(32);
+    @include media-breakpoint-up(md){
+      margin-bottom: 0;
+    }
+  }
+
+  //
+  &__{}
+  &__{}
+}
