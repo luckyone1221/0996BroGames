@@ -181,6 +181,7 @@
 }
 
 .prodCard{
+  display: block;
   &.fixed-h{
     //height: var(--prodCard-h, #{rem(348)});
     @include media-breakpoint-up(lg){
@@ -219,7 +220,10 @@
     width: calc(100% - #{rem(24)});
   }
   &__tags-row{
-    --bs-gutter-x: #{rem(8)};
+    --bs-gutter-x: #{rem(4)};
+    @include media-breakpoint-up(sm){
+      --bs-gutter-x: #{rem(8)};
+    }
     --bs-gutter-y: #{rem(4)};
 
     & > *{

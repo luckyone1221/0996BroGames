@@ -1,0 +1,47 @@
+.cHead{
+  position: sticky;
+  top: var(--header-h);
+  z-index: 100;
+  left: 0;
+
+  &__header{
+    background: #2D2A2A;
+
+    padding: rem(16) 0;
+    @include media-breakpoint-up(sm){
+      padding: rem(20) 0;
+    }
+
+    @include media-breakpoint-up(lg){
+      margin-bottom: rem(60);
+    }
+    @include media-breakpoint-up(xl){
+      margin-bottom: rem(100);
+    }
+  }
+  &__row{
+    --bs-gutter-y: #{rem(12)};
+
+    --bs-gutter-x: #{rem(10)};
+    @include media-breakpoint-up(sm){
+      --bs-gutter-x: #{rem(24)};
+    }
+    @include media-breakpoint-up(lg){
+      --bs-gutter-x: #{rem(40)};
+    }
+  }
+  &__h-link{
+    font-weight: 500;
+
+    font-size: rem(12);
+    @include media-breakpoint-up(sm){
+      font-size: rem(14);
+    }
+    line-height: calc(17/14);
+    color: $white;
+
+    &.active{
+      color: $primary;
+    }
+  }
+}

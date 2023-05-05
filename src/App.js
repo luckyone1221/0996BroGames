@@ -4,6 +4,7 @@ import {MainPage} from "./blocks/MainPage/MainPage";
 import './sass/main.scss';
 import {AboutPage} from "./blocks/AboutPage/AboutPage";
 import {PolicyPage} from "./blocks/PolicyPage/PolicyPage";
+import {CatalogPage} from "./blocks/CatalogPage/CatalogPage";
 
 function App() {
   return (
@@ -20,6 +21,10 @@ function App() {
         <Route
           path="/policy"
           element={<PolicyPage/>}
+        />
+        <Route
+          path="/catalog"
+          element={<CatalogPage/>}
         />
       </Routes>
     </BrowserRouter>
