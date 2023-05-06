@@ -5,6 +5,8 @@ import './sass/main.scss';
 import {AboutPage} from "./blocks/AboutPage/AboutPage";
 import {PolicyPage} from "./blocks/PolicyPage/PolicyPage";
 import {CatalogPage} from "./blocks/CatalogPage/CatalogPage";
+import {ProdCardPage} from "./blocks/ProdCardPage/ProdCardPage";
+import {CartPage} from "./blocks/CartPage/CartPage";
 
 function App() {
   return (
@@ -25,6 +27,14 @@ function App() {
         <Route
           path="/catalog"
           element={<CatalogPage/>}
+        />
+        <Route
+          path="/prod-card"
+          element={<ProdCardPage/>}
+        />
+        <Route
+          path="/cart"
+          element={<CartPage/>}
         />
       </Routes>
     </BrowserRouter>

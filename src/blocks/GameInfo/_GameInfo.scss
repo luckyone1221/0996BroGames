@@ -1,0 +1,24 @@
+.sGame{
+  @include media-breakpoint-up(xxl){
+    --sPT: #{rem(71px)};
+    --sPB: #{rem(71)};
+    --sTPB: #{rem(37)};
+  }
+  @include media-breakpoint-up(sm){
+    margin-bottom: var(--sPB);
+  }
+
+  background: rgba(0, 0, 0, 0.9);
+
+  .section-title{
+
+  }
+  &__content{
+    @include media-breakpoint-up(xl){
+      max-width: rem(940);
+      margin: 0 auto;
+    }
+  }
+  &__{}
+  &__{}
+}

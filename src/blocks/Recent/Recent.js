@@ -8,7 +8,7 @@ import {ProdCard} from "../Catalog/Catalog";
 import slideImg1 from "../../img/headerBlock-slide.jpg";
 
 export const Recent = (props) => {
-  const {} = props;
+  const {title} = props;
   const [slider, setSlider] = useState();
 
   let emptyArray = [];
@@ -20,7 +20,7 @@ export const Recent = (props) => {
     <section className="sResent section">
       <div className="container">
         <div className="section-title">
-          <h2>You recently viewed</h2>
+          <h2>{title}</h2>
         </div>
         <Swiper
           modules={[Pagination]}
@@ -29,12 +29,6 @@ export const Recent = (props) => {
               spaceBetween: 16,
             },
             576: {
-              spaceBetween: 32,
-            },
-            992: {
-              spaceBetween: 32,
-            },
-            1200: {
               spaceBetween: 32,
             },
           }}

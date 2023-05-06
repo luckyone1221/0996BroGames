@@ -128,10 +128,16 @@ $output-bourbon-deprecation-warnings: false;
 //policy page
 @import '../blocks/PolicyPage/_PolicyPage.scss';
 
-//catalog
+//catalog page
 @import '../blocks/CatalogHeader/_CatalogHeader.scss';
 @import '../blocks/CatalogSlider/_CatalogSlider.scss';
 @import '../blocks/CatalogItems/_CatalogItems.scss';
+
+//prod card page
+@import '../blocks/ProdCardHeaderBlock/_ProdCardHeaderBlock.scss';
+@import '../blocks/ProdGalery/_ProdGalery.scss';
+@import '../blocks/GameInfo/_GameInfo.scss';
+@import '../blocks/CartPage/_CartPage.scss';
 
 @import "media"; // Всегда в конце
 

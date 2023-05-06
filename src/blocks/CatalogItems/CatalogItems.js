@@ -2,7 +2,6 @@
 
 import React, {useEffect, useRef, useState} from 'react'
 import Select from 'react-select'
-import {SwiperSlide} from "swiper/react";
 import slideImg1 from "../../img/headerBlock-slide.jpg";
 import {ProdCard} from "../Catalog/Catalog";
 
