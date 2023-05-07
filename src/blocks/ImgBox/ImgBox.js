@@ -1,14 +1,16 @@
 import img1 from '../../img/sImg-1.jpg'
 import img2 from '../../img/sImg-2.jpg'
+import {useLanguage} from "../../Hooks/UseLang";
 
 export const ImgBox = (props) => {
+  const lang = useLanguage().ImgBox;
 
   return(
     <div className="section sImg">
       <div className="container">
         <div className="sImg__row row">
-          <ImgBoxItem img={img1} txt={'Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque.'}/>
-          <ImgBoxItem img={img2} txt={'Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque.'}/>
+          <ImgBoxItem img={img1} txt={lang.item1}/>
+          <ImgBoxItem img={img2} txt={lang.item2}/>
         </div>
       </div>
     </div>

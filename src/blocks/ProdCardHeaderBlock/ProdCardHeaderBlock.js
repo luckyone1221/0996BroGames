@@ -2,8 +2,10 @@ import slideImg1 from '../../img/headerBlock-slide.jpg'
 
 import {TagBox} from "../Catalog/Catalog";
 import {CartIcon} from "../../SvgSpriptes";
+import {useLanguage} from "../../Hooks/UseLang";
 
 export const ProdCardHeaderBlock = (props) => {
+  const lang = useLanguage().ProdCardHeaderBlock;
 
   return (
     <section className="section sProd">
@@ -31,7 +33,7 @@ export const ProdCardHeaderBlock = (props) => {
               <div className="sProd__price">20$</div>
               <div className="sProd__btn-row row align-items-center">
                 <div className="col-sm-auto">
-                  <button className="sProd__btn">BUY NOW</button>
+                  <button className="sProd__btn">{lang.buyNow}</button>
                 </div>
                 <div className="col-auto d-none d-sm-block">
                   <div className="sProd__cart">
@@ -40,16 +42,12 @@ export const ProdCardHeaderBlock = (props) => {
                 </div>
                 <div className="col-auto">
                   <div className="sProd__how-txt">
-                    How it works?
+                    {lang.howItWorks}
                   </div>
                 </div>
               </div>
               <ul className="sProd__how-list">
-                <li>Warranty for all games</li>
-                <li>Best price allover the web</li>
-                <li>Best quality</li>
-                <li>Thousands of real positive reviews</li>
-                <li>Good support that is always ready to answer your questions</li>
+                {lang.list.map((item, index) => <li>{item}</li>)}
               </ul>
             </div>
           </div>

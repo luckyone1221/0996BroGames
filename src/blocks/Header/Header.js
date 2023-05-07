@@ -1,7 +1,7 @@
 //logo.svg
 import logo from "../../img/Logo.png"
 
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useEffect, useRef, useState} from "react";
 import {CartIcon} from "../../SvgSpriptes";
 import {CurrencyLang} from "./CurrencyLang";
@@ -65,12 +65,21 @@ function useMobMenu(){
   return [mobMenuActive, setMobMenuActive]
 }
 
+
 export const Header = (props) => {
   const header = useRef(null);
   const headerAddClasses = useCalcHeaderHeight(header);
 
   //mob menu
   const [mobMenuActive, setMobMenuActive] = useMobMenu();
+
+  //active item
+  const navigate = useNavigate();
+  const [currLocation,setCurrLocation] = useState('');
+
+  useEffect(() => {
+    setCurrLocation(window.location.pathname);
+  }, [navigate]);
 
   return(
     <>
@@ -83,7 +92,7 @@ export const Header = (props) => {
               </Link>
             </div>
             <div className="col d-none d-xl-block">
-              <HeaderMenu/>
+              <HeaderMenu currLocation={currLocation}/>
             </div>
             <div className="col-auto d-none d-md-block">
               <HeaderSearch/>

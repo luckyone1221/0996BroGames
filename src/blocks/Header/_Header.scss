@@ -134,12 +134,17 @@
       color: $white;
 
       //?
-      svg{
+      img{
         width: rem(16);
         margin-right: rem(4);
       }
 
       &:hover{
+        color: $primary;
+      }
+
+      &.active{
+        transition: all 0s;
         color: $primary;
       }
     }

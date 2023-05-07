@@ -3,11 +3,32 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {createStore} from "redux";
+import {Provider} from "react-redux";
+
+const defaultLang = {
+  lang: 'en-US',//
+  currency: "RUB",//USD
+}
+
+const reducer = (state=defaultLang, action) => {
+  switch (action.type){
+    case "CHANGE_LANG":
+      return {...state, lang: action.payload}
+    case "CHANGE_CURRENCY":
+      return {...state, currency: action.payload}
+    default:
+      return state
+  }
+}
+const store = createStore(reducer);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 

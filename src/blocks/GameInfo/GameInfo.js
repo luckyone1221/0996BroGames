@@ -1,10 +1,13 @@
+import {useLanguage} from "../../Hooks/UseLang";
+
 export const GameInfo = (props) => {
+  const lang = useLanguage().GameInfo;
 
   return (
     <section className="sGame section">
       <div className="container">
         <div className="section-title text-center">
-          <h2>Game information</h2>
+          <h2>{lang.title}</h2>
         </div>
         <div className="sGame__content">
           ⭐️Minecraft PREMIUM | Java⭐️MAIL ACCESS❤️All Servers✔️<br/>

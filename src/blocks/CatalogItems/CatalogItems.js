@@ -1,9 +1,11 @@
 //CatalogItems
 
+import {useNavigate} from 'react-router-dom';
 import React, {useEffect, useRef, useState} from 'react'
 import Select from 'react-select'
 import slideImg1 from "../../img/headerBlock-slide.jpg";
 import {ProdCard} from "../Catalog/Catalog";
+import {useLanguage} from "../../Hooks/UseLang";
 
 let setSelectClasses = (state) => {
   return {
@@ -20,15 +22,31 @@ let setSelectClasses = (state) => {
   }
 }
 
+let getOptionFromArr = (options, value) => {
+  return options.filter((option) => {
+    return option.label === value;
+  })
+}
+
 export const CatalogItems = (props) => {
+  const {productType} = props;
+
   //
+  const lang = useLanguage().CatalogItems;
+
+  //prod Type
   let productTypeOptions = [
-    { value: 'Accounts', label: 'Accounts' },
-    { value: 'Activation', label: 'Activation' },
-    { value: 'Keys', label: 'Keys' },
-    { value: 'Top-UP', label: 'Top-UP' }
+    { value: '/catalog/accounts', label: lang.accounts },
+    { value: '/catalog/activation', label: lang.activation },
+    { value: '/catalog/keys', label: lang.keys },
+    { value: '/catalog/top-up', label: lang.topUp }
   ]
-  const [prodType, setProdType] = useState(productTypeOptions[0]);
+  const [prodType, setProdType] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setProdType(getOptionFromArr(productTypeOptions, productType));
+  }, [navigate])
 
 
   //load more
@@ -78,12 +96,17 @@ export const CatalogItems = (props) => {
         <div className="sItems__top-row row align-items-center">
           <div className="col-lg">
             <div className="section-title">
-              <h1>Our Сatalog</h1>
+              <h1>{lang.title}</h1>
             </div>
           </div>
-          <CatalogItemsSelect state={prodType} setState={setProdType} options={productTypeOptions}/>
-          <CatalogItemsSelect state={prodType} setState={setProdType} options={productTypeOptions}/>
-          <CatalogItemsSelect state={prodType} setState={setProdType} options={productTypeOptions}/>
+          <CatalogItemsSelect
+            state={prodType}
+            setState={setProdType}
+            options={productTypeOptions}
+            onChange={(e) => {
+              navigate(e.value);
+            }}
+          />
         </div>
         <div className="sItems__row row">
           {emptyArray.map((item, index) => {
@@ -99,14 +122,16 @@ export const CatalogItems = (props) => {
             </div>
           })}
         </div>
-        <div className="sItems__loading text-center" ref={loadMore}>Loading new products</div>
+        <div className="sItems__loading text-center" ref={loadMore}>
+          {lang.loadingTxt}
+        </div>
       </div>
     </section>
   )
 }
 
 const CatalogItemsSelect = (props) => {
-  const {state, setState, options} = props;
+  const {state, setState, options, onChange} = props;
 
   return(
     <div className="col-sm-4 col-lg-auto">
@@ -117,11 +142,11 @@ const CatalogItemsSelect = (props) => {
             option: (state) => `custom-select__menu-option ${state.isSelected ? 'active' : ''}`,
           }}
         value={state}
-        onChange={(e) => {
-          setState(options.filter((option) => {
-            return option.label === e.value
-          }));
-        }}
+        onChange={
+          (e) => {
+            onChange ? onChange(e) : setState(getOptionFromArr(options, e.value));
+          }
+        }
         isSearchable={false}
         options={options}
       />

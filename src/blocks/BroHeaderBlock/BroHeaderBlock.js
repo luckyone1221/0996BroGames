@@ -1,7 +1,9 @@
 import ppImg from '../../img/sBro-bg.jpg'
 import logo from  '../../img/Logo.png'
+import {useLanguage} from "../../Hooks/UseLang";
 
 export const BroHeaderBlock = (props) => {
+  const lang = useLanguage().BroHeaderBlock;
 
   return(
     <section className="section sBro">
@@ -14,7 +16,7 @@ export const BroHeaderBlock = (props) => {
           <h1 className="sBro__title">BroGamers</h1>
         </div>
         <div className="sBro__descr text-center">
-          Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis
+          {lang.descr}
         </div>
       </div>
     </section>

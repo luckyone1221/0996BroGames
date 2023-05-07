@@ -1,15 +1,15 @@
-//sDigits
+import {useLanguage} from "../../Hooks/UseLang";
 
 export const Digits = (props) => {
+  const lang = useLanguage();
 
   return(
     <div className="sDigits">
       <div className="container">
         <div className="sDigits__row row">
-          <DigitsItem number='5' prefix=' years' descr='experience selling games'/>
-          <DigitsItem number='130' prefix='K' descr='Happy clients'/>
-          <DigitsItem number='99.5' prefix='%' descr='Positive Reviews'/>
-          <DigitsItem number='2400' prefix='+' descr='Games on sale'/>
+          {lang.Digits.map((item, index) => {
+            return <DigitsItem number={item.number} prefix={item.prefix} descr={item.descr}/>
+          })}
         </div>
       </div>
     </div>

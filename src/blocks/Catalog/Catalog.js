@@ -10,6 +10,7 @@ import {Link} from "react-router-dom";
 
 import slideImg1 from '../../img/headerBlock-slide.jpg'
 import steam from '../../img/svg/steam.svg'
+import {useLanguage} from "../../Hooks/UseLang";
 
 export const Catalog = (props) => {
   const {} = props;
@@ -19,7 +20,11 @@ export const Catalog = (props) => {
     emptyArray.push('');
   }
 
+  //
   const [slider, setSlider] = useState(null);
+
+  //
+  const lang = useLanguage().Catalog;
 
   return(
     <section className="sCatalog section">
@@ -27,33 +32,33 @@ export const Catalog = (props) => {
         <div className="sCatalog__top-row row align-items-center">
           <div className="col col-xl-auto">
             <div className="section-title">
-              <h2>Our Сatalog</h2>
+              <h2>{lang.title}</h2>
             </div>
           </div>
           <div className="order-last order-xl-0 col-xl">
             <div className="sCatalog__tags-row align-items-center row">
               <div className="sCatalog__col col-auto">
-                <div className="sCatalog__tag active">Top</div>
+                <div className="sCatalog__tag active">{lang.top}</div>
               </div>
               <div className="sCatalog__col col-auto">
-                <div className="sCatalog__tag">Discount</div>
+                <div className="sCatalog__tag">{lang.discount}</div>
               </div>
               <div className="sCatalog__col sCatalog__col--splitter col-md-auto">
               </div>
               <div className="sCatalog__col col-auto">
-                <div className="sCatalog__tag">Accounts</div>
+                <div className="sCatalog__tag">{lang.accounts}</div>
               </div>
               <div className="sCatalog__col col-auto">
-                <div className="sCatalog__tag">Activation</div>
+                <div className="sCatalog__tag">{lang.activation}</div>
               </div>
               <div className="sCatalog__col col-auto">
-                <div className="sCatalog__tag">Keys</div>
+                <div className="sCatalog__tag">{lang.keys}</div>
               </div>
               <div className="sCatalog__col col-auto">
-                <div className="sCatalog__tag">Soft</div>
+                <div className="sCatalog__tag">{lang.soft}</div>
               </div>
               <div className="sCatalog__col col-auto">
-                <div className="sCatalog__tag">Top-Up</div>
+                <div className="sCatalog__tag">{lang.topUp}</div>
               </div>
             </div>
           </div>
@@ -113,11 +118,11 @@ export const Catalog = (props) => {
         >
           <SwiperSlide>
             <Link className="prodCard sCatalog__steam-card">
-              <div className="sCatalog__steam-img">
+              <div className="sCatalog__steam-img text-center">
                 <img loading="lazy" src={steam} alt=""/>
               </div>
               <div className="sCatalog__steam-txt">
-                Пополнение кошелька
+                {lang.walletTxt}
               </div>
             </Link>
           </SwiperSlide>

@@ -1,0 +1,169 @@
+{
+  "general": {
+    "buyNow": "buy now"
+  },
+  "header": {
+    "market": "Market",
+    "accounts": "Accounts",
+    "activation": "Activation",
+    "keys": "Keys",
+    "top": "Top-UP",
+    "about": "About BroGamers",
+    "searchPlaceholder": "Search game",
+    "language": "Language",
+    "currency": "Currency"
+  },
+  "Digits": [
+    {
+      "number": "5",
+      "prefix": " years",
+      "descr": "experience selling games"
+    },
+    {
+      "number": "130",
+      "prefix": "K",
+      "descr": "Happy clients"
+    },
+    {
+      "number": "99.5",
+      "prefix": "%",
+      "descr": "Positive Reviews"
+    },
+    {
+      "number": "2400",
+      "prefix": "+",
+      "descr": "Games on sale"
+    }
+  ],
+  "Catalog": {
+    "title": "Our Сatalog",
+    "top": "Top",
+    "discount": "Discount",
+    "accounts": "Accounts",
+    "activation": "Activation",
+    "keys": "Keys",
+    "soft": "Soft",
+    "topUp": "Top-Up",
+    "walletTxt": "Пополнение кошелька"
+  },
+  "PreOrder": {
+    "title": "Pre-order your new games"
+  },
+  "Recent": {
+    "titleRecent": "You recently viewed",
+    "titleAlsoLike": "You may also like these games"
+  },
+  "WhyUs": {
+    "title": "Why Choose Us",
+    "item1": "Safety",
+    "item2": "Reasonable prices",
+    "item3": "Best quality",
+    "item4": "Instant delivery"
+  },
+  "Review": {
+    "title": "Clients Reviews"
+  },
+  "Fresh": {
+    "title": "Fresh on the blog",
+    "viewMore": "View more",
+    "hide": "Hide"
+  },
+  "Footer": {
+    "accounts": "Accounts",
+    "activation": "Activation",
+    "keys": "Keys",
+    "about": "About BroGamers",
+    "policy": "Privacy&Policy",
+    "allRights": "© {currYear} BroGames. All rights reserved."
+  },
+  "CatalogHeader": {
+    "pc": "PC",
+    "playStation": "PlayStation",
+    "xBoxAndPc": "Xbox & PC",
+    "nintendo": "Nintendo",
+    "vpnAndSteaming": "VPN & streaming"
+  },
+  "CatalogItems": {
+    "title": "Our Сatalog",
+    "accounts": "Accounts",
+    "activation": "Activation",
+    "keys": "Keys",
+    "topUp": "Top-UP",
+    "loadingTxt": "Loading new products"
+  },
+  "ProdCardHeaderBlock": {
+    "buyNow": "buy now",
+    "howItWorks": "How it works?",
+    "list": [
+      "Warranty for all games",
+      "Best price allover the web",
+      "Best quality",
+      "Thousands of real positive reviews",
+      "Good support that is always ready to answer your questions"
+    ]
+  },
+  "ProdGalery": {
+    "title": "Photo from the game"
+  },
+  "GameInfo": {
+    "title": "Game information"
+  },
+  "Cart": {
+    "title": "Shipping Card",
+    "items": "items",
+    "summary": "Order Summary",
+    "descr": "Prices on payment page are displayed in Rubles, But no metter what currency you pay, convertation without any fee.",
+    "total": "Total cost:",
+    "checkout": "checkout"
+  },
+  "BroHeaderBlock": {
+    "descr": "Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis"
+  },
+  "ImgBox": {
+    "item1": "Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque.",
+    "item2": "Horem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis. Ut commodo efficitur neque."
+  },
+  "SaveWater": {
+    "title": "Save water",
+    "descr": "Don't pollute it with chemicals (car wash, dishwashers, shampoos), remember,\n              it&nbsp;goes&nbsp;to water , air and ground. And then you drink it, breath it and eat it! All of&nbsp;this&nbsp;is not just about water. It’s about all things that harm nature and ourselves!"
+  },
+  "WhatWeDo": {
+    "title": "What we do?",
+    "descr": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed.",
+    "subTitle": "Have I can help?",
+    "list": [
+      "Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed.",
+      "Lorem Ipsum is that it has a more-or-less",
+      "Lorem Ipsum is that it has a more-or-less normal distribution"
+    ]
+  },
+  "HowItWorks": {
+    "title": "How it works",
+    "items": [
+      {
+        "title": "Is there a free trial available?",
+        "content": "Yes, you can try us for free for 30 days. If you want, we’ll provide you with a free, personalized 30-minute onboarding call to get you up and running as soon as possible."
+      },
+      {
+        "title": "Can I change my plan later?",
+        "content": "reply"
+      },
+      {
+        "title": "What is your cancellation policy?",
+        "content": "reply"
+      },
+      {
+        "title": "Can other info be added to an invoice?",
+        "content": "reply"
+      },
+      {
+        "title": "How does billing work?",
+        "content": "reply"
+      },
+      {
+        "title": "How do I change my account email?",
+        "content": "reply"
+      }
+    ]
+  }
+}

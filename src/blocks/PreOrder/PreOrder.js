@@ -6,14 +6,18 @@ import slideImg1 from "../../img/headerBlock-slide.jpg";
 import React, {useState} from "react";
 import {ProdCard} from "../Catalog/Catalog";
 import {ChevronLeft, ChevronRight} from "../../SvgSpriptes";
+import {useLanguage} from "../../Hooks/UseLang";
 
 export const PreOrder = (props) => {
-  const [slider, setSlider] = useState();
+
 
   let emptyArray = [];
   for(var i = 1; i <= 10; i++){
     emptyArray.push('');
   }
+  //
+  const [slider, setSlider] = useState();
+  const lang = useLanguage().PreOrder;
 
   return(
     <section className="sPreOrder section">
@@ -23,7 +27,7 @@ export const PreOrder = (props) => {
             <img loading="lazy" src={PreOrderBg} alt=""/>
           </div>
           <div className="section-title">
-            <h2>Pre-order your new games</h2>
+            <h2>{lang.title}</h2>
           </div>
           <Swiper
             modules={[Pagination]}
@@ -32,12 +36,6 @@ export const PreOrder = (props) => {
                 spaceBetween: 16,
               },
               576: {
-                spaceBetween: 32,
-              },
-              992: {
-                spaceBetween: 32,
-              },
-              1200: {
                 spaceBetween: 32,
               },
             }}

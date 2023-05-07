@@ -3,8 +3,11 @@ import {Discord, Telegram} from "../../SvgSpriptes";
 import gameImg from '../../img/headerBlock-slide.jpg'
 import avatarImg from '../../img/avatar.jpg'
 import {useEffect, useRef, useState} from "react";
+import {useLanguage} from "../../Hooks/UseLang";
 
 export const Fresh = (props) => {
+  const lang = useLanguage().Fresh;
+
   return (
     <section className="section sFresh">
       <div className="container">
@@ -12,7 +15,7 @@ export const Fresh = (props) => {
           <div className="sFresh__row row align-items-center">
             <div className="col">
               <div className="section-title">
-                <h2>Fresh on the blog</h2>
+                <h2>{lang.title}</h2>
               </div>
             </div>
             <div className="col-auto">
@@ -33,6 +36,8 @@ export const Fresh = (props) => {
                 avatar={avatarImg}
                 name={'Neaches'}
                 date={'Apr 06 at 12:38'}
+                viewMoreTxt={lang.viewMore}
+                HideTxt={lang.hide}
                 content={
                   <>
                     Выборка новостей:<br/><br/>
@@ -46,6 +51,8 @@ export const Fresh = (props) => {
                 avatar={avatarImg}
                 name={'Neaches'}
                 date={'Apr 06 at 12:38'}
+                viewMoreTxt={lang.viewMore}
+                HideTxt={lang.hide}
                 content={
                   <>
                     Выборка новостей:<br/><br/>
@@ -59,6 +66,8 @@ export const Fresh = (props) => {
                 avatar={avatarImg}
                 name={'Neaches'}
                 date={'Apr 06 at 12:38'}
+                viewMoreTxt={lang.viewMore}
+                HideTxt={lang.hide}
                 content={
                   <>
                     Short Message
@@ -74,7 +83,7 @@ export const Fresh = (props) => {
 }
 
 const FreshItem = (props) => {
-  const {img, avatar,name,date, content} = props;
+  const {img, avatar,name,date, content, viewMoreTxt, HideTxt} = props;
 
   //txt overflow
   const [txtHasOverFlow, setTxtHasOverflow] = useState(false);
@@ -130,7 +139,7 @@ const FreshItem = (props) => {
             <div className="sFresh__view-more" onClick={() => {
               contentAddClasses ? setContentAddClasses('') : setContentAddClasses('clapTxt');
             }}>
-              {contentAddClasses ? "View more" : "Hide"}
+              {contentAddClasses ? viewMoreTxt : HideTxt}
             </div>
           )}
         </div>

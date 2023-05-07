@@ -3,6 +3,7 @@ import slideImg1 from '../../img/headerBlock-slide.jpg'
 import {Link} from "react-router-dom";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import {EffectFade, Pagination} from "swiper";
+import {useLanguage} from "../../Hooks/UseLang";
 
 export const CatalogSlider = (props) => {
 
@@ -21,6 +22,7 @@ export const CatalogSlider = (props) => {
           className={'cSlider__slider'}
           slidesPerView={1}
           autoplay={true}
+          loop={true}
         >
           {emptyArray.map((item, index) => {
             return (
@@ -41,7 +43,9 @@ export const CatalogSlider = (props) => {
 
 //?
 const CatalogSlide = (props) => {
-  const {title, img, href} = props; 
+  const {title, img, href} = props;
+
+  const lang = useLanguage();
 
   return (
     <div className="cSlider__wrap">
@@ -52,7 +56,7 @@ const CatalogSlide = (props) => {
         <div className="cSlider__title">
           {title}
         </div>
-        <Link to={href} className="cSlider__btn">BUY NOW</Link>
+        <Link to={href} className="cSlider__btn">{lang.general.buyNow}</Link>
       </div>
     </div>
   )

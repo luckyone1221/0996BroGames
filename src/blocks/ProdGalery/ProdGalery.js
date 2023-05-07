@@ -9,20 +9,23 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Thumbs, EffectFade, Pagination} from 'swiper';
 import {TransparentChevrons} from "../PreOrder/PreOrder";
 import React, {useState} from "react";
+import {useLanguage} from "../../Hooks/UseLang";
 
 export const ProdGalery = (props) => {
-  const [slider, setSlider] = useState();
-
   let emptyArray = [];
   for(var i = 1; i <= 5; i++){
     emptyArray.push('');
   }
 
+  //
+  const [slider, setSlider] = useState();
+  const lang = useLanguage().ProdGalery;
+
   return(
     <section className="sGallery section">
       <div className="container">
         <div className="section-title">
-          <h2>Photo from the game</h2>
+          <h2>{lang.title}</h2>
         </div>
         <Swiper
           breakpoints={{

@@ -1,6 +1,8 @@
 import saveImg from '../../img/SaveWater.jpg'
+import {useLanguage} from "../../Hooks/UseLang";
 
 export const SaveWater = (props) => {
+  const lang = useLanguage().SaveWater;
 
   return(
     <section className="section sSave">
@@ -8,10 +10,9 @@ export const SaveWater = (props) => {
         <div className="sSave__box">
           <div className="sSave__hashtag">#SaveWaterBro</div>
           <div className="section-title">
-            <h2>Save water</h2>
+            <h2>{lang.title}</h2>
             <p>
-              Don't pollute it with chemicals (car wash, dishwashers, shampoos), remember,
-              it&nbsp;goes&nbsp;to water , air and ground. And then you drink it, breath it and eat it! All of&nbsp;this&nbsp;is not just about water. It’s about all things that harm nature and ourselves!
+              {lang.descr}
             </p>
           </div>
           <div className="sSave__img">

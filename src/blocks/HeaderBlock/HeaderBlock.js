@@ -3,14 +3,42 @@ import slideImg1 from '../../img/headerBlock-slide.jpg'
 import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Thumbs, EffectFade, Pagination} from 'swiper';
+import axios from "axios";
 
 
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 
 import {ChevronLeft, ChevronRight} from "../../SvgSpriptes";
+import {useLanguage} from "../../Hooks/UseLang";
 
 export const HeaderBlock = (props) => {
+
+  //
+  const getCategory = async () => {
+
+    try {
+      const response = await axios({
+        url : `https://api.digiseller.ru/api/categories?seller_id=817785`,
+        method: 'Get',
+        headers: {
+          "Accept": "application/json"
+        },
+        params: {
+          seller_id: '817785',
+          category_id: '0',
+          lang: 'ru-RU',//en-US
+        }
+      })
+      console.log(response.data);
+
+    }
+    catch (e){
+      console.log(e.response.data);
+    }
+  }
+  getCategory();
+
 
   let emptyArray = [];
   for(var i = 1; i <= 6; i++){
@@ -96,6 +124,7 @@ const HeaderBlockThumb = (props) => {
 const HeaderBlockSlide = (props) => {
   const {img, title, subTitle, href, price, currency} = props;
 
+  const lang = useLanguage();
   return (
     <div className="headerBlock__slide">
       <div className="headerBlock__bg">
@@ -107,7 +136,7 @@ const HeaderBlockSlide = (props) => {
           <div className="headerBlock__subTitle">{subTitle}</div>
           <div className="headerBlock__btn-row row align-items-center">
             <div className="col-auto">
-              <a className="headerBlock__buy-btn" href={href}>Buy Now</a>
+              <a className="headerBlock__buy-btn" href={href}>{lang.general.buyNow}</a>
             </div>
             <div className="headerBlock__col headerBlock__col--price col-auto">
               <div className="headerBlock__price">

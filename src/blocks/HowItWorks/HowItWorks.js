@@ -1,22 +1,22 @@
 import {useState} from "react";
 import SlideToggle from "react-slide-toggle";
+import {useLanguage} from "../../Hooks/UseLang";
 
 export const HowItWorks = (props) => {
   const {} = props;
+  const lang = useLanguage().HowItWorks;
 
   return(
     <section className="section sHow">
       <div className="container">
         <div className="section-title">
-          <h2>How it works</h2>
+          <h2>{lang.title}</h2>
         </div>
         <div className="sHow__items">
-          <HowItWorksItem title={'Is there a free trial available?'} content={'Yes, you can try us for free for 30 days. If you want, we’ll provide you with a free, personalized 30-minute onboarding call to get you up and running as soon as possible.'} isOpen={true}/>
-          <HowItWorksItem title={'Can I change my plan later?'} content={'reply'} isOpen={false}/>
-          <HowItWorksItem title={'What is your cancellation policy?'} content={'reply'} isOpen={false}/>
-          <HowItWorksItem title={'Can other info be added to an invoice?'} content={'reply'} isOpen={false}/>
-          <HowItWorksItem title={'How does billing work?'} content={'reply'} isOpen={false}/>
-          <HowItWorksItem title={'How do I change my account email?'} content={'reply'} isOpen={false}/>
+          {lang.items.map((item, index) => {
+            return <HowItWorksItem title={item.title} content={item.content} isOpen={index === 0}/>
+          })}
+          {/**/}
         </div>
       </div>
     </section>

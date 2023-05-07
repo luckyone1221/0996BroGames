@@ -1,9 +1,10 @@
 import {Link} from "react-router-dom";
 import logo from "../../img/Logo.png"
 import {Discord, Mail, Telegram} from "../../SvgSpriptes";
+import {useLanguage} from "../../Hooks/UseLang";
 
 export const Footer = (props) => {
-  let currYear = new Date().getFullYear();
+  let lang = useLanguage().Footer;
 
   return(
     <footer className="footer">
@@ -17,11 +18,11 @@ export const Footer = (props) => {
           </div>
           <div className="footer__col--middle col-lg order-last order-lg-0">
             <div className="footer__menu">
-              <Link to="/">Accounts</Link>
-              <Link to="/">Activation</Link>
-              <Link to="/">Keys</Link>
-              <Link to="/">About BroGamerss</Link>
-              <Link to="/">Privacy&Policy</Link>
+              <Link to="/about">{lang.accounts}</Link>
+              <Link to="/catalog/activation">{lang.activation}</Link>
+              <Link to="/catalog/keys">{lang.keys}</Link>
+              <Link to="/about">{lang.about}</Link>
+              <Link to="/policy">{lang.policy}</Link>
             </div>
           </div>
           <div className="footer__col--right col-auto">
@@ -39,7 +40,7 @@ export const Footer = (props) => {
           </div>
         </div>
         <div className="footer__all-rights text-lg-center">
-          © {currYear} BroGames. All rights reserved.
+          {lang.allRights.replace("{currYear}", new Date().getFullYear())}
         </div>
       </div>
     </footer>

@@ -7,6 +7,7 @@ import {Grid, Pagination} from "swiper";
 import {TransparentChevrons} from "../PreOrder/PreOrder";
 import 'swiper/css';
 import "swiper/css/grid";
+import {useLanguage} from "../../Hooks/UseLang";
 
 export const Review = (props) => {
   const {} = props;
@@ -16,13 +17,15 @@ export const Review = (props) => {
     emptyArray.push('');
   }
 
+  //
   const [slider, setSlider] = useState(null);
+  const lang = useLanguage().Review;
 
   return(
     <section className="sReview section">
       <div className="container">
         <div className="section-title text-lg-center">
-          <h2>Clients Reviews</h2>
+          <h2>{lang.title}</h2>
         </div>
         <Swiper
           modules={[Grid, Pagination]}

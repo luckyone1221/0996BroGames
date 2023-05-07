@@ -162,6 +162,7 @@
   &__btn{
     @extend .btn;
     @extend .btn-primary;
+    text-transform: uppercase;
 
     min-width: 100%;
     @include media-breakpoint-up(sm){

@@ -10,8 +10,11 @@ import {WhyUs} from "../WhyUs/WhyUs";
 import {Review} from "../Review/Review";
 import {Fresh} from "../Fresh/Fresh";
 import {Footer} from "../Footer/Footer";
+import {useLanguage} from "../../Hooks/UseLang";
 
 export const MainPage = (props) => {
+  const lang = useLanguage();
+
   return(
     <div className="main-wrapper">
       <Header/>
@@ -20,7 +23,7 @@ export const MainPage = (props) => {
         <Digits/>
         <Catalog/>
         <PreOrder/>
-        <Recent/>
+        <Recent title={lang.Recent.titleRecent}/>
         <WhyUs/>
         <Review/>
         <Fresh/>

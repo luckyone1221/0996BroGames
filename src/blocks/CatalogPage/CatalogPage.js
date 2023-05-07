@@ -9,14 +9,15 @@ import {CatalogHeader} from "../CatalogHeader/CatalogHeader";
 import {CatalogItems} from "../CatalogItems/CatalogItems";
 
 export const CatalogPage = (props) => {
-  
+  const {productType} = props;
+
   return (
-    <div className="main-wrapper">
+    <div className="main-wrapper main-wrapper--catalog">
       <Header/>
       <main>
         <CatalogHeader/>
         <CatalogSlider/>
-        <CatalogItems/>
+        <CatalogItems productType={productType}/>
       </main>
       <Footer/>
       {/*<PixelPerfect img={ppImg}/>*/}

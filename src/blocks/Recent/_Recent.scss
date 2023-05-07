@@ -1,4 +1,5 @@
 .sResent{
+  overflow: hidden;
   @include media-breakpoint-up(xxl){
     --sPT: #{rem(81px)};
     --sPB: #{rem(90)};

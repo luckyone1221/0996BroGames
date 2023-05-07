@@ -1,6 +1,7 @@
 import {Trash} from '../../SvgSpriptes'
 
 import img1 from '../../img/headerBlock-slide.jpg'
+import {useLanguage} from "../../Hooks/UseLang";
 
 export const Cart = (props) => {
   const {} = props;
@@ -10,6 +11,9 @@ export const Cart = (props) => {
     emptyArray.push('');
   }
 
+  //
+  const lang = useLanguage().Cart;
+
   return (
     <section className="section sCart">
       <div className="container">
@@ -18,11 +22,11 @@ export const Cart = (props) => {
             <div className="sCart__title-row row align-items-center">
               <div className="col">
                 <div className="section-title">
-                  <h2>Shipping Card</h2>
+                  <h2>{lang.title}</h2>
                 </div>
               </div>
               <div className="col-auto">
-                <div className="sCart__amount">4 items</div>
+                <div className="sCart__amount">4 {lang.items}</div>
               </div>
             </div>
             <div className="sCart__items">
@@ -42,13 +46,13 @@ export const Cart = (props) => {
           </div>
           <div className="sCart__col sCart__col--right col-lg-4">
             <div className="sCart__summary">
-              <div className="sCart__s-title">Order Summary</div>
-              <div className="sCart__s-descr">Prices on payment page are displayed in Rubles, But no metter what currency you pay, convertation without any fee.</div>
+              <div className="sCart__s-title">{lang.summary}</div>
+              <div className="sCart__s-descr">{lang.descr}</div>
               <div className="sCart__s-total-wrap">
-                <div className="sCart__s-total-txt">Total cost:</div>
+                <div className="sCart__s-total-txt">{lang.total}</div>
                 <div className="sCart__s-price">17.86 $</div>
               </div>
-              <div className="sCart__s-btn">Checkout</div>
+              <div className="sCart__s-btn">{lang.checkout}</div>
             </div>
           </div>
         </div>
