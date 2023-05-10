@@ -1,5 +1,33 @@
 import axios from "axios";
 
+export const getItemFeedbacks = async (config, itemId, page=1) => {
+
+  try {
+    const response = await axios({
+      url : `https://api.digiseller.ru/api/reviews?seller_id=${config.digIds.sellerId}&product_id=${itemId}&type=all&page=${page}&rows=12`,
+      method: 'Get',
+      headers: {
+        "Accept": "application/json"
+      },
+      params: {
+        seller_id: config.digIds.sellerId,
+        product_id: itemId,
+        type: "all",
+        page: page,
+        rows: 12,
+        lang: config.lang
+      }
+    })
+
+    // console.log(response.data);
+
+    return response.data
+  }
+  catch (e){
+    console.log(e);
+  }
+}
+
 export const getCatalogList = async (config, categoryId=0) => {
   const sellerId = config.digIds.sellerId;
 
@@ -52,7 +80,7 @@ export const getItemChars = async (config, itemId) => {
   }
 }
 
-export const getProducts = async (config, page=1, prodType, currentPlatform) => {
+export const getProducts = async (config, page=1, prodType, currentPlatform, directlyId) => {
   const sellerId = config.digIds.sellerId;
   let categoryId;
 
@@ -62,6 +90,10 @@ export const getProducts = async (config, page=1, prodType, currentPlatform) => 
   else{
     categoryId = config.currentPlatform ? config.digIds[config.prodType][config.currentPlatform] : config.digIds[config.prodType].all;
   }
+  if(directlyId){
+    categoryId = directlyId;
+  }
+
   // console.log(prodType, currentPlatform);
   // console.log(config.prodType, config.currentPlatform);
 
@@ -95,6 +127,7 @@ export const getProdTypeOption = (options, value) => {
     return option.reduxKey === value;
   })
 }
+
 export const getSortOrderOption = (options, value) => {
   return options.filter((option) => {
     return option.value === value;

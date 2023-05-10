@@ -5,6 +5,7 @@ import {useGetTags} from "../../Hooks/useGetTags";
 import React from "react";
 import {getCurrencySymb} from "../../Hooks/GetFunctions";
 import {useDispatch, useSelector} from "react-redux";
+import {useBuyNow} from "../../Hooks/useBuyNow";
 
 export const ProdCardHeaderBlock = (props) => {
   const {product} = props;
@@ -13,7 +14,7 @@ export const ProdCardHeaderBlock = (props) => {
   const dispatch = useDispatch();
   const lang = useLanguage().ProdCardHeaderBlock;
   const tags = useGetTags(product.id);
-
+  const buyNow = useBuyNow(product.id);
 
   return (
     <section className="section sProd">
@@ -40,7 +41,7 @@ export const ProdCardHeaderBlock = (props) => {
               <div className="sProd__price">{product.price}{getCurrencySymb(product.currency)}</div>
               <div className="sProd__btn-row row align-items-center">
                 <div className="col-sm-auto">
-                  <button className="sProd__btn">
+                  <button className="sProd__btn" onClick={buyNow}>
                     {lang.buyNow}
                   </button>
                 </div>

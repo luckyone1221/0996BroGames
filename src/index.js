@@ -18,6 +18,8 @@ const defaultState = {
   content: content,
   digIds: {
     sellerId: "817785",
+    categorySlider: "133593",
+    sliderOnMain: "133594",
 
     //categories
     all: {
@@ -89,11 +91,9 @@ const store = createStore(reducer);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <App />
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

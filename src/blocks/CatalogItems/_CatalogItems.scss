@@ -17,6 +17,8 @@
     --row-gutter-y: #{rem(32)};
   }
   &__top-row{
+    position: relative;
+    z-index: 20;
     --bs-gutter-x: var(--row-gutter-x);
     --bs-gutter-y: var(--row-gutter-y);
 

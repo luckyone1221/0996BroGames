@@ -1,9 +1,15 @@
 {
   "allPossibleTags": ["Accounts", "Activations", "Keys", "Soft", "Gift", "Gift Card", "Top-UP", "PC", "PS", "Xbox", "Nintendo"],
+  "allPossibleProdTypes": ["accounts", "activations", "keys", "all"],
+  "allPossiblePlatforms": ["pc", "ps", "xBoxAndPC", "nintendo", "vpnAndStreaming", "all"],
   "3262725" : {
-    "tags": ["Activations", "PC"]
+    "tags": ["Activations", "PC"],
+    "prodType": "activations",
+    "currentPlatform": "pc"
   },
   "3264529": {
-    "tags": ["Keys", "PS"]
+    "tags": ["Keys", "PS"],
+    "prodType": "keys",
+    "currentPlatform": "pc"
   }
 }

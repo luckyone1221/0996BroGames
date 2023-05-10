@@ -3,40 +3,19 @@ import {useLanguage} from "../../Hooks/UseLang";
 import {useEffect, useState} from "react";
 import {getProducts} from "../../Hooks/GetFunctions";
 import {useSelector} from "react-redux";
-import {useGetTags} from "../../Hooks/useGetTags";
 import {useNavigate} from "react-router-dom";
+import {useGetPlatform} from "../../Hooks/useGetPlatform"
 
 export const AlsoLikeThis = (props) => {
   const {itemId} = props;
 
   const config = useSelector(state => state);
-  const tags = useGetTags(itemId);
-  console.log(itemId, tags)
   const lang = useLanguage();
   const navigate = useNavigate();
-
+  const [prodType, currentPlatform] = useGetPlatform();
   const [prodIds, setProdIds] = useState([]);
 
   useEffect(() => {
-    let prodType = "all";
-    let currentPlatform = "all";
-
-    for(let item of ['accounts', 'activations', 'keys']){
-      for (let tag of tags){
-        if (item === tag.toLowerCase()){
-          prodType = tag.toLowerCase();
-        }
-      }
-    }
-    for(let item of ['pc', 'ps', 'xBoxAndPC', 'nintendo', 'vpnAndStreaming']){
-      for (let tag of tags){
-        if (item === tag.toLowerCase()){
-          currentPlatform = tag.toLowerCase();
-        }
-      }
-    }
-
-
     getProducts(config, 0, prodType, currentPlatform).then((data) => {
       let prodArr = [];
       if(data.product) {
@@ -49,7 +28,7 @@ export const AlsoLikeThis = (props) => {
 
       setProdIds(prodArr);
     });
-  }, []);
+  }, [navigate, config]);
 
 
   if(prodIds.length > 0){

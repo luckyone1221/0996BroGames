@@ -7,15 +7,20 @@ import {Pagination} from "swiper";
 import {ProdCard} from "../Catalog/ProdCard";
 import {useSelector} from "react-redux";
 import {getCurrencySymb, getItemChars} from "../../Hooks/GetFunctions";
+import {useLanguage} from "../../Hooks/UseLang";
 
 export const Recent = (props) => {
   const {title, itemsList} = props;
 
+  const lang = useLanguage();
   const config = useSelector(state => state);
   const [slider, setSlider] = useState();
 
   const [products, setProducts] = useState([]);
   useEffect(() => {
+    if(!Array.isArray(itemsList) || itemsList.length < 1){
+      return
+    }
     let productsArr = [];
     let promiseArr = [];
 
@@ -26,7 +31,6 @@ export const Recent = (props) => {
     }
 
     Promise.all(promiseArr).then(() => {
-      // console.log(productsArr);
       setProducts(productsArr);
     })
   }, [config]);
@@ -35,7 +39,7 @@ export const Recent = (props) => {
     <section className="sResent section">
       <div className="container">
         <div className="section-title">
-          <h2>{title}</h2>
+          <h2>{title ? title : lang.Recent.titleRecent}</h2>
         </div>
         <Swiper
           modules={[Pagination]}

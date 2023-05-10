@@ -21,7 +21,7 @@ export const CatalogItems = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const lang = useLanguage().CatalogItems;
-  // getCatalogList(config, 133459);
+  getCatalogList(config, 0);
 
   //
   useEffect(() => {

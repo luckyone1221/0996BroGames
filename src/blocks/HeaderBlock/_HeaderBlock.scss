@@ -36,6 +36,7 @@
     flex-direction: column;
   }
   &__bg{
+    background: $black;
     position: absolute;
     z-index: -1;
     top: 0;
@@ -66,7 +67,7 @@
   &__box{
     margin-top: auto;
     @include media-breakpoint-up(md){
-      max-width: 416px;
+      max-width: 900px;
     }
 
     @include media-breakpoint-up(xxl){
@@ -74,6 +75,7 @@
     }
   }
   &__title{
+    color: $white!important;
     font-weight: 600;
     font-size: rem(40);
     line-height: 1.125;
@@ -82,6 +84,14 @@
   &__subTitle{
     color: #EFEFEF;
     margin-bottom: rem(40);
+
+    --descr-fs: #{rem(16)};
+    --descr-lh: 1.5;
+
+    font-size: var(--descr-fs);
+    line-height: var(--descr-lh);
+    height: calc(var(--descr-fs) * var(--descr-lh)  * 1);
+    overflow: hidden;
   }
   &__btn-row{
     --bs-gutter-x: #{rem(32)};
@@ -106,11 +116,13 @@
     text-transform: uppercase;
   }
   &__price{
+    color: $white!important;
     font-size: rem(24);
     line-height: calc(29/24);
     margin-right: 4px;
   }
   &__currency{
+    color: $white!important;
     line-height: calc(20/16);
     text-transform: uppercase;
   }

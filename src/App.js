@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import {BrowserRouter, Routes, Route, useNavigate} from 'react-router-dom';
 import {MainPage} from "./blocks/MainPage/MainPage";
 
 import './sass/main.scss';
@@ -8,6 +8,7 @@ import {CatalogPage} from "./blocks/CatalogPage/CatalogPage";
 import {ProdCardPage} from "./blocks/ProdCardPage/ProdCardPage";
 import {CartPage} from "./blocks/CartPage/CartPage";
 import {useLanguage} from "./Hooks/UseLang";
+import {useEffect} from "react";
 
 function App() {
   const lang = useLanguage();

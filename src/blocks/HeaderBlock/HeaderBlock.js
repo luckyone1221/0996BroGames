@@ -1,22 +1,27 @@
-import slideImg1 from '../../img/headerBlock-slide.jpg'
-
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Thumbs, EffectFade, Pagination} from 'swiper';
-import axios from "axios";
-
-
+import { Thumbs, EffectFade, Pagination, Autoplay} from 'swiper';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 
 import {ChevronLeft, ChevronRight} from "../../SvgSpriptes";
 import {useLanguage} from "../../Hooks/UseLang";
+import {useSelector} from "react-redux";
+import {getProducts, getCurrencySymb} from "../../Hooks/GetFunctions";
+import {Link} from "react-router-dom";
+import {useBuyNow} from "../../Hooks/useBuyNow";
 
 export const HeaderBlock = (props) => {
-  let emptyArray = [];
-  for(var i = 1; i <= 6; i++){
-    emptyArray.push('');
-  }
+  const config = useSelector(state => state);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    getProducts(config, 1, undefined, undefined, config.digIds.sliderOnMain).then((data) => {
+      if(data.product){
+        setProducts([...data.product]);
+      }
+    })
+  }, [config])
 
   //
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -25,22 +30,22 @@ export const HeaderBlock = (props) => {
     <div className="headerBlock">
       <div className="headerBlock__slider">
         <Swiper
-          modules={[Thumbs, EffectFade]}
+          modules={[Thumbs, EffectFade, Autoplay]}
           effect="fade"
           thumbs={{swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null}}
           slidesPerView={1}
           autoplay={true}
         >
-          {emptyArray.map((item, index) => {
+          {products.map((item, index) => {
             return (
               <SwiperSlide key={index}>
                 <HeaderBlockSlide
-                  img={slideImg1}
-                  title={`Survival is only the beginning${index}`}
-                  subTitle={"Immerse yourself in a thrilling reimagining of the classic action horror genre with modern gameplay, updated storyline and stunning visuals."}
-                  href={"https://www.google.com/"}
-                  price={"20"}
-                  currency={"USD"}
+                  img={`https://graph.digiseller.ru/img.ashx?id_d=${item.id}&w=1440&h=800&crop=true`}
+                  id={item.id}
+                  title={item.name}
+                  subTitle={item.info}
+                  price={item.price}
+                  currency={getCurrencySymb(item.currency)}
                 />
               </SwiperSlide>
             )
@@ -59,10 +64,10 @@ export const HeaderBlock = (props) => {
               watchSlidesProgress
               onSwiper={setThumbsSwiper}
             >
-              {emptyArray.map((item, index) => {
+              {products.map((item, index) => {
                 return (
                   <SwiperSlide key={index}>
-                    <HeaderBlockThumb img={slideImg1}/>
+                    <HeaderBlockThumb img={`https://graph.digiseller.ru/img.ashx?id_d=${item.id}&w=176&h=176&crop=true`}/>
                   </SwiperSlide>
                 )
               })}
@@ -95,21 +100,23 @@ const HeaderBlockThumb = (props) => {
 }
 
 const HeaderBlockSlide = (props) => {
-  const {img, title, subTitle, href, price, currency} = props;
+  const {img, title, subTitle, id, price, currency} = props;
 
   const lang = useLanguage();
+  const buyNow = useBuyNow(id);
+
   return (
-    <div className="headerBlock__slide">
+    <Link className="headerBlock__slide" to={`prod/${id}`}>
       <div className="headerBlock__bg">
         <img src={img} alt=""/>
       </div>
       <div className="headerBlock__container container">
         <div className="headerBlock__box">
           <div className="headerBlock__title">{title}</div>
-          <div className="headerBlock__subTitle">{subTitle}</div>
+          <div className="headerBlock__subTitle" dangerouslySetInnerHTML={{__html: subTitle}}></div>
           <div className="headerBlock__btn-row row align-items-center">
             <div className="col-auto">
-              <a className="headerBlock__buy-btn" href={href}>{lang.general.buyNow}</a>
+              <button className="headerBlock__buy-btn" onClick={buyNow}>{lang.general.buyNow}</button>
             </div>
             <div className="headerBlock__col headerBlock__col--price col-auto">
               <div className="headerBlock__price">
@@ -122,6 +129,6 @@ const HeaderBlockSlide = (props) => {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
