@@ -14,7 +14,7 @@ export const HowItWorks = (props) => {
         </div>
         <div className="sHow__items">
           {lang.items.map((item, index) => {
-            return <HowItWorksItem title={item.title} content={item.content} isOpen={index === 0}/>
+            return <HowItWorksItem key={index} title={item.title} content={item.content} isOpen={index === 0}/>
           })}
           {/**/}
         </div>

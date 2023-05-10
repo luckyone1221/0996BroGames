@@ -116,6 +116,8 @@
     @extend .btn;
     @extend .btn-primary;
 
+    text-transform: uppercase;
+
     background: $primary;
     min-width: rem(185);
   }

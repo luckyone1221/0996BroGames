@@ -1,152 +1,170 @@
-//CatalogItems
-
 import {useNavigate} from 'react-router-dom';
 import React, {useEffect, useRef, useState} from 'react'
 import Select from 'react-select'
 import slideImg1 from "../../img/headerBlock-slide.jpg";
-import {ProdCard} from "../Catalog/Catalog";
 import {useLanguage} from "../../Hooks/UseLang";
+import {
+  getCatalogList, getCurrencySymb,
+  getProdTypeOption,
+  getProducts,
+  getSelectClasses,
+  getSortOrderOption
+} from "../../Hooks/GetFunctions";
+import {useDispatch, useSelector} from "react-redux";
+import {ProdCard} from "../Catalog/ProdCard";
 
-let setSelectClasses = (state) => {
-  return {
-    control: (state) => 'custom-select__control',
-    valueContainer: (state) => 'custom-select__val-cont',
-    singleValue: (state) => 'custom-select__value',
-    placeholder: (state) => 'custom-select__placeholder',
-    input: (state) => 'custom-select__input',
-    indicatorsContainer: (state) => 'custom-select__indicators-cont',
-    indicatorSeparator: (state) => 'custom-select__separator',
-    indicatorContainer: (state) => 'custom-select__img',
-    menu: (state) => 'custom-select__menu',
-    menuList: (state) => 'custom-select__menu-list',
-  }
-}
-
-let getOptionFromArr = (options, value) => {
-  return options.filter((option) => {
-    return option.label === value;
-  })
-}
 
 export const CatalogItems = (props) => {
   const {productType} = props;
 
-  //
-  const lang = useLanguage().CatalogItems;
-
-  //prod Type
-  let productTypeOptions = [
-    { value: '/catalog/accounts', label: lang.accounts },
-    { value: '/catalog/activation', label: lang.activation },
-    { value: '/catalog/keys', label: lang.keys },
-    { value: '/catalog/top-up', label: lang.topUp }
-  ]
-  const [prodType, setProdType] = useState('');
+  const config = useSelector(state => state);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const lang = useLanguage().CatalogItems;
+  // getCatalogList(config, 133459);
 
+  //
   useEffect(() => {
-    setProdType(getOptionFromArr(productTypeOptions, productType));
+    dispatch({type: "CHANGE_PRODTYPE", payload: productType});
   }, [navigate])
 
+  //select options
+  let productTypeOptions = [
+    { value: '/catalog', label: lang.all, reduxKey: 'all'},
+    { value: '/catalog/accounts', label: lang.accounts, reduxKey: "accounts"},
+    { value: '/catalog/activations', label: lang.activation, reduxKey: "activations"},
+    { value: '/catalog/keys', label: lang.keys, reduxKey: "keys"},
+    // { value: '/catalog/top-up', label: lang.topUp }
+  ];
+  let orderOptions = [
+    {value: "name", label: lang.sortName},
+    {value: "nameDESC", label: lang.sortNameDesc},
+    {value: "price", label: lang.sortPrice},
+    {value: "priceDESC", label: lang.sortPriceDesc},
+  ];
 
-  //load more
-  let getEmptyArr = (num) => {
-    let result = [];
-
-    for(var i = 1; i <= num; i++){
-      result.push('');
-    }
-
-    return result
-  }
-  let [emptyArray, setEmptyArr] = useState(getEmptyArr(12));
-  let [loadingMute, setLoadingMute] = useState(false);
-  let [loadingTop, setLoadingTop] = useState(100000);
-  let loadMore = useRef();
-
-  let calcLoadingTop = () => {
+  //again
+  const [totalPages, setTotalPages] = useState(-1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [alertTxt, setAlertTxt] = useState(lang.loadingTxt);
+  const [products,SetProducts] = useState([]);
+  const [loadingMute, setLoadingMute] = useState(false);
+  const loadMore = useRef();
+  const loadMoreFunc = () => {
     if(loadMore.current){
-      setLoadingTop(loadMore.current.getBoundingClientRect().top + window.scrollY);
-    }
-  }
+      let loadMoreIsVisible = window.scrollY + window.innerHeight > loadMore.current.getBoundingClientRect().top + window.scrollY;
 
-  let loadMoreFunc = () => {
-    if(loadMore.current){
-      let loadMoreIsVisible = window.scrollY + window.innerHeight > loadingTop;
-      if(!loadingMute && loadMoreIsVisible){
+      if(!loadingMute && loadMoreIsVisible && currentPage < totalPages){
         setLoadingMute(true);
-        setEmptyArr(getEmptyArr(emptyArray.length + 12));
-        setLoadingMute(false);
+        getProducts(config, currentPage+1).then((data) => {
+          if(data.product){
+            setCurrentPage(currentPage+1);
+            SetProducts([...products, ...data.product]);
+
+            window.setTimeout(() => {
+              setLoadingMute(false);
+            }, 100);
+          }
+        })
       }
     }
   }
 
+  //
+  useEffect(() => {
+    setCurrentPage(1);
+    getProducts(config).then((data) => {
+      if(data.product){
+        setTotalPages(data.totalPages);
+        SetProducts([...data.product]);
+      }
+      else{
+        SetProducts([]);
+        setAlertTxt(lang.nothingFound);
+      }
+    })
+  }, [config])
   useEffect(() => {
     window.addEventListener('scroll', loadMoreFunc, {passive: true})
-    window.addEventListener('resize', calcLoadingTop, {passive: true})
     return () => {
       window.removeEventListener('scroll', loadMoreFunc)
-      window.addEventListener('resize', calcLoadingTop, {passive: true})
     }
-  })
+  }, [products])//currentPage??
 
   return (
     <section className="sItems section">
       <div className="container">
         <div className="sItems__top-row row align-items-center">
-          <div className="col-lg">
+          <div className="col-md">
             <div className="section-title">
               <h1>{lang.title}</h1>
             </div>
           </div>
           <CatalogItemsSelect
-            state={prodType}
-            setState={setProdType}
+            value={getProdTypeOption(productTypeOptions, config.prodType)}
             options={productTypeOptions}
             onChange={(e) => {
               navigate(e.value);
             }}
           />
+          {/*new*/}
+          <CatalogItemsSelect
+            value={getSortOrderOption(orderOptions, config.sortOrder)}
+            options={orderOptions}
+            onChange={(e) => {
+              dispatch({type: "CHANGE_SORTORDER", payload: e.value});
+            }}
+          />
         </div>
-        <div className="sItems__row row">
-          {emptyArray.map((item, index) => {
-            return <div className="sItems__col col-sm-6 col-md-4 col-xl-3">
-              <ProdCard
-                key={index}
-                href="#"
-                img={slideImg1}
-                tagsArr={['Accounts', 'PS']}
-                name={'Resident Evil 2'}
-                price={'0.86 $'}
-              />
+        {products.length > 0 ? (
+          <>
+            <div className="sItems__row row">
+              {products && products.length > 0 && products.map((item, index) => {
+                // console.log(item);
+                return <div key={index} className="sItems__col col-sm-6 col-md-4 col-xl-3">
+                  <ProdCard
+                    itemId={item.id}
+                    key={index}
+                    href={`product/${item.id}`}
+                    img={slideImg1}
+                    tagsArr={['Accounts', 'PS']}
+                    name={item.name}
+                    price={`${item.price} ${getCurrencySymb(item.currency)}`}
+                  />
+                </div>
+              })}
             </div>
-          })}
-        </div>
-        <div className="sItems__loading text-center" ref={loadMore}>
-          {lang.loadingTxt}
-        </div>
+            {currentPage < totalPages && (
+              <div className="sItems__loading text-center" ref={loadMore}>
+                {lang.loadingTxt}
+              </div>
+            )}
+          </>
+        ) : (
+          <div className="h4">{alertTxt}</div>
+        )}
       </div>
     </section>
   )
 }
 
 const CatalogItemsSelect = (props) => {
-  const {state, setState, options, onChange} = props;
+  const {value, options, onChange} = props;
 
   return(
-    <div className="col-sm-4 col-lg-auto">
+    <div className="col-6 col-md-auto">
       <Select
         classNames={
           {
-            ...setSelectClasses(),
+            ...getSelectClasses(),
             option: (state) => `custom-select__menu-option ${state.isSelected ? 'active' : ''}`,
           }}
-        value={state}
         onChange={
           (e) => {
-            onChange ? onChange(e) : setState(getOptionFromArr(options, e.value));
+            onChange(e);
           }
         }
+        value={value}
         isSearchable={false}
         options={options}
       />

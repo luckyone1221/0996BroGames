@@ -19,13 +19,13 @@ function App() {
         <Route path="/about" element={<AboutPage/>}/>
         <Route path="/policy" element={<PolicyPage/>}/>
         {/**/}
-        <Route path="/catalog" element={<CatalogPage/>}/>
-        <Route path="/catalog/accounts" element={<CatalogPage productType={lang.CatalogItems.accounts}/>}/>
-        <Route path="/catalog/activation" element={<CatalogPage productType={lang.CatalogItems.activation}/>}/>
-        <Route path="/catalog/keys" element={<CatalogPage productType={lang.CatalogItems.keys}/>}/>
-        <Route path="/catalog/top-up" element={<CatalogPage productType={lang.CatalogItems.topUp}/>}/>
+        <Route path="/catalog" element={<CatalogPage productType="all"/>}/>
+        <Route path="/catalog/accounts" element={<CatalogPage productType="accounts"/>}/>
+        <Route path="/catalog/activations" element={<CatalogPage productType="activations"/>}/>
+        <Route path="/catalog/keys" element={<CatalogPage productType="keys"/>}/>
+        {/*<Route path="/catalog/top-up" element={<CatalogPage productType={lang.CatalogItems.topUp}/>}/>*/}
         {/**/}
-        <Route path="/prod" element={<ProdCardPage/>}/>
+        <Route path="/prod/:id" element={<ProdCardPage/>}/>
         <Route path="/cart" element={<CartPage/>}/>
       </Routes>
     </BrowserRouter>

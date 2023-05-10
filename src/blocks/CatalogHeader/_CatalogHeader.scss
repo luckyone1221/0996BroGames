@@ -31,6 +31,8 @@
     }
   }
   &__h-link{
+    @include mt();
+    cursor: pointer;
     font-weight: 500;
 
     font-size: rem(12);
@@ -40,6 +42,7 @@
     line-height: calc(17/14);
     color: $white;
 
+    &:hover,
     &.active{
       color: $primary;
     }

@@ -85,10 +85,16 @@
   },
   "CatalogItems": {
     "title": "Our Сatalog",
+    "all": "All",
     "accounts": "Accounts",
     "activation": "Activation",
     "keys": "Keys",
     "topUp": "Top-UP",
+    "sortName": "name [A-Z]",
+    "sortNameDesc": "name [Z-A]",
+    "sortPrice": "price ↑",
+    "sortPriceDesc": "price ↓",
+    "nothingFound": "Nothing was found",
     "loadingTxt": "Loading new products"
   },
   "ProdCardHeaderBlock": {

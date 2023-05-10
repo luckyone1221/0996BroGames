@@ -21,6 +21,7 @@
   z-index: 1;
 
   &__bg{
+    pointer-events: none;
     position: absolute;
     top: 0;
     left: 50%;
@@ -174,8 +175,18 @@
     }
   }
   &__cart{
+    @include mt();
+    cursor: pointer;
+
     @include media-breakpoint-up(xxl){
       margin-right: rem(8);
+    }
+
+    &:hover,
+    &.active{
+      path{
+        stroke: $primary!important;
+      }
     }
   }
   &__how-txt{

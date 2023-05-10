@@ -19,7 +19,7 @@ export const Footer = (props) => {
           <div className="footer__col--middle col-lg order-last order-lg-0">
             <div className="footer__menu">
               <Link to="/about">{lang.accounts}</Link>
-              <Link to="/catalog/activation">{lang.activation}</Link>
+              <Link to="/catalog/activations">{lang.activation}</Link>
               <Link to="/catalog/keys">{lang.keys}</Link>
               <Link to="/about">{lang.about}</Link>
               <Link to="/policy">{lang.policy}</Link>

@@ -13,33 +13,6 @@ import {ChevronLeft, ChevronRight} from "../../SvgSpriptes";
 import {useLanguage} from "../../Hooks/UseLang";
 
 export const HeaderBlock = (props) => {
-
-  //
-  const getCategory = async () => {
-
-    try {
-      const response = await axios({
-        url : `https://api.digiseller.ru/api/categories?seller_id=817785`,
-        method: 'Get',
-        headers: {
-          "Accept": "application/json"
-        },
-        params: {
-          seller_id: '817785',
-          category_id: '0',
-          lang: 'ru-RU',//en-US
-        }
-      })
-      console.log(response.data);
-
-    }
-    catch (e){
-      console.log(e.response.data);
-    }
-  }
-  getCategory();
-
-
   let emptyArray = [];
   for(var i = 1; i <= 6; i++){
     emptyArray.push('');

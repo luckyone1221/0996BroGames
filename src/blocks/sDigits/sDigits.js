@@ -8,7 +8,7 @@ export const Digits = (props) => {
       <div className="container">
         <div className="sDigits__row row">
           {lang.Digits.map((item, index) => {
-            return <DigitsItem number={item.number} prefix={item.prefix} descr={item.descr}/>
+            return <DigitsItem key={index} number={item.number} prefix={item.prefix} descr={item.descr}/>
           })}
         </div>
       </div>

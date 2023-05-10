@@ -25,9 +25,9 @@ export const HeaderMenu = (props) => {
       <div className="menu__row row">
         <HeaderMenuBtn img={menuMarket} imgActive={menuMarketActive} currLocation={currLocation} href="/catalog" txt={lang.header.market}/>
         <HeaderMenuBtn img={menuAccounts} imgActive={menuAccountsActive} currLocation={currLocation} href="/catalog/accounts" txt={lang.header.accounts}/>
-        <HeaderMenuBtn img={menuActivation} imgActive={menuActivationActive} currLocation={currLocation} href="/catalog/activation" txt={lang.header.activation}/>
+        <HeaderMenuBtn img={menuActivation} imgActive={menuActivationActive} currLocation={currLocation} href="/catalog/activations" txt={lang.header.activation}/>
         <HeaderMenuBtn img={menuKeys} imgActive={menuKeysActive} currLocation={currLocation} href="/catalog/keys" txt={lang.header.keys}/>
-        <HeaderMenuBtn img={menuTopUp} imgActive={menuTopUpActive} currLocation={currLocation} href="/catalog/top-up" txt={lang.header.top}/>
+        {/*<HeaderMenuBtn img={menuTopUp} imgActive={menuTopUpActive} currLocation={currLocation} href="/catalog/top-up" txt={lang.header.top}/>*/}
         <HeaderMenuBtn img={menuAbout} imgActive={menuAboutActive} currLocation={currLocation} href="/about" txt={lang.header.about}/>
       </div>
     </div>

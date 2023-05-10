@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import ruLang from "../langs/en-US.json";
 import enLang from "../langs/en-US.json";
 
-export function useLanguage(section){
+export function useLanguage(){
   const lang = useSelector(state => state.lang);
   const [langFile, setLangFile] = useState(lang === "ru-Ru" ? ruLang : enLang);
 

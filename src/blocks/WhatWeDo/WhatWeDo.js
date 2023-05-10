@@ -36,7 +36,7 @@ export const WhatWeDo = (props) => {
               <h4>{lang.subTitle}</h4>
               <ol>
                 {lang.list.map((item,index) => {
-                  return <li>{item}</li>
+                  return <li key={index}>{item}</li>
                 })}
               </ol>
             </div>

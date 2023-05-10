@@ -1,20 +1,35 @@
-
 import {TransparentChevrons} from "../PreOrder/PreOrder";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import {Pagination} from "swiper";
-import {ProdCard} from "../Catalog/Catalog";
-import slideImg1 from "../../img/headerBlock-slide.jpg";
+
+import {ProdCard} from "../Catalog/ProdCard";
+import {useSelector} from "react-redux";
+import {getCurrencySymb, getItemChars} from "../../Hooks/GetFunctions";
 
 export const Recent = (props) => {
-  const {title} = props;
+  const {title, itemsList} = props;
+
+  const config = useSelector(state => state);
   const [slider, setSlider] = useState();
 
-  let emptyArray = [];
-  for(var i = 1; i <= 10; i++){
-    emptyArray.push('');
-  }
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    let productsArr = [];
+    let promiseArr = [];
+
+    for(let [index, id] of Object.entries(itemsList)){
+      promiseArr.push(getItemChars(config, id).then((data) => {
+        productsArr[index] = data.product;
+      }));
+    }
+
+    Promise.all(promiseArr).then(() => {
+      // console.log(productsArr);
+      setProducts(productsArr);
+    })
+  }, [config]);
 
   return(
     <section className="sResent section">
@@ -37,14 +52,12 @@ export const Recent = (props) => {
           onSwiper={setSlider}
           pagination={{ clickable: true }}
         >
-          {emptyArray.map((item, index) => {
+          {products.length > 0 && products.map((item, index) => {
             return <SwiperSlide key={index}>
               <ProdCard
-                href="#"
-                img={slideImg1}
-                tagsArr={['Accounts', 'PS']}
-                name={'Resident Evil 2'}
-                price={'0.86 $'}
+                name={item.name}
+                price={`${item.price} ${getCurrencySymb(item.currency)}`}
+                itemId={item.id}
               />
             </SwiperSlide>
           })}

@@ -4,9 +4,9 @@ import {Grid, Pagination, Thumbs} from 'swiper';
 
 import slideImg1 from "../../img/headerBlock-slide.jpg";
 import React, {useState} from "react";
-import {ProdCard} from "../Catalog/Catalog";
 import {ChevronLeft, ChevronRight} from "../../SvgSpriptes";
 import {useLanguage} from "../../Hooks/UseLang";
+import {ProdCard} from "../Catalog/ProdCard";
 
 export const PreOrder = (props) => {
 
