@@ -34,15 +34,16 @@ export function useGetSubCategories(){
       }
 
       Promise.all(promiseArr).then((data) => {
-        // let newCategories = JSON.parse(JSON.stringify(config.digIds.categories));
-        //
-        // let i = 0;
-        // for (let categoryName in config.digIds.categories){
-        //   newCategories[categoryName].subCategories = data[i].category
-        //   i++;
-        // }
-        //
-        // dispatch("CHANGE_CATEGORIES", newCategories);
+        let newDigIds = JSON.parse(JSON.stringify(config.digIds));
+        let newCategories = newDigIds.categories;
+
+        let i = 0;
+        for (let categoryName in config.digIds.categories){
+          newCategories[categoryName].subCategories = data[i].category
+          i++;
+        }
+
+        dispatch({type: "CHANGE_CATEGORIES", payload: newDigIds});
       })
     }
     catch (e){

@@ -162,7 +162,7 @@ export const getProducts = async (config, page=1, directlyId) => {
         seller_id: sellerId,
         category_id: categoryId,
         page: page,
-        rows: "12",
+        rows: "12",//??
         currency: config.currency,
         order: config.sortOrder,
         lang: config.lang,//en-US

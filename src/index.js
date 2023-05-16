@@ -80,12 +80,7 @@ const reducer = (state=defaultState, action) => {
     case "CHANGE_SEARCH_RESULTS":
       return {...state, searchResults: action.payload}
     case "CHANGE_CATEGORIES":
-      return {...state,
-        digIds: {
-          ...state.digIds,
-          categories: action.payload
-        }
-      }
+      return {...state, digIds: action.payload}
     default:
       return state
   }
