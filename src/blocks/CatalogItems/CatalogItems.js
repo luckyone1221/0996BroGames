@@ -18,30 +18,17 @@ export const CatalogItems = (props) => {
   const {productType} = props;
 
   const config = useSelector(state => state);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const lang = useLanguage().CatalogItems;
-  getCatalogList(config, 0);
 
   //
   useEffect(() => {
     dispatch({type: "CHANGE_PRODTYPE", payload: productType});
+    dispatch({type: "CHANGE_PLATFORM", payload: undefined});
   }, [navigate])
 
   //select options
-  let productTypeOptions = [
-    { value: '/catalog', label: lang.all, reduxKey: 'all'},
-    { value: '/catalog/accounts', label: lang.accounts, reduxKey: "accounts"},
-    { value: '/catalog/activations', label: lang.activation, reduxKey: "activations"},
-    { value: '/catalog/keys', label: lang.keys, reduxKey: "keys"},
-    // { value: '/catalog/top-up', label: lang.topUp }
-  ];
-  let orderOptions = [
-    {value: "name", label: lang.sortName},
-    {value: "nameDESC", label: lang.sortNameDesc},
-    {value: "price", label: lang.sortPrice},
-    {value: "priceDESC", label: lang.sortPriceDesc},
-  ];
 
   //again
   const [totalPages, setTotalPages] = useState(-1);
@@ -50,6 +37,7 @@ export const CatalogItems = (props) => {
   const [products,SetProducts] = useState([]);
   const [loadingMute, setLoadingMute] = useState(false);
   const loadMore = useRef();
+
   const loadMoreFunc = () => {
     if(loadMore.current){
       let loadMoreIsVisible = window.scrollY + window.innerHeight > loadMore.current.getBoundingClientRect().top + window.scrollY;
@@ -73,6 +61,7 @@ export const CatalogItems = (props) => {
   //
   useEffect(() => {
     setCurrentPage(1);
+
     getProducts(config).then((data) => {
       if(data.product){
         setTotalPages(data.totalPages);
@@ -84,6 +73,7 @@ export const CatalogItems = (props) => {
       }
     })
   }, [config])
+
   useEffect(() => {
     window.addEventListener('scroll', loadMoreFunc, {passive: true})
     return () => {
@@ -100,34 +90,17 @@ export const CatalogItems = (props) => {
               <h1>{lang.title}</h1>
             </div>
           </div>
-          <CatalogItemsSelect
-            value={getProdTypeOption(productTypeOptions, config.prodType)}
-            options={productTypeOptions}
-            onChange={(e) => {
-              navigate(e.value);
-            }}
-          />
           {/*new*/}
-          <CatalogItemsSelect
-            value={getSortOrderOption(orderOptions, config.sortOrder)}
-            options={orderOptions}
-            onChange={(e) => {
-              dispatch({type: "CHANGE_SORTORDER", payload: e.value});
-            }}
-          />
+          <ProdTypeSelect/>
+          <SortOrderSelect/>
         </div>
         {products.length > 0 ? (
           <>
             <div className="sItems__row row">
               {products && products.length > 0 && products.map((item, index) => {
-                // console.log(item);
                 return <div key={index} className="sItems__col col-sm-6 col-md-4 col-xl-3">
                   <ProdCard
                     itemId={item.id}
-                    key={index}
-                    href={`product/${item.id}`}
-                    img={slideImg1}
-                    tagsArr={['Accounts', 'PS']}
                     name={item.name}
                     price={`${item.price} ${getCurrencySymb(item.currency)}`}
                   />
@@ -145,6 +118,55 @@ export const CatalogItems = (props) => {
         )}
       </div>
     </section>
+  )
+}
+
+export const SortOrderSelect = (props) => {
+  const lang = useLanguage().CatalogItems;
+  const config = useSelector(state => state);
+  const dispatch = useDispatch();
+
+  let orderOptions = [
+    {value: "name", label: lang.sortName},
+    {value: "nameDESC", label: lang.sortNameDesc},
+    {value: "price", label: lang.sortPrice},
+    {value: "priceDESC", label: lang.sortPriceDesc},
+  ];
+
+  return(
+    <CatalogItemsSelect
+      value={getSortOrderOption(orderOptions, config.sortOrder)}
+      options={orderOptions}
+      onChange={(e) => {
+        dispatch({type: "CHANGE_SORTORDER", payload: e.value});
+      }}
+    />
+  )
+}
+
+export const ProdTypeSelect = (props) => {
+  const {onChangeHandler} = props;
+  const navigate = useNavigate();
+  const lang = useLanguage().CatalogItems;
+  const config = useSelector(state => state);
+
+  let productTypeOptions = [
+    { value: '/catalog', label: lang.all, reduxKey: 'all'},
+    { value: '/catalog/accounts', label: lang.accounts, reduxKey: "accounts"},
+    { value: '/catalog/activations', label: lang.activation, reduxKey: "activations"},
+    { value: '/catalog/keys', label: lang.keys, reduxKey: "keys"},
+    { value: '/catalog/top-up', label: lang.topUp, reduxKey: "topUp" }
+  ];
+
+  return (
+    <CatalogItemsSelect
+      value={getProdTypeOption(productTypeOptions, config.prodType)}
+      options={productTypeOptions}
+      onChange={(e) => {
+        console.log()
+        onChangeHandler ? onChangeHandler(e) : navigate(e.value);
+      }}
+    />
   )
 }
 

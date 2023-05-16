@@ -65,7 +65,16 @@
     }
   }
 
-  &__{}
+  //
+  &__nothing-found{
+    @extend .h1;
+    font-weight: 500;
+    font-size: rem(56);
+    line-height: calc(68/56);
+    text-align: center;
+
+    color: rgba($white, 0.5);
+  }
   &__{}
 }
 

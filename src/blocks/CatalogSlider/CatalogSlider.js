@@ -1,12 +1,13 @@
 import slideImg1 from '../../img/headerBlock-slide.jpg'
 
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import {EffectFade, Pagination, Autoplay} from "swiper";
 import {useLanguage} from "../../Hooks/UseLang";
 import {useEffect, useState} from "react";
 import {getProducts} from "../../Hooks/GetFunctions";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {addToCart} from "../../Hooks/cartFunctions";
 
 export const CatalogSlider = (props) => {
   const config = useSelector(state => state);
@@ -40,6 +41,7 @@ export const CatalogSlider = (props) => {
                     title={item.name}
                     img={`https://graph.digiseller.ru/img.ashx?id_d=${item.id}&w=1216&h=1216&crop=true`}
                     href={"#"}
+                    itemId={item.id}
                   />
                 </SwiperSlide>
               )
@@ -53,9 +55,12 @@ export const CatalogSlider = (props) => {
 
 //?
 const CatalogSlide = (props) => {
-  const {title, img, href} = props;
-
+  const {title, img, itemId} = props;
   const lang = useLanguage();
+
+  const navigate = useNavigate();
+  const config = useSelector(state => state);
+  const dispatch = useDispatch();
 
   return (
     <div className="cSlider__wrap">
@@ -66,7 +71,14 @@ const CatalogSlide = (props) => {
         <div className="cSlider__title">
           {title}
         </div>
-        <Link to={href} className="cSlider__btn">{lang.general.buyNow}</Link>
+        <button className="cSlider__btn" onClick={() => {
+          addToCart(itemId, config).then((data) => {
+            dispatch({type: "CHANGE_CARTUID", payload: data.cart_uid});
+            dispatch({type: "SET_CARTRESPONSE", payload: data});
+          }).then(() => {
+            navigate('/cart');
+          })
+        }}>{lang.general.buyNow}</button>
       </div>
     </div>
   )

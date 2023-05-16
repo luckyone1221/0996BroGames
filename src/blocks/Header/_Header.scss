@@ -37,6 +37,31 @@
     align-items: center;
     justify-content: center;
 
+    &:before{
+      pointer-events: none;
+      position: absolute;
+      bottom: calc(100% - 8px);
+      left: calc(100% - 6px);
+      width: 16px;
+      height: 16px;
+      padding: 4px;
+      border-radius: 50%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: rem(10);
+
+      background: $primary;
+      color: $white;
+    }
+    &.active{
+      &:before{
+        content: attr(data-count);
+      }
+    }
+
     & > *{
       width: auto;
       height: auto;
@@ -49,16 +74,16 @@
       }
     }
 
-    &:before{
-      content: '';
-      position: absolute;
-      z-index: -1;
-      top: 50%;
-      left: 50%;
-      transform: translateX(-50%) translateY(-50%);
-      width: rem(32);
-      height: rem(32);
-    }
+    //&:before{
+    //  content: '';
+    //  position: absolute;
+    //  z-index: -1;
+    //  top: 50%;
+    //  left: 50%;
+    //  transform: translateX(-50%) translateY(-50%);
+    //  width: rem(32);
+    //  height: rem(32);
+    //}
   }
   &__burger{
     width: rem(40);
@@ -153,6 +178,9 @@
   }
   //
   .search{
+    position: relative;
+    z-index: 1;
+
     &__inp-wrap{
       position: relative;
       z-index: 1;
@@ -184,7 +212,61 @@
     }
 
     //
-    &__{}
+
+    &__dd{
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: rem(681);
+      padding-top: rem(10);
+      max-height: calc(100vh - var(--header-h));
+      overflow-y: auto;
+    }
+    &__dd-inner{
+      background: #0B0B0B;
+      border-radius: rem(12);
+      padding: rem(12) 0;
+    }
+    &__dd-item{
+      @include mt();
+      padding: rem(8) rem(16);
+      display: block;
+      color: $white;
+
+      &:hover{
+        background: rgba(255, 255, 255, 0.1);
+      }
+    }
+    &__dd-row{
+      --bs-gutter-x: #{rem(16)};
+    }
+    &__item-img{
+      width: rem(48);
+      height: rem(48);
+      border-radius: 8px;
+      overflow: hidden;
+
+      img{
+        object-fit: cover;
+      }
+    }
+    &__item-name{
+      @include ell(2);
+      line-height: calc(20/16);
+    }
+    &__item-price{
+
+    }
+    &__dd-link{
+      display: inline-block;
+      padding: rem(8) rem(16);
+      font-weight: 500;
+      line-height: 1.125;
+
+      &.muted{
+        color: $gray-600;
+      }
+    }
     &__{}
   }
 

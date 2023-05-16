@@ -1,18 +1,22 @@
 import {Trash} from '../../SvgSpriptes'
 
-import img1 from '../../img/headerBlock-slide.jpg'
 import {useLanguage} from "../../Hooks/UseLang";
+import {useDispatch, useSelector} from "react-redux";
+import {getCurrencySymb} from "../../Hooks/GetFunctions"
+import {addToCart, changeCartItemAmount, goToCheckOut} from "../../Hooks/cartFunctions";
+import {useEffect, useState} from "react";
 
 export const Cart = (props) => {
   const {} = props;
-
-  let emptyArray = [];
-  for(var i = 1; i <= 4; i++){
-    emptyArray.push('');
-  }
-
-  //
   const lang = useLanguage().Cart;
+  const config = useSelector(state => state);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    changeCartItemAmount(undefined, config).then((data) => {
+      dispatch({type: "SET_CARTRESPONSE", payload: data});
+    })
+  }, [config.lang, config.currency])
 
   return (
     <section className="section sCart">
@@ -26,19 +30,14 @@ export const Cart = (props) => {
                 </div>
               </div>
               <div className="col-auto">
-                <div className="sCart__amount">4 {lang.items}</div>
+                <div className="sCart__amount">{config.cartResponse && Array.isArray(config.cartResponse.products) ? config.cartResponse.products.length : 0} {lang.items}</div>
               </div>
             </div>
             <div className="sCart__items">
-              {emptyArray.map((item, index) => {
+              {config.cartResponse && Array.isArray(config.cartResponse.products) && config.cartResponse.products.map((item, index) => {
                 return (
                   <CartItem
-                    img={img1}
-                    name={'RESIDENT EVIL 7 BIOHAZARD'}
-                    discount={'-63%'}
-                    quantity={'1'}
-                    oldPrice={'599$'}
-                    price={'4,09RUB'}
+                    product={item}
                   />
                 )
               })}
@@ -50,9 +49,20 @@ export const Cart = (props) => {
               <div className="sCart__s-descr">{lang.descr}</div>
               <div className="sCart__s-total-wrap">
                 <div className="sCart__s-total-txt">{lang.total}</div>
-                <div className="sCart__s-price">17.86 $</div>
+                <div className="sCart__s-price">
+                  {config.cartResponse && config.cartResponse.amount}
+                  {config.cartResponse && config.cartResponse.products && getCurrencySymb(config.cartResponse.currency)}</div>
               </div>
-              <div className="sCart__s-btn">{lang.checkout}</div>
+              <div
+                className={`sCart__s-btn ${
+                  !config.cartResponse ||
+                  !config.cartResponse.products ||
+                  config.cartResponse.products.length === 0 ? "disabled" : ""}`
+                }
+                onClick={() => {
+                  goToCheckOut(config);
+                }}
+              >{lang.checkout}</div>
             </div>
           </div>
         </div>
@@ -62,14 +72,18 @@ export const Cart = (props) => {
 }
 
 const CartItem = (props) => {
-  const {img, name, discount, quantity, oldPrice, price} = props;
+  const {discount, cnt_item, oldPrice, price, name, id, currency} = props.product;
+
+  const [countBtnMute, setCountBtnMute] = useState(false);
+  const config = useSelector(state => state);
+  const dispatch = useDispatch();
 
   return(
     <div className="sCart__item">
       <div className="sCart__i-row row align-items-center">
         <div className="col-sm-auto sCart__i-col sCart__i-col--left">
           <div className="sCart__img">
-            <img src={img} alt=""/>
+            <img src={`https://graph.digiseller.ru/img.ashx?id_d=${id}&w=248&h=248&crop=true`} alt=""/>
           </div>
         </div>
         <div className="col-sm-auto sCart__i-col sCart__i-col--right">
@@ -81,18 +95,40 @@ const CartItem = (props) => {
           </div>
           <div className="sCart__price-row row align-items-center">
             <div className="sCart__controll-box col-auto">
-              <div className="sCart__btn sCart__btn--plus"></div>
-              <div className="sCart__item-amount">{quantity}</div>
-              <div className="sCart__btn sCart__btn--minus"></div>
+              <div className={`sCart__btn sCart__btn--plus ${countBtnMute ? "disabled" : ""}`} onClick={() => {
+                setCountBtnMute(true);
+                changeCartItemAmount(id, config, Number(cnt_item)+1).then((data) => {
+                  dispatch({type: "SET_CARTRESPONSE", payload: data});
+                }).then(() => {
+                  setCountBtnMute(false);
+                })
+              }}>
+
+              </div>
+              <div className="sCart__item-amount">{cnt_item}</div>
+              <div className={`sCart__btn sCart__btn--minus ${countBtnMute ? "disabled" : ""}`} onClick={() => {
+                setCountBtnMute(true);
+                changeCartItemAmount(id, config, Number(cnt_item)-1).then((data) => {
+                  dispatch({type: "SET_CARTRESPONSE", payload: data});
+                }).then(() => {
+                  setCountBtnMute(false);
+                })
+              }}>
+
+              </div>
             </div>
             <div className="col-auto">
               {oldPrice && (
                 <div className="sCart__old-price">{oldPrice}</div>
               )}
-              <div className="sCart__price">{price}</div>
+              <div className="sCart__price">{price} {getCurrencySymb(currency)}</div>
             </div>
             <div className="col-auto ms-auto">
-              <div className="sCart__trash">
+              <div className="sCart__trash" onClick={() => {
+                changeCartItemAmount(id, config, 0).then((data) => {
+                  dispatch({type: "SET_CARTRESPONSE", payload: data});
+                })
+              }}>
                 <Trash/>
               </div>
             </div>

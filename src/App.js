@@ -7,11 +7,20 @@ import {PolicyPage} from "./blocks/PolicyPage/PolicyPage";
 import {CatalogPage} from "./blocks/CatalogPage/CatalogPage";
 import {ProdCardPage} from "./blocks/ProdCardPage/ProdCardPage";
 import {CartPage} from "./blocks/CartPage/CartPage";
+import {SearchPage} from "./blocks/SearchPage/SearchPage";
+
+//
 import {useLanguage} from "./Hooks/UseLang";
+import {useGetSubCategories} from "./Hooks/useGetSubCategories";
+
+
 import {useEffect} from "react";
+import {useSelector} from "react-redux";
 
 function App() {
   const lang = useLanguage();
+  const config = useSelector(state => state);
+  const getSubCategories = useGetSubCategories();
 
   return (
     <BrowserRouter>
@@ -28,6 +37,7 @@ function App() {
         {/**/}
         <Route path="/prod/:id" element={<ProdCardPage/>}/>
         <Route path="/cart" element={<CartPage/>}/>
+        <Route path="/search" element={<SearchPage/>}/>
       </Routes>
     </BrowserRouter>
   );

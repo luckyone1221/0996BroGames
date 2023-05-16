@@ -1,5 +1,59 @@
 import axios from "axios";
 
+export const getSearchResults = async (config) => {
+
+  try {
+    if(config.searchTxt === ''){
+      return []
+    }
+
+    let xmlBodyStr = `
+      <?xml version="1.0" encoding="utf-8"?>
+      <digiseller.request>
+        <seller>
+          <id>${config.digIds.sellerId}</id>
+        </seller>
+        <products>
+          <search>${config.searchTxt}</search>
+          <currency>${config.currency}</currency>
+        </products>
+        <pages>
+          <num>0</num>
+          <rows>100</rows>
+        </pages>
+        <lang>${config.lang}</lang>
+      </digiseller.request>
+    `;
+    let axiosConfig = {
+      headers: {'Content-Type': 'text/xml'}
+    };
+    const response = await axios.post('http://shop.digiseller.ru/xml/shop_search.asp', xmlBodyStr);
+
+    let result = [];
+    let content = response.data;//your xml string variable
+    if (typeof content === 'string') {
+      let parsed = new DOMParser().parseFromString(content, "text/xml");
+
+      let products = parsed.getElementsByTagName('product');
+      for(let product of products){
+        let id = product.getElementsByTagName('id')[0].innerHTML;
+        let name = product.getElementsByTagName('name')[0].innerHTML;
+        let price = product.getElementsByTagName('price')[0].innerHTML;
+
+        result.push({
+          id: id,
+          name: name,
+          price: price,
+        })
+      }
+    }
+
+    return result
+  }
+  catch (e){
+    console.log(e);
+  }
+}
 export const getItemFeedbacks = async (config, itemId, page=1) => {
 
   try {
@@ -45,9 +99,8 @@ export const getCatalogList = async (config, categoryId=0) => {
       }
     })
 
-    console.log(categoryId);
+
     console.log(response.data);
-    console.log('//');
     return response.data
   }
   catch (e){
@@ -56,7 +109,6 @@ export const getCatalogList = async (config, categoryId=0) => {
 }
 
 export const getItemChars = async (config, itemId) => {
-
   try {
     const response = await axios({
       url : `https://api.digiseller.ru/api/products/${itemId}/data`,
@@ -77,25 +129,27 @@ export const getItemChars = async (config, itemId) => {
   }
   catch (e){
     console.log(e);
+    // window.localStorage.setItem('BroGamesRecentList', "");
   }
 }
+//"last 1 chrome version",
+//       "last 1 firefox version",
+//       "last 1 safari version"
 
-export const getProducts = async (config, page=1, prodType, currentPlatform, directlyId) => {
+export const getProducts = async (config, page=1, directlyId) => {
   const sellerId = config.digIds.sellerId;
+  const categories = config.digIds.categories;
   let categoryId;
 
-  if(prodType && currentPlatform){
-    categoryId = config.digIds[prodType][currentPlatform];
+  if(config.currentPlatform){
+    categoryId = config.currentPlatform;
   }
   else{
-    categoryId = config.currentPlatform ? config.digIds[config.prodType][config.currentPlatform] : config.digIds[config.prodType].all;
+    categoryId = categories[config.prodType].id;
   }
   if(directlyId){
     categoryId = directlyId;
   }
-
-  // console.log(prodType, currentPlatform);
-  // console.log(config.prodType, config.currentPlatform);
 
   try {
     const response = await axios({

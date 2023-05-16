@@ -4,17 +4,16 @@ import {useDispatch, useSelector} from "react-redux";
 
 export const CatalogHeader = (props) => {
   const lang = useLanguage().CatalogHeader;
+  const config = useSelector(state => state);
 
   return(
     <div className="cHead">
       <div className="cHead__header">
         <div className="container">
           <div className="cHead__row row justify-content-center">
-            <CatalogHeadItem platform="pc" txt={lang.pc}/>
-            <CatalogHeadItem platform="ps" txt={lang.playStation}/>
-            <CatalogHeadItem platform="xBoxAndPC" txt={lang.xBoxAndPc}/>
-            <CatalogHeadItem platform="nintendo" txt={lang.nintendo}/>
-            <CatalogHeadItem platform="vpnAndStreaming" txt={lang.vpnAndSteaming}/>
+            {config.digIds.categories[config.prodType].subCategories.map((item, index) => {
+              return <CatalogHeadItem key={index} id={item.id} txt={item.name}/>
+            })}
           </div>
         </div>
       </div>
@@ -23,14 +22,14 @@ export const CatalogHeader = (props) => {
 }
 
 const CatalogHeadItem = (props) => {
-  const {platform, txt} = props;
+  const {id, txt} = props;
   const dispatch = useDispatch();
   const currentPlatform = useSelector(state => state.currentPlatform);
 
   return (
     <div className="col-auto">
-      <div className={`cHead__h-link ${currentPlatform === platform ? "active" : ""}`} onClick={() => {
-        dispatch({type: "CHANGE_PLATFORM", payload: currentPlatform !== platform ? platform : undefined})
+      <div className={`cHead__h-link ${currentPlatform === id ? "active" : ""}`} onClick={() => {
+        dispatch({type: "CHANGE_PLATFORM", payload: id})
       }}>{txt}</div>
     </div>
   )

@@ -124,8 +124,8 @@
   }
   &__btn{
     @extend .btn;
-    width: rem(32);
-    height: rem(32);
+    width: 32px;
+    height: 32px;
     padding: 0;
     border-radius: 50%;
 
@@ -135,6 +135,13 @@
     }
     position: relative;
     z-index: 1;
+    border: none!important;
+
+    &.disabled{
+      pointer-events: none!important;
+      background: #212121!important;
+      opacity: .7;
+    }
 
     &:before,
     &:after{
@@ -149,11 +156,11 @@
     }
 
     &:before{
-      width: rem(10);
+      width: 10px;
       height: 2px;
     }
     &:after{
-      height: rem(10);
+      height: 10px;
       width: 2px;
     }
 

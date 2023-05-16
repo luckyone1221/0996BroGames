@@ -26,7 +26,14 @@ export const Recent = (props) => {
 
     for(let [index, id] of Object.entries(itemsList)){
       promiseArr.push(getItemChars(config, id).then((data) => {
-        productsArr[index] = data.product;
+        // console.log('//')
+        // console.log(data)
+        // console.log('//')
+
+        if(data.product){
+          // productsArr[index] = data.product;
+          productsArr.push(data.product);
+        }
       }));
     }
 

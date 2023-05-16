@@ -11,9 +11,11 @@ import {Review} from "../Review/Review";
 import {Fresh} from "../Fresh/Fresh";
 import {Footer} from "../Footer/Footer";
 import {useLanguage} from "../../Hooks/UseLang";
+import {useTrackRecent} from "../../Hooks/useTrackRecent";
 
 export const MainPage = (props) => {
   const lang = useLanguage();
+  const recentIdList = useTrackRecent();
 
   return(
     <div className="main-wrapper">
@@ -23,7 +25,9 @@ export const MainPage = (props) => {
         <Digits/>
         <Catalog/>
         <PreOrder/>
-        <Recent title={lang.Recent.titleRecent}/>
+        {recentIdList.length > 4 && (
+          <Recent itemsList={recentIdList}/>
+        )}
         <WhyUs/>
         <Review/>
         <Fresh/>

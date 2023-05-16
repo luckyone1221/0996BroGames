@@ -18,6 +18,7 @@
     "redux": "^4.2.1",
     "sass": "^1.53.0",
     "swiper": "^9.2.0",
+    "util": "^0.12.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -31,6 +32,11 @@
       "react-app",
       "react-app/jest"
     ]
+  },
+  "browser": {
+    "fs": false,
+    "os": false,
+    "path": false
   },
   "browserslist": {
     "production": [

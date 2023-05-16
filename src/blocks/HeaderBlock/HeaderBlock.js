@@ -6,10 +6,10 @@ import 'swiper/css/effect-fade';
 
 import {ChevronLeft, ChevronRight} from "../../SvgSpriptes";
 import {useLanguage} from "../../Hooks/UseLang";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {getProducts, getCurrencySymb} from "../../Hooks/GetFunctions";
-import {Link} from "react-router-dom";
-import {useBuyNow} from "../../Hooks/useBuyNow";
+import {Link, useNavigate} from "react-router-dom";
+import {addToCart} from "../../Hooks/cartFunctions";
 
 export const HeaderBlock = (props) => {
   const config = useSelector(state => state);
@@ -101,12 +101,17 @@ const HeaderBlockThumb = (props) => {
 
 const HeaderBlockSlide = (props) => {
   const {img, title, subTitle, id, price, currency} = props;
-
   const lang = useLanguage();
-  const buyNow = useBuyNow(id);
+  const navigate = useNavigate();
+  const config = useSelector(state => state);
+  const dispatch = useDispatch();
 
   return (
-    <Link className="headerBlock__slide" to={`prod/${id}`}>
+    <div className="headerBlock__slide" onClick={(e) => {
+      if(!e.target.closest('.buy-now-js')){
+        navigate(`prod/${id}`);
+      }
+    }}>
       <div className="headerBlock__bg">
         <img src={img} alt=""/>
       </div>
@@ -116,7 +121,14 @@ const HeaderBlockSlide = (props) => {
           <div className="headerBlock__subTitle" dangerouslySetInnerHTML={{__html: subTitle}}></div>
           <div className="headerBlock__btn-row row align-items-center">
             <div className="col-auto">
-              <button className="headerBlock__buy-btn" onClick={buyNow}>{lang.general.buyNow}</button>
+              <button className="headerBlock__buy-btn buy-now-js" onClick={(e) => {
+                addToCart(id, config).then((data) => {
+                  dispatch({type: "CHANGE_CARTUID", payload: data.cart_uid});
+                  dispatch({type: "SET_CARTRESPONSE", payload: data});
+                }).then(() => {
+                  navigate('/cart');
+                })
+              }}>{lang.general.buyNow}</button>
             </div>
             <div className="headerBlock__col headerBlock__col--price col-auto">
               <div className="headerBlock__price">
@@ -129,6 +141,6 @@ const HeaderBlockSlide = (props) => {
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   )
 }

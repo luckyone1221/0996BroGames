@@ -8,12 +8,16 @@ import {CurrencyLang} from "./CurrencyLang";
 import {HeaderSearch} from "./HeaderSearch";
 import {HeaderMenu} from "./HeaderMenu";
 import {MobMenu} from "./MobMenu";
+import {getSearchResults} from "../../Hooks/GetFunctions";
+import {useDispatch, useSelector} from "react-redux";
 
 function useCalcHeaderHeight(header){
   const [headerAddClasses, setHeaderAddClass] = useState('');
 
   const calcHeaderHeight = () => {
-    document.documentElement.style.setProperty('--header-h', header.current.offsetHeight + 'px');
+    if(header.current){
+      document.documentElement.style.setProperty('--header-h', header.current.offsetHeight + 'px');
+    }
 
     if (window.pageYOffset > 0) {
       setHeaderAddClass('fixed');
@@ -65,8 +69,10 @@ function useMobMenu(){
   return [mobMenuActive, setMobMenuActive]
 }
 
-
 export const Header = (props) => {
+  const config = useSelector(state => state);
+  const dispatch = useDispatch();
+
   const header = useRef(null);
   const headerAddClasses = useCalcHeaderHeight(header);
 
@@ -77,9 +83,18 @@ export const Header = (props) => {
   const navigate = useNavigate();
   const [currLocation,setCurrLocation] = useState('');
 
+
   useEffect(() => {
     setCurrLocation(window.location.pathname);
   }, [navigate]);
+
+  //search changes
+  useEffect(() => {
+    getSearchResults(config).then((data) => {
+      dispatch({type: "CHANGE_SEARCH_RESULTS", payload: data});
+    })
+  }, [navigate, config.searchTxt , config.lang, config.currency])
+
 
   return(
     <>
@@ -95,10 +110,10 @@ export const Header = (props) => {
               <HeaderMenu currLocation={currLocation}/>
             </div>
             <div className="col-auto d-none d-md-block">
-              <HeaderSearch/>
+              <HeaderSearch hasDropDown={true}/>
             </div>
             <div className="col-auto">
-              <Link to="/cart" className="header__cart">
+              <Link to="/cart" className={`header__cart ${config.cartResponse && config.cartResponse.products && config.cartResponse.products.length > 0 && "active"}`} data-count={config.cartResponse && config.cartResponse.products && config.cartResponse.products.length}>
                 <CartIcon/>
               </Link>
             </div>

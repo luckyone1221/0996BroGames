@@ -11,7 +11,9 @@
     "about": "About BroGamers",
     "searchPlaceholder": "Search game",
     "language": "Language",
-    "currency": "Currency"
+    "currency": "Currency",
+    "nothingFound": "Nothing Found",
+    "GotoSearchPage": "Watch all results"
   },
   "Digits": [
     {
@@ -171,5 +173,10 @@
         "content": "reply"
       }
     ]
+  },
+  "SearchPage": {
+    "title": "Search:",
+    "totalResults": "Total result:",
+    "nothingFound": "Nothing Found"
   }
 }

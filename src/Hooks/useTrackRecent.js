@@ -4,14 +4,18 @@ import {useNavigate} from "react-router-dom";
 export function useTrackRecent(id){
   const navigate = useNavigate();
 
-  let idList = JSON.parse(localStorage.getItem('BroGamesRecentList'));
+  let idList;
+  if (localStorage.getItem('BroGamesRecentList')){
+    idList = JSON.parse(localStorage.getItem('BroGamesRecentList'));
+  }
+
   if(idList && Array.isArray(idList)){
-    if(idList.indexOf(id) < 0){
+    if(id && idList.indexOf(id) < 0){
       idList.push(id);
     }
   }
   else{
-    idList = new Array(id);
+    idList = id ? new Array(id) : new Array();
   }
 
   window.localStorage.setItem('BroGamesRecentList', JSON.stringify(idList));

@@ -11,48 +11,50 @@ import content from "./content.json";
 const defaultState = {
   lang: 'en-US',//ru-Ru
   currency: "RUB",//USD
-  currentPlatform: undefined,
+
   prodType: "all",
+  currentPlatform: undefined,//?
   sortOrder: "name",
-  cart: [],
+
+  //content override
   content: content,
+
+  //search
+  searchTxt: "",
+  searchResults: [],
+
+  //cart
+  cartUID: "",
+  cartResponse: undefined,
+
+  //
   digIds: {
     sellerId: "817785",
     categorySlider: "133593",
     sliderOnMain: "133594",
 
     //categories
-    all: {
-      all: "133459",
-      pc: "133563",
-      ps: "133564",
-      xBoxAndPC: "133565",
-      nintendo: "133566",
-      vpnAndStreaming: "133567",
-    },
-    accounts: {
-      all: "116325",
-      pc: "133467",
-      ps: "133468",
-      xBoxAndPC: "133469",
-      nintendo: "133470",
-      vpnAndStreaming: "133471",
-    },
-    activations: {
-      all: "116368",
-      pc: "133462",
-      ps: "133463",
-      xBoxAndPC: "133464",
-      nintendo: "133465",
-      vpnAndStreaming: "133466",
-    },
-    keys: {
-      all: "116327",
-      pc: "133454",
-      ps: "133455",
-      xBoxAndPC: "133456",
-      nintendo: "133457",
-      vpnAndStreaming: "133458",
+    categories: {
+      all: {
+        id: "133459",
+        subCategories: [],
+      },
+      accounts: {
+        id: "116325",
+        subCategories: [],
+      },
+      activations: {
+        id: "116368",
+        subCategories: [],
+      },
+      keys: {
+        id: "116327",
+        subCategories: [],
+      },
+      topUp: {
+        id: "133792",
+        subCategories: [],
+      },
     },
   },
 }
@@ -65,24 +67,25 @@ const reducer = (state=defaultState, action) => {
       return {...state, currency: action.payload}
     case "CHANGE_PLATFORM":
       return {...state, currentPlatform: action.payload}
-    case "ADD_TO_CART":
-      if ([...state.cart].indexOf(action.payload) <= -1) {
-        return {...state, cart: [...state.cart, action.payload]}
-      }
-      else {
-        return state
-      }
-    case "REMOVE_FROM_CART":
-      const cart = [...state.cart];
-      const index = cart.indexOf(action.payload);
-      if (index > -1) {
-        cart.splice(index, 1);
-      }
-      return {...state, cart: cart}
+    case "CHANGE_CARTUID":
+      return {...state, cartUID: action.payload}
+    case "SET_CARTRESPONSE":
+      return {...state, cartResponse: action.payload}
     case "CHANGE_SORTORDER":
       return {...state, sortOrder: action.payload}
     case "CHANGE_PRODTYPE":
       return {...state, prodType: action.payload}
+    case "CHANGE_SEARCHTXT":
+      return {...state, searchTxt: action.payload}
+    case "CHANGE_SEARCH_RESULTS":
+      return {...state, searchResults: action.payload}
+    case "CHANGE_CATEGORIES":
+      return {...state,
+        digIds: {
+          ...state.digIds,
+          categories: action.payload
+        }
+      }
     default:
       return state
   }
