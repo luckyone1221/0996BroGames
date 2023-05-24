@@ -1,5 +1,3 @@
-import ppImg from '../../screen/about.png'
-
 import {Header} from "../Header/Header";
 import {Footer} from "../Footer/Footer";
 import {BroHeaderBlock} from "../BroHeaderBlock/BroHeaderBlock";
@@ -11,8 +9,10 @@ import {WhatWeDo} from "../WhatWeDo/WhatWeDo";
 import {Review} from "../Review/Review";
 import {Fresh} from "../Fresh/Fresh";
 import {HowItWorks} from "../HowItWorks/HowItWorks";
+import {useSelector} from "react-redux";
 
 export const AboutPage = (props) => {
+  const content = useSelector(state => state.content);
 
   return(
     <div className="main-wrapper">
@@ -23,12 +23,11 @@ export const AboutPage = (props) => {
         <WhyUs/>
         <SaveWater/>
         <WhatWeDo/>
-        <Review/>
+        <Review itemId={content.feedBackFallBackId}/>
         <HowItWorks/>
         <Fresh/>
       </main>
       <Footer/>
-      <PixelPerfect img={ppImg}/>
     </div>
   )
 }

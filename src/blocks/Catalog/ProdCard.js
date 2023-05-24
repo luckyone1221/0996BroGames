@@ -1,5 +1,5 @@
-import React from "react";
-import {Link} from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {Link, useNavigate} from "react-router-dom";
 import {CartIcon} from "../../SvgSpriptes";
 import {useDispatch, useSelector} from "react-redux";
 import {useGetTags} from "../../Hooks/useGetTags";
@@ -12,7 +12,7 @@ export const ProdCard = (props) => {
   const config = useSelector(state => state);
   const dispatch = useDispatch();
   const tags = useGetTags(itemId);
-  const cartBtnActiveClasses = useCartActiveClasses(itemId);
+  const btnClasses = useCartActiveClasses(itemId);
 
   return(
     <div className={`prodCard ${addClasses ? addClasses : ''}`}>
@@ -35,7 +35,8 @@ export const ProdCard = (props) => {
           <div className="prodCard__price">{price}</div>
         </div>
         <div className="col-auto">
-          <div className={`prodCard__cart-btn ${cartBtnActiveClasses}`} onClick={() => {
+
+          <div className={`prodCard__cart-btn ${btnClasses}`} onClick={() => {
             addToCart(itemId, config).then((data) => {
               dispatch({type: "CHANGE_CARTUID", payload: data.cart_uid});
               dispatch({type: "SET_CARTRESPONSE", payload: data});

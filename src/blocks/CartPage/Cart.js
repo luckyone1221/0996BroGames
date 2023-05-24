@@ -37,6 +37,7 @@ export const Cart = (props) => {
               {config.cartResponse && Array.isArray(config.cartResponse.products) && config.cartResponse.products.map((item, index) => {
                 return (
                   <CartItem
+                    key={index}
                     product={item}
                   />
                 )
@@ -53,16 +54,26 @@ export const Cart = (props) => {
                   {config.cartResponse && config.cartResponse.amount}
                   {config.cartResponse && config.cartResponse.products && getCurrencySymb(config.cartResponse.currency)}</div>
               </div>
-              <div
-                className={`sCart__s-btn ${
-                  !config.cartResponse ||
-                  !config.cartResponse.products ||
-                  config.cartResponse.products.length === 0 ? "disabled" : ""}`
-                }
-                onClick={() => {
-                  goToCheckOut(config);
-                }}
-              >{lang.checkout}</div>
+              <form id="digiselller_form" action="https://oplata.info/asp2/pay.asp" method="post">
+                <input type="hidden" name="id_d" value="" />
+                <input type="hidden" name="cart_uid" value={config.cartUID} />
+                <input type="hidden" name="typecurr" value="WMZ" />
+                <input type="hidden" name="email" value="" />
+                <input type="hidden" name="lang" value={config.lang} />
+                <input type="hidden" name="failpage" value={window.location.origin} />
+                <input type="hidden" name="agent" value="" />
+                <input type="hidden" name="promocode" value="" />
+                <input type="hidden" name="unit_cnt" value="" />
+                <input type="hidden" name="id_po" value="" />
+                <button
+                  className={`sCart__s-btn ${
+                    !config.cartResponse ||
+                    !config.cartResponse.products ||
+                    config.cartResponse.products.length === 0 ? "disabled" : ""}`
+                  }
+                  type="submit"
+                >{lang.checkout}</button>
+              </form>
             </div>
           </div>
         </div>

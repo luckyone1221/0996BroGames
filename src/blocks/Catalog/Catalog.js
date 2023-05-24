@@ -8,24 +8,43 @@ import {ChevronLeft, ChevronRight} from "../../SvgSpriptes";
 import React, {useEffect, useRef, useState} from "react";
 import {Link} from "react-router-dom";
 
-import slideImg1 from '../../img/headerBlock-slide.jpg'
 import steam from '../../img/svg/steam.svg'
 import {useLanguage} from "../../Hooks/UseLang";
 import {ProdCard} from "./ProdCard";
+import {getCurrencySymb, getProducts} from "../../Hooks/GetFunctions";
+import {useSelector} from "react-redux";
 
 export const Catalog = (props) => {
   const {} = props;
 
-  let emptyArray = [];
-  for(var i = 1; i <= 11; i++){
-    emptyArray.push('');
-  }
-
-  //
-  const [slider, setSlider] = useState(null);
-
   //
   const lang = useLanguage().Catalog;
+  const config = useSelector(state => state);
+
+  const [slider, setSlider] = useState(null);
+  const [products, setProducts] = useState([]);
+  const [currentCatalog, setCurrentCatalog] = useState("-3");
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(-1);
+
+  useEffect(() => {
+    //11 items for first time because of static card
+    //always get first page here
+    getProducts(config, 1, currentCatalog, 11).then((data) => {
+      if(data.product){
+        setTotalPages(data.totalPages);
+
+        //set it 2 for next time
+        setCurrentPage(2);
+        setProducts([...data.product]);
+      }
+      else{
+        setProducts([]);
+      }
+    })
+  }, [currentCatalog, config.lang, config.currency]);
+
 
   return(
     <section className="sCatalog section">
@@ -38,29 +57,40 @@ export const Catalog = (props) => {
           </div>
           <div className="order-last order-xl-0 col-xl">
             <div className="sCatalog__tags-row align-items-center row">
-              <div className="sCatalog__col col-auto">
-                <div className="sCatalog__tag active">{lang.top}</div>
+              <CatalogFilterBtn
+                currentCatalog={currentCatalog} setCurrentCatalog={setCurrentCatalog}
+                btnTxt={lang.top}
+                btnCategoryId={"-3"}
+              />
+              <CatalogFilterBtn
+                currentCatalog={currentCatalog} setCurrentCatalog={setCurrentCatalog}
+                btnTxt={lang.discount}
+                btnCategoryId={"-1"}
+              />
+              {/*??*/}
+              <div className="sCatalog__col d-none sCatalog__col--splitter col-md-auto">
               </div>
-              <div className="sCatalog__col col-auto">
-                <div className="sCatalog__tag">{lang.discount}</div>
-              </div>
-              <div className="sCatalog__col sCatalog__col--splitter col-md-auto">
-              </div>
-              <div className="sCatalog__col col-auto">
-                <div className="sCatalog__tag">{lang.accounts}</div>
-              </div>
-              <div className="sCatalog__col col-auto">
-                <div className="sCatalog__tag">{lang.activation}</div>
-              </div>
-              <div className="sCatalog__col col-auto">
-                <div className="sCatalog__tag">{lang.keys}</div>
-              </div>
-              <div className="sCatalog__col col-auto">
-                <div className="sCatalog__tag">{lang.soft}</div>
-              </div>
-              <div className="sCatalog__col col-auto">
-                <div className="sCatalog__tag">{lang.topUp}</div>
-              </div>
+              {/*??*/}
+              <CatalogFilterBtn
+                currentCatalog={currentCatalog} setCurrentCatalog={setCurrentCatalog}
+                btnTxt={lang.accounts}
+                btnCategoryId={config.digIds.categories.accounts.id}
+              />
+              <CatalogFilterBtn
+                currentCatalog={currentCatalog} setCurrentCatalog={setCurrentCatalog}
+                btnTxt={lang.activation}
+                btnCategoryId={config.digIds.categories.activations.id}
+              />
+              <CatalogFilterBtn
+                currentCatalog={currentCatalog} setCurrentCatalog={setCurrentCatalog}
+                btnTxt={lang.keys}
+                btnCategoryId={config.digIds.categories.keys.id}
+              />
+              <CatalogFilterBtn
+                currentCatalog={currentCatalog} setCurrentCatalog={setCurrentCatalog}
+                btnTxt={lang.topUp}
+                btnCategoryId={config.digIds.categories.topUp.id}
+              />
             </div>
           </div>
           <div className="col-auto">
@@ -83,6 +113,16 @@ export const Catalog = (props) => {
           </div>
         </div>
         <Swiper
+          onReachEnd={()=>{
+            if(currentPage <= totalPages){
+              getProducts(config, currentPage, currentCatalog, 12).then((data) => {
+                if(data.product){
+                  setCurrentPage(currentPage+1);
+                  setProducts([...products, ...data.product]);
+                }
+              })
+            }
+          }}
           modules={[Grid]}
           className={'sCatalog__slider'}
           breakpoints={{
@@ -127,21 +167,33 @@ export const Catalog = (props) => {
               </div>
             </Link>
           </SwiperSlide>
-          {emptyArray.map((item, index) => {
+          {products.map((item, index) => {
             return <SwiperSlide key={index}>
               <ProdCard
-                key={index}
-                href="#"
-                addClasses={'fixed-h'}
-                img={slideImg1}
-                tagsArr={['Accounts', 'PS']}
-                name={'Resident Evil 2'}
-                price={'0.86 $'}
+                addClasses={"fixed-h"}
+                itemId={item.id}
+                name={item.name}
+                price={`${item.price} ${getCurrencySymb(item.currency)}`}
               />
             </SwiperSlide>
           })}
         </Swiper>
       </div>
     </section>
+  )
+}
+
+const CatalogFilterBtn = (props) => {
+  const {currentCatalog, setCurrentCatalog, btnTxt, btnCategoryId} = props;
+
+  return(
+    <div className="sCatalog__col col-auto">
+      <div
+        className={`sCatalog__tag ${currentCatalog === btnCategoryId ? "active" : ""}`}
+        onClick={() => setCurrentCatalog(btnCategoryId)}
+      >
+        {btnTxt}
+      </div>
+    </div>
   )
 }

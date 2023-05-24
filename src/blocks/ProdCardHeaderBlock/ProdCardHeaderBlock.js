@@ -2,17 +2,22 @@ import {CartIcon} from "../../SvgSpriptes";
 import {useLanguage} from "../../Hooks/UseLang";
 import {TagBox} from "../Catalog/ProdCard";
 import {useGetTags} from "../../Hooks/useGetTags";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {getCurrencySymb} from "../../Hooks/GetFunctions";
 import {useDispatch, useSelector} from "react-redux";
+import {addToCart} from "../../Hooks/cartFunctions";
+import {useCartActiveClasses} from "../../Hooks/useCartActiveClasses";
+import {useNavigate} from "react-router-dom";
 
 export const ProdCardHeaderBlock = (props) => {
   const {product} = props;
 
   const config = useSelector(state => state);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const lang = useLanguage().ProdCardHeaderBlock;
   const tags = useGetTags(product.id);
+  const cartBtnActiveClasses = useCartActiveClasses(product.id);
 
   return (
     <section className="section sProd">
@@ -39,13 +44,23 @@ export const ProdCardHeaderBlock = (props) => {
               <div className="sProd__price">{product.price}{getCurrencySymb(product.currency)}</div>
               <div className="sProd__btn-row row align-items-center">
                 <div className="col-sm-auto">
-                  <button className="sProd__btn" onClick={() => {}}>
+                  <button className="sProd__btn" onClick={() => {
+                    addToCart(product.id, config, 1).then((data) => {
+                      dispatch({type: "CHANGE_CARTUID", payload: data.cart_uid});
+                      dispatch({type: "SET_CARTRESPONSE", payload: data});
+                    }).then(() => {
+                      navigate('/cart');
+                    })
+                  }}>
                     {lang.buyNow}
                   </button>
                 </div>
                 <div className="col-auto d-none d-sm-block">
-                  <div className={`sProd__cart ${config.cart && config.cart.indexOf(product.id) > -1 ? "active" : "" }`} onClick={() => {
-                    dispatch({type: "ADD_TO_CART", payload: product.id})
+                  <div className={`sProd__cart ${cartBtnActiveClasses}`} onClick={() => {
+                    addToCart(product.id, config).then((data) => {
+                      dispatch({type: "CHANGE_CARTUID", payload: data.cart_uid});
+                      dispatch({type: "SET_CARTRESPONSE", payload: data});
+                    })
                   }}>
                     <CartIcon/>
                   </div>

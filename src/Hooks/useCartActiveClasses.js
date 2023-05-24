@@ -1,19 +1,25 @@
 import {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
 
 export function useCartActiveClasses(id){
+  const navigate = useNavigate();
   const [btnClasses, setBtnClasses] = useState("");
-  const cartResponse = useSelector(state => state.cartResponse);
+
+  const config = useSelector(state => state);
+  let cartResponse = config.cartResponse;
 
   useEffect(() => {
+    setBtnClasses("");
     if(cartResponse && cartResponse.products && Array.isArray(cartResponse.products)){
+
       for (let item of cartResponse.products) {
-        if(item.id === id){
+        if(Number(item.id) === Number(id)){
           setBtnClasses("active");
         }
       }
     }
-  }, [cartResponse]);
+  }, [cartResponse, navigate, id]);
 
   return btnClasses
 }

@@ -1,7 +1,7 @@
 import {useNavigate} from 'react-router-dom';
 import React, {useEffect, useRef, useState} from 'react'
 import Select from 'react-select'
-import slideImg1 from "../../img/headerBlock-slide.jpg";
+
 import {useLanguage} from "../../Hooks/UseLang";
 import {
   getCatalogList, getCurrencySymb,
@@ -21,7 +21,6 @@ export const CatalogItems = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const lang = useLanguage().CatalogItems;
-
   //
   useEffect(() => {
     dispatch({type: "CHANGE_PRODTYPE", payload: productType});
@@ -72,7 +71,7 @@ export const CatalogItems = (props) => {
         setAlertTxt(lang.nothingFound);
       }
     })
-  }, [config])
+  }, [config.lang, config.currency, config.prodType, config.currentPlatform])
 
   useEffect(() => {
     window.addEventListener('scroll', loadMoreFunc, {passive: true})

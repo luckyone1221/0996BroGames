@@ -12,8 +12,10 @@ import {Fresh} from "../Fresh/Fresh";
 import {Footer} from "../Footer/Footer";
 import {useLanguage} from "../../Hooks/UseLang";
 import {useTrackRecent} from "../../Hooks/useTrackRecent";
+import {useSelector} from "react-redux";
 
 export const MainPage = (props) => {
+  const content = useSelector(state => state.content);
   const lang = useLanguage();
   const recentIdList = useTrackRecent();
 
@@ -29,7 +31,7 @@ export const MainPage = (props) => {
           <Recent itemsList={recentIdList}/>
         )}
         <WhyUs/>
-        <Review/>
+        <Review itemId={content.feedBackFallBackId}/>
         <Fresh/>
         <Footer/>
       </main>

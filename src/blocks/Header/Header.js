@@ -64,7 +64,7 @@ function useMobMenu(){
       document.body.removeEventListener('click', mobMenuMissclick);
       window.removeEventListener('resize', closeMenuOnXL);
     };
-  })
+  }, [])
 
   return [mobMenuActive, setMobMenuActive]
 }

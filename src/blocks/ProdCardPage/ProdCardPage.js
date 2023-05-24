@@ -27,7 +27,7 @@ export const ProdCardPage = (props) => {
     getItemChars(config, params.id).then((data) => {
       setItemChars(data);
     });
-  }, [config, navigate]);
+  }, [config.lang, config.currency, navigate]);
 
 
   return (

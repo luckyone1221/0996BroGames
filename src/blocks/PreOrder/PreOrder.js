@@ -7,61 +7,65 @@ import React, {useState} from "react";
 import {ChevronLeft, ChevronRight} from "../../SvgSpriptes";
 import {useLanguage} from "../../Hooks/UseLang";
 import {ProdCard} from "../Catalog/ProdCard";
+import {getCurrencySymb, getProducts} from "../../Hooks/GetFunctions";
+import {useSelector} from "react-redux";
 
 export const PreOrder = (props) => {
+  const [products, setProducts] = useState([]);
+  const config = useSelector(state => state);
 
+  getProducts(config, 1, config.digIds.preOrder, 100).then((data) => {
+    if(data && data.product){
+      setProducts([...data.product]);
+    }
+  })
 
-  let emptyArray = [];
-  for(var i = 1; i <= 10; i++){
-    emptyArray.push('');
-  }
   //
   const [slider, setSlider] = useState();
   const lang = useLanguage().PreOrder;
 
-  return(
-    <section className="sPreOrder section">
-      <div className="container">
-        <div className="sPreOrder__box">
-          <div className="sPreOrder__bg">
-            <img loading="lazy" src={PreOrderBg} alt=""/>
+  if(products.length > 0){
+    return(
+      <section className="sPreOrder section">
+        <div className="container">
+          <div className="sPreOrder__box">
+            <div className="sPreOrder__bg">
+              <img loading="lazy" src={PreOrderBg} alt=""/>
+            </div>
+            <div className="section-title">
+              <h2>{lang.title}</h2>
+            </div>
+            <Swiper
+              modules={[Pagination]}
+              breakpoints={{
+                0: {
+                  spaceBetween: 16,
+                },
+                576: {
+                  spaceBetween: 32,
+                },
+              }}
+              slidesPerView={"auto"}
+              className={'sPreOrder__slider'}
+              onSwiper={setSlider}
+              pagination={{ clickable: true }}
+            >
+              {products.map((item, index) => {
+                return <SwiperSlide key={index}>
+                  <ProdCard
+                    itemId={item.id}
+                    name={item.name}
+                    price={`${item.price} ${getCurrencySymb(item.currency)}`}
+                  />
+                </SwiperSlide>
+              })}
+              <TransparentChevrons slider={slider}/>
+            </Swiper>
           </div>
-          <div className="section-title">
-            <h2>{lang.title}</h2>
-          </div>
-          <Swiper
-            modules={[Pagination]}
-            breakpoints={{
-              0: {
-                spaceBetween: 16,
-              },
-              576: {
-                spaceBetween: 32,
-              },
-            }}
-            slidesPerView={"auto"}
-            className={'sPreOrder__slider'}
-            onSwiper={setSlider}
-            pagination={{ clickable: true }}
-          >
-            {emptyArray.map((item, index) => {
-              return <SwiperSlide key={index}>
-                <ProdCard
-                  key={index}
-                  href="#"
-                  img={slideImg1}
-                  tagsArr={['Accounts', 'PS']}
-                  name={'Resident Evil 2'}
-                  price={'0.86 $'}
-                />
-              </SwiperSlide>
-            })}
-            <TransparentChevrons slider={slider}/>
-          </Swiper>
         </div>
-      </div>
-    </section>
-  )
+      </section>
+    )
+  }
 }
 
 export const TransparentChevrons = (props) => {

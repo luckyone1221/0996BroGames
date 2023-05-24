@@ -16,12 +16,12 @@ export const HeaderBlock = (props) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    getProducts(config, 1, undefined, undefined, config.digIds.sliderOnMain).then((data) => {
+    getProducts(config, 1, config.digIds.sliderOnMain).then((data) => {
       if(data.product){
         setProducts([...data.product]);
       }
     })
-  }, [config])
+  }, [config.lang, config.currency])
 
   //
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -122,7 +122,7 @@ const HeaderBlockSlide = (props) => {
           <div className="headerBlock__btn-row row align-items-center">
             <div className="col-auto">
               <button className="headerBlock__buy-btn buy-now-js" onClick={(e) => {
-                addToCart(id, config).then((data) => {
+                addToCart(id, config, 1).then((data) => {
                   dispatch({type: "CHANGE_CARTUID", payload: data.cart_uid});
                   dispatch({type: "SET_CARTRESPONSE", payload: data});
                 }).then(() => {

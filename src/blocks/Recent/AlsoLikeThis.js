@@ -16,7 +16,7 @@ export const AlsoLikeThis = (props) => {
   const [prodIds, setProdIds] = useState([]);
 
   useEffect(() => {
-    getProducts(config, 0, prodType, currentPlatform).then((data) => {
+    getProducts(config, 0, prodType).then((data) => {
       let prodArr = [];
       if(data.product) {
         for(let item of data.product){
@@ -28,7 +28,7 @@ export const AlsoLikeThis = (props) => {
 
       setProdIds(prodArr);
     });
-  }, [navigate, config]);
+  }, [navigate, config.lang, config.currency]);
 
 
   if(prodIds.length > 0){

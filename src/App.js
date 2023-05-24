@@ -13,13 +13,8 @@ import {SearchPage} from "./blocks/SearchPage/SearchPage";
 import {useLanguage} from "./Hooks/UseLang";
 import {useGetSubCategories} from "./Hooks/useGetSubCategories";
 
-
-import {useEffect} from "react";
-import {useSelector} from "react-redux";
-
 function App() {
   const lang = useLanguage();
-  const config = useSelector(state => state);
   const getSubCategories = useGetSubCategories();
 
   return (
@@ -33,7 +28,7 @@ function App() {
         <Route path="/catalog/accounts" element={<CatalogPage productType="accounts"/>}/>
         <Route path="/catalog/activations" element={<CatalogPage productType="activations"/>}/>
         <Route path="/catalog/keys" element={<CatalogPage productType="keys"/>}/>
-        {/*<Route path="/catalog/top-up" element={<CatalogPage productType={lang.CatalogItems.topUp}/>}/>*/}
+        <Route path="/catalog/top-up" element={<CatalogPage productType={"topUp"}/>}/>
         {/**/}
         <Route path="/prod/:id" element={<ProdCardPage/>}/>
         <Route path="/cart" element={<CartPage/>}/>

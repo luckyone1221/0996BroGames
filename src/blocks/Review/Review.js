@@ -1,5 +1,5 @@
 import goodImg from '../../img/svg/thumbs-up.svg'
-import slideImg1 from "../../img/headerBlock-slide.jpg";
+import badImg from '../../img/svg/thumbs-down.svg'
 
 import React, {useEffect, useState} from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -13,23 +13,51 @@ import {useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 
 export const Review = (props) => {
-  const {itemId} = props;
+  const {itemId, isFeedBackCase} = props;
 
   //feedBackList
+  const [gameName, setGameName] = useState('');
+
+
   const [feedBackList, setFeedBackList] = useState([]);
   const [slider, setSlider] = useState(null);
 
+  const content = useSelector(state => state.content);
   const lang = useLanguage().Review;
   const navigate = useNavigate();
   const config = useSelector((state => state))
 
   useEffect(() => {
+    getItemChars(config, itemId).then((data) => {
+      if(data.product && data.product.name){
+        setGameName(data.product.name);
+      }
+      else{
+        console.log('//broken')
+        console.log(data.product)
+        console.log('//broken')
+      }
+
+    })
+
     getItemFeedbacks(config, itemId).then((data) => {
-      // console.log(data);
+      if (data.review && data.review.length > 4){
+        setFeedBackList(data.review);
+      }
+      else{
+        if(!isFeedBackCase){
+          setFeedBackList("ShowFallback");
+        }
+        else{
+          setFeedBackList([]);
+        }
+
+      }
     });
   }, [navigate]);
 
-  if(feedBackList.length > 0){
+
+  if(Array.isArray(feedBackList) && feedBackList.length > 0){
     return(
       <section className="sReview section">
         <div className="container">
@@ -78,11 +106,11 @@ export const Review = (props) => {
               return <SwiperSlide key={index}>
                 <ReviewItem
                   key={index}
-                  date={'Apr 06 at 12:38'}
-                  feedBackImg={goodImg}
-                  txt={'Все работает, поддержка реагирует, если возникают проблемы всё быстро фиксят, рекомендую)'}
-                  gameImg={slideImg1}
-                  gameName={' ⭐️Xbox Game Pass Ultimate + EA✔️3 года+✔️РФ✔️На Ваш Акк'}
+                  date={item.date}
+                  type={item.type}
+                  txt={item.info}
+                  itemId={itemId}
+                  gameName={gameName}
                 />
               </SwiperSlide>
             })}
@@ -92,10 +120,16 @@ export const Review = (props) => {
       </section>
     )
   }
+
+  if(feedBackList === "ShowFallback"){
+    return (
+      <Review itemId={content.feedBackFallBackId} isFeedBackCase={true}/>
+    )
+  }
 }
 
 const ReviewItem = (props) => {
-  const {date, feedBackImg, txt, gameImg, gameName} = props;
+  const {date, type, txt, itemId, gameName} = props;
 
   return(
     <div className="sReview__item">
@@ -105,7 +139,10 @@ const ReviewItem = (props) => {
         </div>
         <div className="col-auto">
           <div className="sReview__fb-img">
-            <img loading="lazy" src={feedBackImg} alt=""/>
+            {type === "good" && (<img loading="lazy" src={goodImg} alt=""/>)}
+          </div>
+          <div className="sReview__fb-img">
+            {type === "bad" && (<img loading="lazy" src={badImg} alt=""/>)}
           </div>
         </div>
       </div>
@@ -113,7 +150,7 @@ const ReviewItem = (props) => {
       <div className="sReview__bot-row row align-items-center">
         <div className="col-auto">
           <div className="sReview__game-img">
-            <img loading="lazy" src={gameImg} alt=""/>
+            <img loading="lazy" src={`https://graph.digiseller.ru/img.ashx?id_d=${itemId}&w=248&h=248&crop=true`} alt=""/>
           </div>
         </div>
         <div className="col">

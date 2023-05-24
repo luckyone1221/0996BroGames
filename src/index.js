@@ -1,3 +1,4 @@
+import { StrictMode } from 'react';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -20,7 +21,7 @@ const defaultState = {
   content: content,
 
   //search
-  searchTxt: "",
+  searchTxt: "",//heavy load
   searchResults: [],
 
   //cart
@@ -32,6 +33,7 @@ const defaultState = {
     sellerId: "817785",
     categorySlider: "133593",
     sliderOnMain: "133594",
+    preOrder: "133988",
 
     //categories
     categories: {

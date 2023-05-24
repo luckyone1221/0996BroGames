@@ -356,6 +356,7 @@ ul {
 
 .swiper-pagination {
 	width: 100%;
+
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
@@ -365,7 +366,11 @@ ul {
 		cursor: pointer;
 		@include mt;
 		outline: none !important;
-		margin: rem(4) rem(17);
+
+		margin: rem(8) rem(12);
+		@include media-breakpoint-up(md){
+			margin: rem(4) rem(17);
+		}
 
 		opacity: 1;
 		width: 6px;

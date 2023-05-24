@@ -14,7 +14,7 @@ export const CatalogSlider = (props) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    getProducts(config, 1, undefined, undefined, config.digIds.categorySlider).then((data) => {
+    getProducts(config, 1, config.digIds.categorySlider, 12).then((data) => {
       if(data.product){
         setProducts([...data.product]);
       }

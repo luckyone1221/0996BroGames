@@ -54,11 +54,11 @@ export const getSearchResults = async (config) => {
     console.log(e);
   }
 }
-export const getItemFeedbacks = async (config, itemId, page=1) => {
+export const getItemFeedbacks = async (config, itemId, type="good", page=1, amount=36) => {
 
   try {
     const response = await axios({
-      url : `https://api.digiseller.ru/api/reviews?seller_id=${config.digIds.sellerId}&product_id=${itemId}&type=all&page=${page}&rows=12`,
+      url : `https://api.digiseller.ru/api/reviews?seller_id=${config.digIds.sellerId}&product_id=${itemId}&type=${type}&page=${page}&rows=${amount}`,
       method: 'Get',
       headers: {
         "Accept": "application/json"
@@ -66,9 +66,9 @@ export const getItemFeedbacks = async (config, itemId, page=1) => {
       params: {
         seller_id: config.digIds.sellerId,
         product_id: itemId,
-        type: "all",
+        type: type,
         page: page,
-        rows: 12,
+        rows: amount,
         lang: config.lang
       }
     })
@@ -123,20 +123,14 @@ export const getItemChars = async (config, itemId) => {
       }
     })
 
-    // console.log(response);
-
     return response.data
   }
   catch (e){
     console.log(e);
-    // window.localStorage.setItem('BroGamesRecentList', "");
   }
 }
-//"last 1 chrome version",
-//       "last 1 firefox version",
-//       "last 1 safari version"
 
-export const getProducts = async (config, page=1, directlyId) => {
+export const getProducts = async (config, page=1, directlyId, amount="12") => {
   const sellerId = config.digIds.sellerId;
   const categories = config.digIds.categories;
   let categoryId;
@@ -162,7 +156,7 @@ export const getProducts = async (config, page=1, directlyId) => {
         seller_id: sellerId,
         category_id: categoryId,
         page: page,
-        rows: "12",//??
+        rows: amount,//??
         currency: config.currency,
         order: config.sortOrder,
         lang: config.lang,//en-US

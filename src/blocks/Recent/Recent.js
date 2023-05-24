@@ -26,12 +26,8 @@ export const Recent = (props) => {
 
     for(let [index, id] of Object.entries(itemsList)){
       promiseArr.push(getItemChars(config, id).then((data) => {
-        // console.log('//')
-        // console.log(data)
-        // console.log('//')
 
-        if(data.product){
-          // productsArr[index] = data.product;
+        if(data && data.product){
           productsArr.push(data.product);
         }
       }));
@@ -40,7 +36,7 @@ export const Recent = (props) => {
     Promise.all(promiseArr).then(() => {
       setProducts(productsArr);
     })
-  }, [config]);
+  }, []);
 
   return(
     <section className="sResent section">

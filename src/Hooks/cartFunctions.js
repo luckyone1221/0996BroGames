@@ -18,7 +18,7 @@ export const addToCart = async (id,config, count="1") => {
         cart_uid: config.cartUID ? config.cartUID : "",
       }
     })
-    console.log(response.data);
+    // console.log(response.data);
 
     return response.data
   }
@@ -51,7 +51,7 @@ export const changeCartItemAmount = async (itemId, config, count=0) => {
         lang: config.lang,
       }
     })
-    console.log(response.data);
+    // console.log(response.data);
 
     return response.data
   }
