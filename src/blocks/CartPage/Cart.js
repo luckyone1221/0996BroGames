@@ -54,6 +54,7 @@ export const Cart = (props) => {
                   {config.cartResponse && config.cartResponse.amount}
                   {config.cartResponse && config.cartResponse.products && getCurrencySymb(config.cartResponse.currency)}</div>
               </div>
+              <div className="btn btn-danger">cleanUp</div>
               <form id="digiselller_form" action="https://oplata.info/asp2/pay.asp" method="post">
                 <input type="hidden" name="id_d" value="" />
                 <input type="hidden" name="cart_uid" value={config.cartUID} />

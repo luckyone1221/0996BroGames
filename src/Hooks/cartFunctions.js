@@ -57,6 +57,11 @@ export const changeCartItemAmount = async (itemId, config, count=0) => {
         lang: config.lang,
       }
     })
+
+    if(response.data.cart_err_num === "0"){
+      window.localStorage.setItem('BroGamesCartId', JSON.stringify(response.data.cart_uid));
+      window.localStorage.setItem('BroGamesCartResponse', JSON.stringify(response.data));
+    }
     // console.log(response.data);
 
     return response.data

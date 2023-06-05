@@ -12,10 +12,14 @@ import content from "./content.json";
 
 let cartId = undefined;
 let cartResponse = undefined;
+
 if(localStorage.getItem('BroGamesCartId')){
   cartId = JSON.parse(localStorage.getItem('BroGamesCartId'))
+}
+if(localStorage.getItem('BroGamesCartResponse')){
   cartResponse = JSON.parse(localStorage.getItem('BroGamesCartResponse'))
 }
+
 
 const defaultState = {
   lang: 'en-US',//ru-Ru
