@@ -23,6 +23,7 @@ export const ProdCardPage = (props) => {
   const config = useSelector(state => state);
 
   const [itemChars, setItemChars] = useState();
+
   useEffect(() => {
     getItemChars(config, params.id).then((data) => {
       setItemChars(data);
@@ -36,8 +37,8 @@ export const ProdCardPage = (props) => {
       <main>
         {itemChars && (
           <>
-            <ProdCardHeaderBlock product={itemChars.product}/>
-            <ProdGalery imgArr={itemChars.product.preview_imgs}/>
+            <ProdCardHeaderBlock product={itemChars.product} imgArr={itemChars.product.preview_imgs}/>
+            {/*<ProdGalery imgArr={itemChars.product.preview_imgs}/>*/}
             <GameInfo info={itemChars.product.info}/>
             <AlsoLikeThis itemId={params.id}/>
             <Review itemId={params.id}/>

@@ -12,7 +12,7 @@ export const CatalogPage = (props) => {
       <Header/>
       <main>
         <CatalogHeader/>
-        <CatalogSlider/>
+        {/*<CatalogSlider/>*/}
         <CatalogItems productType={productType}/>
       </main>
       <Footer/>

@@ -71,7 +71,7 @@ export const CatalogItems = (props) => {
         setAlertTxt(lang.nothingFound);
       }
     })
-  }, [config.lang, config.currency, config.prodType, config.currentPlatform])
+  }, [config.lang, config.currency, config.prodType, config.currentPlatform, config.sortOrder])
 
   useEffect(() => {
     window.addEventListener('scroll', loadMoreFunc, {passive: true})
@@ -90,7 +90,7 @@ export const CatalogItems = (props) => {
             </div>
           </div>
           {/*new*/}
-          <ProdTypeSelect/>
+          {/*<ProdTypeSelect/>*/}
           <SortOrderSelect/>
         </div>
         {products.length > 0 ? (

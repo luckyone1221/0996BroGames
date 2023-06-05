@@ -2,7 +2,7 @@
   overflow: hidden;
   @include media-breakpoint-up(lg){
     --sPT: #{rem(61px)};
-    --sPB: #{rem(90)};
+    --sPB: #{rem(50)};
   }
   --sTPB: 0;
 
@@ -129,6 +129,7 @@
       background: linear-gradient(270deg, rgba(20,17,17,0) 0%, rgba(20,17,17,1) 100%);
     }
 
+    height: rem(728);
     @include media-breakpoint-up(lg){
       height: 728px;
     }
@@ -140,10 +141,11 @@
         width: var(--slide-w, 50vw);
       }
 
-      height: auto;
-      @include media-breakpoint-up(lg){
-        height: calc((100% - 32px) / 2) !important;
-      }
+      //height: auto;
+      //@include media-breakpoint-up(lg){
+      //
+      //}
+      height: calc((100% - 32px) / 2) !important;
       //width: calc(100%/4 - 32px*3/4);
 
       display: flex;
@@ -186,19 +188,27 @@
   flex-grow: 1;
   //min-height: 100%;
 
+  font-size: 20px;
   --name-lh: #{rem(20)};
   --name-pt: #{rem(16)};
 
   &.fixed-h{
-    @include media-breakpoint-up(lg){
-      --img-box-pt: 0;
-      --img-box-flex-grow: 1;
+    --img-box-pt: 0;
+    --img-box-flex-grow: 1;
 
-      .prodCard__name{
-        min-height: calc(var(--name-lh)*2 + var(--name-pt));
-        @include ell(2);
+    .prodCard__name{
+      font-size: rem(13);
+      @include media-breakpoint-up(lg){
+        font-size: rem(16);
       }
+
+      min-height: calc(var(--name-lh)*3 + var(--name-pt));
+      @include ell(3);
     }
+
+    //@include media-breakpoint-up(lg){
+    //
+    //}
   }
 
   @include mt();

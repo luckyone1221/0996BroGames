@@ -1,4 +1,5 @@
 import { StrictMode } from 'react';
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -9,6 +10,13 @@ import {Provider} from "react-redux";
 
 import content from "./content.json";
 
+let cartId = undefined;
+let cartResponse = undefined;
+if(localStorage.getItem('BroGamesCartId')){
+  cartId = JSON.parse(localStorage.getItem('BroGamesCartId'))
+  cartResponse = JSON.parse(localStorage.getItem('BroGamesCartResponse'))
+}
+
 const defaultState = {
   lang: 'en-US',//ru-Ru
   currency: "RUB",//USD
@@ -16,6 +24,9 @@ const defaultState = {
   prodType: "all",
   currentPlatform: undefined,//?
   sortOrder: "name",
+
+  //
+  scrollTo: undefined,
 
   //content override
   content: content,
@@ -25,8 +36,8 @@ const defaultState = {
   searchResults: [],
 
   //cart
-  cartUID: "",
-  cartResponse: undefined,
+  cartUID: cartId,
+  cartResponse: cartResponse,
 
   //
   digIds: {
@@ -83,6 +94,8 @@ const reducer = (state=defaultState, action) => {
       return {...state, searchResults: action.payload}
     case "CHANGE_CATEGORIES":
       return {...state, digIds: action.payload}
+    case "CHANGE_SCROLLTO":
+      return {...state, scrollTo: action.payload}
     default:
       return state
   }

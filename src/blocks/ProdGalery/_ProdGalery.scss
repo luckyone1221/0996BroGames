@@ -7,8 +7,8 @@
     --sPB: #{rem(90)};
   }
   @include media-breakpoint-up(xxl){
-    --sPT: #{rem(171px)};
-    --sPB: #{rem(180)};
+    --sPT: #{rem(100px)};
+    --sPB: #{rem(100)};
     --sTPB: #{rem(40)};
   }
 

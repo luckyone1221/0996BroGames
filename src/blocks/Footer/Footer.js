@@ -2,8 +2,10 @@ import {Link} from "react-router-dom";
 import logo from "../../img/Logo.png"
 import {Discord, Mail, Telegram} from "../../SvgSpriptes";
 import {useLanguage} from "../../Hooks/UseLang";
+import {useSelector} from "react-redux";
 
 export const Footer = (props) => {
+  const config = useSelector(state => state);
   let lang = useLanguage().Footer;
 
   return(
@@ -27,13 +29,13 @@ export const Footer = (props) => {
           </div>
           <div className="footer__col--right col-auto">
             <div className="footer__soc">
-              <a href="#">
+              <a href={process.env.REACT_APP_DISCORD_LINK} target="_blank">
                 <Discord/>
               </a>
-              <a href="#">
+              <a href={config.lang === "ru-Ru" ? process.env.REACT_APP_TELEGRAM_LINK_RU : process.env.REACT_APP_TELEGRAM_LINK_EN} target="_blank">
                 <Telegram/>
               </a>
-              <a href="#">
+              <a href="mailto:makegameprofit@gmail.com">
                 <Mail/>
               </a>
             </div>

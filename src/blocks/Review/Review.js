@@ -94,7 +94,7 @@ export const Review = (props) => {
               },
               1200: {
                 spaceBetween: 32,
-                slidesPerView: 2,
+                slidesPerView: 3,
                 grid: {
                   rows: 2
                 }

@@ -18,6 +18,12 @@ export const addToCart = async (id,config, count="1") => {
         cart_uid: config.cartUID ? config.cartUID : "",
       }
     })
+
+    if(response.data.cart_err_num === "0"){
+      window.localStorage.setItem('BroGamesCartId', JSON.stringify(response.data.cart_uid));
+      window.localStorage.setItem('BroGamesCartResponse', JSON.stringify(response.data));
+    }
+
     // console.log(response.data);
 
     return response.data
@@ -54,27 +60,6 @@ export const changeCartItemAmount = async (itemId, config, count=0) => {
     // console.log(response.data);
 
     return response.data
-  }
-  catch (e){
-    console.log(e);
-  }
-}
-export const goToCheckOut = async (config) => {
-  try{
-    const response = await axios({
-      url : `https://oplata.info/asp2/pay.asp`,
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      data: {
-        cart_uid: config.cartUID,
-        typecurr: "WMZ",
-        lang: config.lang,
-        failpage: window.location.origin,
-      }
-    })
-
   }
   catch (e){
     console.log(e);

@@ -1,11 +1,11 @@
 .sCart{
   @include media-breakpoint-up(sm){
     --sPT: #{rem(50)};
-    --sPB: #{rem(80)};
+    --sPB: #{rem(50)};
   }
   @include media-breakpoint-up(xxl){
-    --sPT: #{rem(110)};
-    --sPB: #{rem(180)};
+    --sPT: #{rem(50)};
+    --sPB: #{rem(50)};
   }
   --sTPB: #{rem(0)};
 

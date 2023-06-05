@@ -1,7 +1,7 @@
 .sGame{
   @include media-breakpoint-up(xxl){
-    --sPT: #{rem(71px)};
-    --sPB: #{rem(71)};
+    --sPT: #{rem(50px)};
+    --sPB: #{rem(50)};
     --sTPB: #{rem(37)};
   }
   @include media-breakpoint-up(sm){

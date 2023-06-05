@@ -9,10 +9,27 @@ import {WhatWeDo} from "../WhatWeDo/WhatWeDo";
 import {Review} from "../Review/Review";
 import {Fresh} from "../Fresh/Fresh";
 import {HowItWorks} from "../HowItWorks/HowItWorks";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
 
 export const AboutPage = (props) => {
+  const config = useSelector(state => state);
   const content = useSelector(state => state.content);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if(config.scrollTo){
+      // document.querySelector(config.scrollTo).scrollIntoView();
+
+      window.setTimeout(() => {
+        window.scrollTo({
+          top: document.querySelector(config.scrollTo).offsetTop - 100,
+        })
+        dispatch({type: "CHANGE_SCROLLTO", payload: ""});
+
+      }, 100)
+    }
+  }, [])
 
   return(
     <div className="main-wrapper">
@@ -23,8 +40,8 @@ export const AboutPage = (props) => {
         <WhyUs/>
         <SaveWater/>
         <WhatWeDo/>
-        <Review itemId={content.feedBackFallBackId}/>
         <HowItWorks/>
+        <Review itemId={content.feedBackFallBackId}/>
         <Fresh/>
       </main>
       <Footer/>

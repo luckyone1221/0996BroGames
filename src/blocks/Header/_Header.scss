@@ -159,21 +159,50 @@
       color: $white;
 
       //?
-      img{
-        width: rem(16);
-        margin-right: rem(4);
-      }
+
 
       &:hover{
         color: $primary;
+
+        --def-img-o: 0;
+        --active-img-o: 1;
       }
 
       &.active{
         transition: all 0s;
         color: $primary;
+
+        --def-img-o: 0;
+        --active-img-o: 1;
       }
     }
 
+    &__link-img{
+      width: rem(16);
+      height: rem(16);
+      margin-right: rem(4);
+
+      position: relative;
+      img{
+        @include mt();
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+
+
+        &:first-child{
+          opacity: var(--def-img-o, 1);
+        }
+        &:last-child{
+          opacity: var(--active-img-o, 0);
+        }
+      }
+    }
     &__{}
   }
   //

@@ -1,0 +1,427 @@
+Index: src/slidetoggle.min.js
+===================================================================
+diff --git a/src/slidetoggle.min.js b/src/slidetoggle.min.js
+deleted file mode 100644
+--- a/src/slidetoggle.min.js	(revision ca0ba46c7bc4f4bc1900f3006fe749c193006a3b)
++++ /dev/null	(revision ca0ba46c7bc4f4bc1900f3006fe749c193006a3b)
+@@ -1,78 +0,0 @@
+-/* plain JS slideToggle https://github.com/ericbutler555/plain-js-slidetoggle */
+-
+-export function slideToggle(el, duration, callback) {
+-  if (el.clientHeight === 0) {
+-    _s(el, duration, callback, true);
+-  } else {
+-    _s(el, duration, callback);
+-  }
+-}
+-
+-function slideUp(el, duration, callback) {
+-  _s(el, duration, callback);
+-}
+-
+-function slideDown(el, duration, callback) {
+-  _s(el, duration, callback, true);
+-}
+-
+-function _s(el, duration, callback, isDown) {
+-
+-  if (typeof duration === 'undefined') duration = 400;
+-  if (typeof isDown === 'undefined') isDown = false;
+-
+-  el.style.overflow = "hidden";
+-  if (isDown) el.style.display = "block";
+-
+-  var elStyles        = window.getComputedStyle(el);
+-
+-  var elHeight        = parseFloat(elStyles.getPropertyValue('height'));
+-  var elPaddingTop    = parseFloat(elStyles.getPropertyValue('padding-top'));
+-  var elPaddingBottom = parseFloat(elStyles.getPropertyValue('padding-bottom'));
+-  var elMarginTop     = parseFloat(elStyles.getPropertyValue('margin-top'));
+-  var elMarginBottom  = parseFloat(elStyles.getPropertyValue('margin-bottom'));
+-
+-  var stepHeight        = elHeight        / duration;
+-  var stepPaddingTop    = elPaddingTop    / duration;
+-  var stepPaddingBottom = elPaddingBottom / duration;
+-  var stepMarginTop     = elMarginTop     / duration;
+-  var stepMarginBottom  = elMarginBottom  / duration;
+-
+-  var start;
+-
+-  function step(timestamp) {
+-
+-    if (start === undefined) start = timestamp;
+-
+-    var elapsed = timestamp - start;
+-
+-    if (isDown) {
+-      el.style.height        = (stepHeight        * elapsed) + "px";
+-      el.style.paddingTop    = (stepPaddingTop    * elapsed) + "px";
+-      el.style.paddingBottom = (stepPaddingBottom * elapsed) + "px";
+-      el.style.marginTop     = (stepMarginTop     * elapsed) + "px";
+-      el.style.marginBottom  = (stepMarginBottom  * elapsed) + "px";
+-    } else {
+-      el.style.height        = elHeight        - (stepHeight        * elapsed) + "px";
+-      el.style.paddingTop    = elPaddingTop    - (stepPaddingTop    * elapsed) + "px";
+-      el.style.paddingBottom = elPaddingBottom - (stepPaddingBottom * elapsed) + "px";
+-      el.style.marginTop     = elMarginTop     - (stepMarginTop     * elapsed) + "px";
+-      el.style.marginBottom  = elMarginBottom  - (stepMarginBottom  * elapsed) + "px";
+-    }
+-
+-    if (elapsed >= duration) {
+-      el.style.height        = "";
+-      el.style.paddingTop    = "";
+-      el.style.paddingBottom = "";
+-      el.style.marginTop     = "";
+-      el.style.marginBottom  = "";
+-      el.style.overflow      = "";
+-      if (!isDown) el.style.display = "none";
+-      if (typeof callback === 'function') callback();
+-    } else {
+-      window.requestAnimationFrame(step);
+-    }
+-  }
+-
+-  window.requestAnimationFrame(step);
+-}
+Index: package-lock.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/package-lock.json b/package-lock.json
+--- a/package-lock.json	(revision ca0ba46c7bc4f4bc1900f3006fe749c193006a3b)
++++ b/package-lock.json	(date 1684963834047)
+@@ -8,23 +8,68 @@
+       "name": "my-app",
+       "version": "0.1.0",
+       "dependencies": {
++        "@babel/core": "^7.16.0",
++        "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
++        "@svgr/webpack": "^5.5.0",
+         "@testing-library/jest-dom": "^5.16.5",
+         "@testing-library/react": "^13.4.0",
+         "@testing-library/user-event": "^13.5.0",
+         "axios": "^1.2.3",
++        "babel-jest": "^27.4.2",
++        "babel-loader": "^8.2.3",
++        "babel-plugin-named-asset-import": "^0.3.8",
++        "babel-preset-react-app": "^10.0.1",
++        "bfj": "^7.0.2",
+         "bootstrap": "^5.3.0-alpha1",
++        "browserslist": "^4.18.1",
++        "camelcase": "^6.2.1",
++        "case-sensitive-paths-webpack-plugin": "^2.4.0",
++        "css-loader": "^6.5.1",
++        "css-minimizer-webpack-plugin": "^3.2.0",
++        "dotenv": "^10.0.0",
++        "dotenv-expand": "^5.1.0",
++        "eslint": "^8.3.0",
++        "eslint-config-react-app": "^7.0.1",
++        "eslint-webpack-plugin": "^3.1.1",
++        "file-loader": "^6.2.0",
++        "fs-extra": "^10.0.0",
++        "html-webpack-plugin": "^5.5.0",
++        "identity-obj-proxy": "^3.0.0",
++        "jest": "^27.4.3",
++        "jest-resolve": "^27.4.2",
++        "jest-watch-typeahead": "^1.0.0",
++        "mini-css-extract-plugin": "^2.4.5",
++        "postcss": "^8.4.4",
++        "postcss-flexbugs-fixes": "^5.0.2",
++        "postcss-loader": "^6.2.1",
++        "postcss-normalize": "^10.0.1",
++        "postcss-preset-env": "^7.0.1",
++        "prompts": "^2.4.2",
+         "react": "^18.2.0",
++        "react-app-polyfill": "^3.0.0",
++        "react-dev-utils": "^12.0.1",
+         "react-dom": "^18.2.0",
+         "react-redux": "^8.0.5",
++        "react-refresh": "^0.11.0",
+         "react-router-dom": "^6.6.1",
+-        "react-scripts": "5.0.1",
+         "react-select": "^5.7.2",
+-        "react-slide-toggle": "0.3.5",
+         "redux": "^4.2.1",
++        "resolve": "^1.20.0",
++        "resolve-url-loader": "^4.0.0",
+         "sass": "^1.53.0",
++        "sass-loader": "^12.3.0",
++        "semver": "^7.3.5",
++        "source-map-loader": "^3.0.0",
++        "style-loader": "^3.3.1",
+         "swiper": "^9.2.0",
++        "tailwindcss": "^3.0.2",
++        "terser-webpack-plugin": "^5.2.5",
+         "util": "^0.12.5",
+-        "web-vitals": "^2.1.4"
++        "web-vitals": "^2.1.4",
++        "webpack": "^5.64.4",
++        "webpack-dev-server": "^4.6.0",
++        "webpack-manifest-plugin": "^4.0.2",
++        "workbox-webpack-plugin": "^6.4.1"
+       }
+     },
+     "node_modules/@adobe/css-tools": {
+@@ -14155,78 +14200,6 @@
+         "react-dom": ">=16.8"
+       }
+     },
+-    "node_modules/react-scripts": {
+-      "version": "5.0.1",
+-      "resolved": "https://registry.npmjs.org/react-scripts/-/react-scripts-5.0.1.tgz",
+-      "integrity": "sha512-8VAmEm/ZAwQzJ+GOMLbBsTdDKOpuZh7RPs0UymvBR2vRk4iZWCskjbFnxqjrzoIvlNNRZ3QJFx6/qDSi6zSnaQ==",
+-      "dependencies": {
+-        "@babel/core": "^7.16.0",
+-        "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
+-        "@svgr/webpack": "^5.5.0",
+-        "babel-jest": "^27.4.2",
+-        "babel-loader": "^8.2.3",
+-        "babel-plugin-named-asset-import": "^0.3.8",
+-        "babel-preset-react-app": "^10.0.1",
+-        "bfj": "^7.0.2",
+-        "browserslist": "^4.18.1",
+-        "camelcase": "^6.2.1",
+-        "case-sensitive-paths-webpack-plugin": "^2.4.0",
+-        "css-loader": "^6.5.1",
+-        "css-minimizer-webpack-plugin": "^3.2.0",
+-        "dotenv": "^10.0.0",
+-        "dotenv-expand": "^5.1.0",
+-        "eslint": "^8.3.0",
+-        "eslint-config-react-app": "^7.0.1",
+-        "eslint-webpack-plugin": "^3.1.1",
+-        "file-loader": "^6.2.0",
+-        "fs-extra": "^10.0.0",
+-        "html-webpack-plugin": "^5.5.0",
+-        "identity-obj-proxy": "^3.0.0",
+-        "jest": "^27.4.3",
+-        "jest-resolve": "^27.4.2",
+-        "jest-watch-typeahead": "^1.0.0",
+-        "mini-css-extract-plugin": "^2.4.5",
+-        "postcss": "^8.4.4",
+-        "postcss-flexbugs-fixes": "^5.0.2",
+-        "postcss-loader": "^6.2.1",
+-        "postcss-normalize": "^10.0.1",
+-        "postcss-preset-env": "^7.0.1",
+-        "prompts": "^2.4.2",
+-        "react-app-polyfill": "^3.0.0",
+-        "react-dev-utils": "^12.0.1",
+-        "react-refresh": "^0.11.0",
+-        "resolve": "^1.20.0",
+-        "resolve-url-loader": "^4.0.0",
+-        "sass-loader": "^12.3.0",
+-        "semver": "^7.3.5",
+-        "source-map-loader": "^3.0.0",
+-        "style-loader": "^3.3.1",
+-        "tailwindcss": "^3.0.2",
+-        "terser-webpack-plugin": "^5.2.5",
+-        "webpack": "^5.64.4",
+-        "webpack-dev-server": "^4.6.0",
+-        "webpack-manifest-plugin": "^4.0.2",
+-        "workbox-webpack-plugin": "^6.4.1"
+-      },
+-      "bin": {
+-        "react-scripts": "bin/react-scripts.js"
+-      },
+-      "engines": {
+-        "node": ">=14.0.0"
+-      },
+-      "optionalDependencies": {
+-        "fsevents": "^2.3.2"
+-      },
+-      "peerDependencies": {
+-        "react": ">= 16",
+-        "typescript": "^3.2.1 || ^4"
+-      },
+-      "peerDependenciesMeta": {
+-        "typescript": {
+-          "optional": true
+-        }
+-      }
+-    },
+     "node_modules/react-select": {
+       "version": "5.7.3",
+       "resolved": "https://registry.npmjs.org/react-select/-/react-select-5.7.3.tgz",
+@@ -14247,19 +14220,6 @@
+         "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0"
+       }
+     },
+-    "node_modules/react-slide-toggle": {
+-      "version": "0.3.5",
+-      "resolved": "https://registry.npmjs.org/react-slide-toggle/-/react-slide-toggle-0.3.5.tgz",
+-      "integrity": "sha512-dV2PkLGiE7m66Ohk36jLqaaneUYc0ZpQe/ZmYEU3+7TVXfZwddimFyjeDfVzPhlqDcpK1yfKJ8NN7aIyR9bOTA==",
+-      "engines": {
+-        "node": ">=10",
+-        "npm": ">=6"
+-      },
+-      "peerDependencies": {
+-        "react": "^15.x || ^16.x || ^17.x",
+-        "react-dom": "^15.x || ^16.x || ^17.x"
+-      }
+-    },
+     "node_modules/react-transition-group": {
+       "version": "4.4.5",
+       "resolved": "https://registry.npmjs.org/react-transition-group/-/react-transition-group-4.4.5.tgz",
+@@ -27423,61 +27383,6 @@
+         "react-router": "6.11.1"
+       }
+     },
+-    "react-scripts": {
+-      "version": "5.0.1",
+-      "resolved": "https://registry.npmjs.org/react-scripts/-/react-scripts-5.0.1.tgz",
+-      "integrity": "sha512-8VAmEm/ZAwQzJ+GOMLbBsTdDKOpuZh7RPs0UymvBR2vRk4iZWCskjbFnxqjrzoIvlNNRZ3QJFx6/qDSi6zSnaQ==",
+-      "requires": {
+-        "@babel/core": "^7.16.0",
+-        "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
+-        "@svgr/webpack": "^5.5.0",
+-        "babel-jest": "^27.4.2",
+-        "babel-loader": "^8.2.3",
+-        "babel-plugin-named-asset-import": "^0.3.8",
+-        "babel-preset-react-app": "^10.0.1",
+-        "bfj": "^7.0.2",
+-        "browserslist": "^4.18.1",
+-        "camelcase": "^6.2.1",
+-        "case-sensitive-paths-webpack-plugin": "^2.4.0",
+-        "css-loader": "^6.5.1",
+-        "css-minimizer-webpack-plugin": "^3.2.0",
+-        "dotenv": "^10.0.0",
+-        "dotenv-expand": "^5.1.0",
+-        "eslint": "^8.3.0",
+-        "eslint-config-react-app": "^7.0.1",
+-        "eslint-webpack-plugin": "^3.1.1",
+-        "file-loader": "^6.2.0",
+-        "fs-extra": "^10.0.0",
+-        "fsevents": "^2.3.2",
+-        "html-webpack-plugin": "^5.5.0",
+-        "identity-obj-proxy": "^3.0.0",
+-        "jest": "^27.4.3",
+-        "jest-resolve": "^27.4.2",
+-        "jest-watch-typeahead": "^1.0.0",
+-        "mini-css-extract-plugin": "^2.4.5",
+-        "postcss": "^8.4.4",
+-        "postcss-flexbugs-fixes": "^5.0.2",
+-        "postcss-loader": "^6.2.1",
+-        "postcss-normalize": "^10.0.1",
+-        "postcss-preset-env": "^7.0.1",
+-        "prompts": "^2.4.2",
+-        "react-app-polyfill": "^3.0.0",
+-        "react-dev-utils": "^12.0.1",
+-        "react-refresh": "^0.11.0",
+-        "resolve": "^1.20.0",
+-        "resolve-url-loader": "^4.0.0",
+-        "sass-loader": "^12.3.0",
+-        "semver": "^7.3.5",
+-        "source-map-loader": "^3.0.0",
+-        "style-loader": "^3.3.1",
+-        "tailwindcss": "^3.0.2",
+-        "terser-webpack-plugin": "^5.2.5",
+-        "webpack": "^5.64.4",
+-        "webpack-dev-server": "^4.6.0",
+-        "webpack-manifest-plugin": "^4.0.2",
+-        "workbox-webpack-plugin": "^6.4.1"
+-      }
+-    },
+     "react-select": {
+       "version": "5.7.3",
+       "resolved": "https://registry.npmjs.org/react-select/-/react-select-5.7.3.tgz",
+@@ -27494,12 +27399,6 @@
+         "use-isomorphic-layout-effect": "^1.1.2"
+       }
+     },
+-    "react-slide-toggle": {
+-      "version": "0.3.5",
+-      "resolved": "https://registry.npmjs.org/react-slide-toggle/-/react-slide-toggle-0.3.5.tgz",
+-      "integrity": "sha512-dV2PkLGiE7m66Ohk36jLqaaneUYc0ZpQe/ZmYEU3+7TVXfZwddimFyjeDfVzPhlqDcpK1yfKJ8NN7aIyR9bOTA==",
+-      "requires": {}
+-    },
+     "react-transition-group": {
+       "version": "4.4.5",
+       "resolved": "https://registry.npmjs.org/react-transition-group/-/react-transition-group-4.4.5.tgz",
+Index: src/blocks/HowItWorks/HowItWorks.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/blocks/HowItWorks/HowItWorks.js b/src/blocks/HowItWorks/HowItWorks.js
+--- a/src/blocks/HowItWorks/HowItWorks.js	(revision ca0ba46c7bc4f4bc1900f3006fe749c193006a3b)
++++ b/src/blocks/HowItWorks/HowItWorks.js	(date 1684963666926)
+@@ -1,5 +1,4 @@
+ import {useState} from "react";
+-import SlideToggle from "react-slide-toggle";
+ import {useLanguage} from "../../Hooks/UseLang";
+ 
+ export const HowItWorks = (props) => {
+@@ -25,36 +24,28 @@
+ 
+ export const HowItWorksItem = (props) => {
+   const {title, content, isOpen} = props;
+-
+   const [showContent, setShowContent] = useState(isOpen);
+ 
+   return(
+-    <SlideToggle
+-      collapsed={!isOpen}
+-    >
+-      {({ toggle, setCollapsibleElement }) => (
+-        <div className="sHow__item">
+-          <div className="sHow__head" onClick={() => {
+-            setShowContent(!showContent);
+-            toggle();
+-          }}>
+-            <div className="sHow__row row align-items-center">
+-              <div className="col">
+-                <div className="sHow__title">{title}</div>
+-              </div>
+-              <div className="col-auto">
+-                <div className={`sHow__ball ${showContent ? "active" : ''}`}>
+-                </div>
+-              </div>
+-            </div>
+-            <div className={`sHow__content ${showContent ? "active" : ''}`} ref={setCollapsibleElement}>
+-              <div className="sHow__content-inner">
+-                {content}
+-              </div>
+-            </div>
+-          </div>
+-        </div>
+-      )}
+-    </SlideToggle>
++    <div className="sHow__item">
++      <div className="sHow__head" onClick={() => {
++        setShowContent(!showContent);
++      }}>
++        <div className="sHow__row row align-items-center">
++          <div className="col">
++            <div className="sHow__title">{title}</div>
++          </div>
++          <div className="col-auto">
++            <div className={`sHow__ball ${showContent ? "active" : ''}`}>
++            </div>
++          </div>
++        </div>
++        <div className={`sHow__content ${showContent ? "active d-block" : 'd-none'}`}>
++          <div className="sHow__content-inner">
++            {content}
++          </div>
++        </div>
++      </div>
++    </div>
+   )
+ }
+\ No newline at end of file
+Index: package.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/package.json b/package.json
+--- a/package.json	(revision ca0ba46c7bc4f4bc1900f3006fe749c193006a3b)
++++ b/package.json	(date 1684963680957)
+@@ -48,7 +48,6 @@
+     "react-refresh": "^0.11.0",
+     "react-router-dom": "^6.6.1",
+     "react-select": "^5.7.2",
+-    "react-slide-toggle": "0.3.5",
+     "redux": "^4.2.1",
+     "resolve": "^1.20.0",
+     "resolve-url-loader": "^4.0.0",

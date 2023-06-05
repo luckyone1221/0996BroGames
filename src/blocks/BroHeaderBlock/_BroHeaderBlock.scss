@@ -1,8 +1,8 @@
 .sBro{
   padding: 0!important;
   @include media-breakpoint-up(lg){
-    --sPT: #{rem(80)};
-    --sPB: #{rem(80)};
+    --sPT: #{rem(50)};
+    --sPB: #{rem(50)};
   }
 
   position: relative;

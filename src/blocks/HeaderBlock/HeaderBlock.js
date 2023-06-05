@@ -109,7 +109,8 @@ const HeaderBlockSlide = (props) => {
   return (
     <div className="headerBlock__slide" onClick={(e) => {
       if(!e.target.closest('.buy-now-js')){
-        navigate(`prod/${id}`);
+        let win = window.open(`prod/${id}`, '_blank');
+            win.focus();
       }
     }}>
       <div className="headerBlock__bg">

@@ -4,8 +4,8 @@
   z-index: 1;
 
   @include media-breakpoint-up(xxl){
-    --sPT: #{rem(97)};
-    --sPB: #{rem(90)};
+    --sPT: #{rem(50)};
+    --sPB: #{rem(50)};
     --sTPB: #{rem(24)};
   }
 
@@ -16,11 +16,11 @@
       position: relative;
       z-index: 1;
       --box-px: #{rem(32)};
-      padding: rem(60) var(--box-px) rem(40);
+      padding: rem(40) var(--box-px) rem(40);
     }
     @include media-breakpoint-up(xxl){
       --box-px: #{rem(60)};
-      padding: rem(94) var(--box-px) rem(80);
+      padding: rem(40) var(--box-px) rem(40);
     }
   }
   &__bg{

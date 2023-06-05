@@ -16,7 +16,7 @@ export const ProdCard = (props) => {
 
   return(
     <div className={`prodCard ${addClasses ? addClasses : ''}`}>
-      <Link className="prodCard__link" to={`/prod/${itemId}`}></Link>
+      <Link className="prodCard__link" to={`/prod/${itemId}`} target="_blank"></Link>
       <div className="prodCard__img-box">
         <img loading="lazy" src={`https://graph.digiseller.ru/img.ashx?id_d=${itemId}&w=248&h=248&crop=true`} alt=""/>
         <div className="prodCard__tags">

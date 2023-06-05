@@ -43,6 +43,7 @@ function useCalcHeaderHeight(header){
   return headerAddClasses;
 }
 function useMobMenu(){
+  const navigate = useNavigate();
   const [mobMenuActive, setMobMenuActive] = useState(false);
   const mobMenuMissclick = (event) => {
     if(!event.target.closest('.mobMenu-inner-js, .header-js')){
@@ -65,6 +66,11 @@ function useMobMenu(){
       window.removeEventListener('resize', closeMenuOnXL);
     };
   }, [])
+
+  useEffect(() => {
+    setMobMenuActive(false);
+    document.body.classList.remove('fixed');
+  }, [navigate])
 
   return [mobMenuActive, setMobMenuActive]
 }
@@ -131,7 +137,7 @@ export const Header = (props) => {
           </div>
         </div>
       </header>
-      <MobMenu isVible={mobMenuActive}/>
+      <MobMenu isVible={mobMenuActive} currLocation={currLocation}/>
     </>
   )
 }

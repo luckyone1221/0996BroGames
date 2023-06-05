@@ -1,8 +1,8 @@
 .sReview{
   overflow: hidden;
   @include media-breakpoint-up(xxl){
-    --sPT: #{rem(78px)};
-    --sPB: #{rem(90)};
+    --sPT: #{rem(50px)};
+    --sPB: #{rem(50)};
     --sTPB: #{rem(40)};
   }
 
@@ -72,12 +72,10 @@
       height: auto;
       @include media-breakpoint-up(lg){
         height: calc((100% - 32px) / 2) !important;
-
-        display: flex;
-        flex-direction: column;
       }
 
-
+      display: flex;
+      flex-direction: column;
     }
     .swiper-pagination{
       @include media-breakpoint-down(sm){
@@ -112,11 +110,9 @@
     background: #0B0B0B;
     border-radius: rem(12);
 
-    @include media-breakpoint-up(lg){
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-    }
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
   }
   &__top-row{
     margin-bottom: rem(12);

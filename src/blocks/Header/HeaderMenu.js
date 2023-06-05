@@ -40,7 +40,10 @@ const HeaderMenuBtn = (props) => {
   return (
     <div className="col-xl-auto">
       <Link className={`menu__link ${currLocation === href ? "active" : ''}`} to={href}>
-        <img src={currLocation === href ? imgActive : img} alt=""/>
+        <div className="menu__link-img">
+          <img src={img} alt=""/>
+          <img src={imgActive} alt=""/>
+        </div>
         {txt}
       </Link>
     </div>

@@ -1,5 +1,25 @@
 import axios from "axios";
 
+
+export const getTgData = async () => {
+  try {
+    const response = await axios({
+      url : process.env.REACT_APP_TELEGRAM_API,
+      method: 'Get',
+      headers: {
+        "Accept": "application/json"
+      },
+      params: {}
+    })
+
+    // console.log(response.data);
+
+    return response.data
+  }
+  catch (e){
+    console.log(e);
+  }
+}
 export const getSearchResults = async (config) => {
 
   try {

@@ -1,8 +1,8 @@
 .sFresh{
   --sPB: #{rem(90)};
   @include media-breakpoint-up(xxl){
-    --sPT: #{rem(74px)};
-    --sPB: #{rem(180)};
+    --sPT: #{rem(50px)};
+    --sPB: #{rem(100)};
   }
   --sTPB: #{rem(0)};
 

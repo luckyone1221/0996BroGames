@@ -1,7 +1,7 @@
 .sHow{
   @include media-breakpoint-up(xxl){
-    --sPT: #{rem(76)};
-    --sPB: #{rem(105)};
+    --sPT: #{rem(50)};
+    --sPB: #{rem(75)};
     --sTPB: #{rem(48)};
   }
 

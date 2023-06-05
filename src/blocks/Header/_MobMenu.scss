@@ -112,13 +112,39 @@
       color: $white;
 
       //?
-      img{
-        width: rem(24);
-        margin-right: rem(8);
-      }
+      //img{
+      //  width: rem(24);
+      //  margin-right: rem(8);
+      //}
 
-      &:hover{
+      &.active{
         color: $primary;
+        --def-img-o: 0;
+        --active-img-o: 1;
+      }
+    }
+    &__link-img{
+      width: rem(24);
+      height: rem(24);
+      margin-right: rem(8);
+
+      position: relative;
+      img{
+        @include mt();
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        width: 100%;
+        height: auto;
+
+
+        &:first-child{
+          opacity: var(--def-img-o, 1);
+        }
+        &:last-child{
+          opacity: var(--active-img-o, 0);
+        }
       }
     }
 

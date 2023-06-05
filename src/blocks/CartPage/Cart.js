@@ -3,7 +3,7 @@ import {Trash} from '../../SvgSpriptes'
 import {useLanguage} from "../../Hooks/UseLang";
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrencySymb} from "../../Hooks/GetFunctions"
-import {addToCart, changeCartItemAmount, goToCheckOut} from "../../Hooks/cartFunctions";
+import {addToCart, changeCartItemAmount} from "../../Hooks/cartFunctions";
 import {useEffect, useState} from "react";
 
 export const Cart = (props) => {

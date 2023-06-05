@@ -72,7 +72,7 @@ const CatalogSlide = (props) => {
           {title}
         </div>
         <button className="cSlider__btn" onClick={() => {
-          addToCart(itemId, config).then((data) => {
+          addToCart(itemId, config,1).then((data) => {
             dispatch({type: "CHANGE_CARTUID", payload: data.cart_uid});
             dispatch({type: "SET_CARTRESPONSE", payload: data});
           }).then(() => {

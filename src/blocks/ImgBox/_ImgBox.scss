@@ -1,8 +1,8 @@
 .sImg{
   --sPT: #{rem(60)};
   @include media-breakpoint-up(lg){
-    --sPT: #{rem(180px)};
-    --sPB: #{rem(90)};
+    --sPT: #{rem(90px)};
+    --sPB: #{rem(50)};
   }
 
   &__row{

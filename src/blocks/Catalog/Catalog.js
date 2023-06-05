@@ -62,13 +62,13 @@ export const Catalog = (props) => {
                 btnTxt={lang.top}
                 btnCategoryId={"-3"}
               />
-              <CatalogFilterBtn
-                currentCatalog={currentCatalog} setCurrentCatalog={setCurrentCatalog}
-                btnTxt={lang.discount}
-                btnCategoryId={"-1"}
-              />
+              {/*<CatalogFilterBtn*/}
+              {/*  currentCatalog={currentCatalog} setCurrentCatalog={setCurrentCatalog}*/}
+              {/*  btnTxt={lang.discount}*/}
+              {/*  btnCategoryId={"-1"}*/}
+              {/*/>*/}
               {/*??*/}
-              <div className="sCatalog__col d-none sCatalog__col--splitter col-md-auto">
+              <div className="sCatalog__col sCatalog__col--splitter col-md-auto">
               </div>
               {/*??*/}
               <CatalogFilterBtn
@@ -113,6 +113,7 @@ export const Catalog = (props) => {
           </div>
         </div>
         <Swiper
+
           onReachEnd={()=>{
             if(currentPage <= totalPages){
               getProducts(config, currentPage, currentCatalog, 12).then((data) => {
@@ -130,14 +131,14 @@ export const Catalog = (props) => {
               spaceBetween: 16,
               slidesPerView: "auto",
               grid: {
-                rows: 1
+                rows: 2
               }
             },
             576: {
               spaceBetween: 32,
               slidesPerView: 2,
               grid: {
-                rows: 1
+                rows: 2
               }
             },
             992: {
