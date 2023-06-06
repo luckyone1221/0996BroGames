@@ -265,6 +265,7 @@
     line-height: var(--name-lh);
     color: $white;
     margin-bottom: rem(12);
+    word-break: break-word;
   }
   &__price-row{
     --bs-gutter-x: #{rem(12)};

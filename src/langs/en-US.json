@@ -12,6 +12,7 @@
     "searchPlaceholder": "Search game",
     "language": "Language",
     "currency": "Currency",
+    "currencyCategory": "Currency",
     "nothingFound": "Nothing Found",
     "GotoSearchPage": "Watch all results"
   },
@@ -43,6 +44,7 @@
     "discount": "Discount",
     "accounts": "Accounts",
     "activation": "Activation",
+    "currency": "Currency",
     "keys": "Keys",
     "soft": "Soft",
     "topUp": "Top-Up",
@@ -76,10 +78,13 @@
     "keys": "Keys",
     "about": "About BroGamers",
     "policy": "Privacy&Policy",
+    "topUp": "Top-UP",
+    "currency": "Currency",
     "allRights": "© {currYear} BroGames. All rights reserved."
   },
   "CatalogHeader": {
     "pc": "PC",
+    "all": "All Subcategories",
     "playStation": "PlayStation",
     "xBoxAndPc": "Xbox & PC",
     "nintendo": "Nintendo",
@@ -90,6 +95,7 @@
     "all": "All",
     "accounts": "Accounts",
     "activation": "Activation",
+    "currency": "Currency",
     "keys": "Keys",
     "topUp": "Top-UP",
     "sortName": "name [A-Z]",

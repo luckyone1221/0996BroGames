@@ -12,6 +12,7 @@ export const CatalogHeader = (props) => {
         <div className="cHead__header">
           <div className="container">
             <div className="cHead__row row justify-content-center">
+              <CatalogHeadItem txt={lang.all}/>
               {config.digIds.categories[config.prodType].subCategories.map((item, index) => {
                 return <CatalogHeadItem key={index} id={item.id} txt={item.name}/>
               })}
@@ -30,8 +31,13 @@ const CatalogHeadItem = (props) => {
 
   return (
     <div className="col-auto">
-      <div className={`cHead__h-link ${currentPlatform === id ? "active" : ""}`} onClick={() => {
-        dispatch({type: "CHANGE_PLATFORM", payload: id})
+      <div className={`cHead__h-link ${(!id && !currentPlatform) || currentPlatform === id ? "active" : ""}`} onClick={() => {
+        if(id){
+          dispatch({type: "CHANGE_PLATFORM", payload: id})
+        }
+        else{
+          dispatch({type: "CHANGE_PLATFORM", payload: undefined})
+        }
       }}>{txt}</div>
     </div>
   )

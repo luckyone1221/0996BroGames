@@ -125,6 +125,8 @@ export const SortOrderSelect = (props) => {
   const config = useSelector(state => state);
   const dispatch = useDispatch();
 
+  // const allCategories = getCatalogList(config);
+
   let orderOptions = [
     {value: "name", label: lang.sortName},
     {value: "nameDESC", label: lang.sortNameDesc},
@@ -152,9 +154,10 @@ export const ProdTypeSelect = (props) => {
   let productTypeOptions = [
     { value: '/catalog', label: lang.all, reduxKey: 'all'},
     { value: '/catalog/accounts', label: lang.accounts, reduxKey: "accounts"},
-    { value: '/catalog/activations', label: lang.activation, reduxKey: "activations"},
+    // { value: '/catalog/activations', label: lang.accounts, reduxKey: "activations"},
     { value: '/catalog/keys', label: lang.keys, reduxKey: "keys"},
-    { value: '/catalog/top-up', label: lang.topUp, reduxKey: "topUp" }
+    { value: '/catalog/top-up', label: lang.topUp, reduxKey: "topUp" },
+    { value: '/catalog/currency', label: lang.currency, reduxKey: "currency"},
   ];
 
   return (

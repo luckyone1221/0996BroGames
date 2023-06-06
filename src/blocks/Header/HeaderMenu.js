@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import menuMarket from '../../img/svg/MenuMarket.svg'
 import menuAccounts from '../../img/svg/MenuAccounts.svg'
 import menuActivation from '../../img/svg/MenuActivations.svg'
+import menuCurrency from '../../img/svg/menuCurrency.svg'
 import menuKeys from '../../img/svg/MenuKeys.svg'
 import menuTopUp from '../../img/svg/MenuTop.svg'
 import menuAbout from '../../img/svg/MenuAbout.svg'
@@ -11,6 +12,7 @@ import menuAbout from '../../img/svg/MenuAbout.svg'
 import menuMarketActive from '../../img/svg/MenuMarket-active.svg'
 import menuAccountsActive from '../../img/svg/MenuAccounts-active.svg'
 import menuActivationActive from '../../img/svg/MenuActivations-active.svg'
+import menuCurrencyActive from '../../img/svg/menuCurrency-active.svg'
 import menuKeysActive from '../../img/svg/MenuKeys-active.svg'
 import menuTopUpActive from '../../img/svg/MenuTop-active.svg'
 import menuAboutActive from '../../img/svg/MenuAbout-active.svg'
@@ -25,9 +27,10 @@ export const HeaderMenu = (props) => {
       <div className="menu__row row">
         <HeaderMenuBtn img={menuMarket} imgActive={menuMarketActive} currLocation={currLocation} href="/catalog" txt={lang.header.market}/>
         <HeaderMenuBtn img={menuAccounts} imgActive={menuAccountsActive} currLocation={currLocation} href="/catalog/accounts" txt={lang.header.accounts}/>
-        <HeaderMenuBtn img={menuActivation} imgActive={menuActivationActive} currLocation={currLocation} href="/catalog/activations" txt={lang.header.activation}/>
+        {/*<HeaderMenuBtn img={menuActivation} imgActive={menuActivationActive} currLocation={currLocation} href="/catalog/activations" txt={lang.header.activation}/>*/}
         <HeaderMenuBtn img={menuKeys} imgActive={menuKeysActive} currLocation={currLocation} href="/catalog/keys" txt={lang.header.keys}/>
         <HeaderMenuBtn img={menuTopUp} imgActive={menuTopUpActive} currLocation={currLocation} href="/catalog/top-up" txt={lang.header.top}/>
+        <HeaderMenuBtn img={menuCurrency} imgActive={menuCurrencyActive} currLocation={currLocation} href="/catalog/currency" txt={lang.header.currencyCategory}/>
         <HeaderMenuBtn img={menuAbout} imgActive={menuAboutActive} currLocation={currLocation} href="/about" txt={lang.header.about}/>
       </div>
     </div>

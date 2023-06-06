@@ -13,13 +13,22 @@ import content from "./content.json";
 let cartId = undefined;
 let cartResponse = undefined;
 
-if(localStorage.getItem('BroGamesCartId')){
-  cartId = JSON.parse(localStorage.getItem('BroGamesCartId'))
+if(window.localStorage.getItem('BroGamesCartId')){
+  try {
+    cartId = JSON.parse(window.localStorage.getItem('BroGamesCartId'))
+  }
+  catch (e){
+    console.log(e)
+  }
 }
-if(localStorage.getItem('BroGamesCartResponse')){
-  cartResponse = JSON.parse(localStorage.getItem('BroGamesCartResponse'))
+if(window.localStorage.getItem('BroGamesCartResponse')){
+  try {
+    cartResponse = JSON.parse(window.localStorage.getItem('BroGamesCartResponse'))
+  }
+  catch (e){
+    console.log(e)
+  }
 }
-
 
 const defaultState = {
   lang: 'en-US',//ru-Ru
@@ -45,31 +54,31 @@ const defaultState = {
 
   //
   digIds: {
-    sellerId: "817785",
-    categorySlider: "133593",
-    sliderOnMain: "133594",
-    preOrder: "133988",
+    sellerId: "988672",
+    categorySlider: "134490",
+    sliderOnMain: "134491",
+    preOrder: "134492",
 
     //categories
     categories: {
       all: {
-        id: "133459",
+        id: "134288",
         subCategories: [],
       },
       accounts: {
-        id: "116325",
-        subCategories: [],
-      },
-      activations: {
-        id: "116368",
+        id: "126555",
         subCategories: [],
       },
       keys: {
-        id: "116327",
+        id: "126557",
         subCategories: [],
       },
       topUp: {
-        id: "133792",
+        id: "132945",
+        subCategories: [],
+      },
+      currency: {
+        id: "134299",
         subCategories: [],
       },
     },

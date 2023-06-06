@@ -31,7 +31,7 @@ export const Catalog = (props) => {
   useEffect(() => {
     //11 items for first time because of static card
     //always get first page here
-    getProducts(config, 1, currentCatalog, 11).then((data) => {
+    getProducts(config, 1, currentCatalog, 15).then((data) => {
       if(data.product){
         setTotalPages(data.totalPages);
 
@@ -76,11 +76,11 @@ export const Catalog = (props) => {
                 btnTxt={lang.accounts}
                 btnCategoryId={config.digIds.categories.accounts.id}
               />
-              <CatalogFilterBtn
-                currentCatalog={currentCatalog} setCurrentCatalog={setCurrentCatalog}
-                btnTxt={lang.activation}
-                btnCategoryId={config.digIds.categories.activations.id}
-              />
+              {/*<CatalogFilterBtn*/}
+              {/*  currentCatalog={currentCatalog} setCurrentCatalog={setCurrentCatalog}*/}
+              {/*  btnTxt={lang.activation}*/}
+              {/*  btnCategoryId={config.digIds.categories.activations.id}*/}
+              {/*/>*/}
               <CatalogFilterBtn
                 currentCatalog={currentCatalog} setCurrentCatalog={setCurrentCatalog}
                 btnTxt={lang.keys}
@@ -90,6 +90,11 @@ export const Catalog = (props) => {
                 currentCatalog={currentCatalog} setCurrentCatalog={setCurrentCatalog}
                 btnTxt={lang.topUp}
                 btnCategoryId={config.digIds.categories.topUp.id}
+              />
+              <CatalogFilterBtn
+                currentCatalog={currentCatalog} setCurrentCatalog={setCurrentCatalog}
+                btnTxt={lang.currency}
+                btnCategoryId={config.digIds.categories.currency.id}
               />
             </div>
           </div>
@@ -116,7 +121,7 @@ export const Catalog = (props) => {
 
           onReachEnd={()=>{
             if(currentPage <= totalPages){
-              getProducts(config, currentPage, currentCatalog, 12).then((data) => {
+              getProducts(config, currentPage, currentCatalog, 16).then((data) => {
                 if(data.product){
                   setCurrentPage(currentPage+1);
                   setProducts([...products, ...data.product]);
@@ -150,6 +155,7 @@ export const Catalog = (props) => {
             },
             1200: {
               spaceBetween: 32,
+              slidesPerGroup: 4,
               slidesPerView: 4,
               grid: {
                 rows: 2

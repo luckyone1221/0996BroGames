@@ -14,6 +14,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {AlsoLikeThis} from "../Recent/AlsoLikeThis";
 import {useTrackRecent} from "../../Hooks/useTrackRecent";
 import {useScrollTop} from "../../Hooks/useScrollTop";
+import {log} from "util";
 
 export const ProdCardPage = (props) => {
   const params = useParams();
@@ -27,6 +28,7 @@ export const ProdCardPage = (props) => {
   useEffect(() => {
     getItemChars(config, params.id).then((data) => {
       setItemChars(data);
+      console.log(data.product.seller);
     });
   }, [config.lang, config.currency, navigate]);
 
