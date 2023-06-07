@@ -102,7 +102,7 @@ const SearchDDItem = (props) => {
           <div className="row align-items-center gx-3">
             {tags.map((tag, index) => {
               return <div className="col-auto" key={index}>
-                <TagBox txt={tag.trim()}/>
+                <TagBox txt={tag.txt.trim()} color={tag.color}/>
               </div>
             })}
           </div>

@@ -23,7 +23,7 @@ export const ProdCard = (props) => {
           <div className="prodCard__tags-row row">
             {tags.map((tag, index) => {
               return <div className="col-auto" key={index}>
-                <TagBox txt={tag.trim()}/>
+                <TagBox txt={tag.txt.trim()} color={tag.color}/>
               </div>
             })}
           </div>
@@ -51,33 +51,9 @@ export const ProdCard = (props) => {
 }
 
 export const TagBox = (props) => {
-  let {txt} = props;
-
-  let colorArr = {
-    'accounts': 'rgba(255, 184, 0, 0.7)',
-    'activation': 'rgba(189, 0, 255, 0.7)',
-    'keys': 'rgba(0, 183, 183, 0.7)',
-    'soft': 'rgba(51, 255, 0, 0.7)',
-    'gift': 'rgba(66, 0, 255, 0.7)',
-    'gift card': 'rgba(255, 0, 0, 0.7)',
-    'top-up': 'rgba(255, 0, 184, 0.7)',
-    'pc': 'rgba(240, 105, 29, 0.7)',
-    'ps': 'rgba(95, 103, 234, 0.7)',
-    'xbox': 'rgba(22, 152, 58, 0.7)',
-    'nintendo': 'rgba(22, 89, 152, 0.7)',
-    'other': 'rgba(87, 87, 87, 0.7)',
-  }
-
-  let getColor = (txt) => {
-    if(colorArr[txt.toLowerCase()]){
-      return colorArr[txt.toLowerCase()];
-    }
-    else{
-      return colorArr.other;
-    }
-  }
+  let {txt, color} = props;
 
   return(
-    <div className="tag" style={{background: getColor(txt)}}>{txt}</div>
+    <div className="tag" style={{background: color ? color : "#6c757d"}}>{txt}</div>
   )
 }

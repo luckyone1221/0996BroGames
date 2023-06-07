@@ -96,7 +96,7 @@ export const ProdCardHeaderBlock = (props) => {
               <div className="sProd__tags-row row">
                 {tags.map((tag,index) => {
                   return <div key={index} className="col-auto">
-                    <TagBox txt={tag.trim()}/>
+                    <TagBox txt={tag.txt.trim()} color={tag.color}/>
                   </div>
                 })}
               </div>

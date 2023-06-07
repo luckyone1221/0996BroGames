@@ -19,8 +19,8 @@ function App() {
   const lang = useLanguage();
   const getSubCategories = useGetSubCategories();
 
-  // const config = useSelector(state => state);
-  // const allCategories = getCatalogList(config);
+  const config = useSelector(state => state);
+  const allCategories = getCatalogList(config);
 
   return (
     <BrowserRouter>

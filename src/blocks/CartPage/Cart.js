@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getCurrencySymb} from "../../Hooks/GetFunctions"
 import {addToCart, changeCartItemAmount} from "../../Hooks/cartFunctions";
 import {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 
 export const Cart = (props) => {
   const {} = props;
@@ -94,13 +95,13 @@ const CartItem = (props) => {
     <div className="sCart__item">
       <div className="sCart__i-row row align-items-center">
         <div className="col-sm-auto sCart__i-col sCart__i-col--left">
-          <div className="sCart__img">
+          <Link className="sCart__img" to={`/prod/${id}`}>
             <img src={`https://graph.digiseller.ru/img.ashx?id_d=${id}&w=248&h=248&crop=true`} alt=""/>
-          </div>
+          </Link>
         </div>
         <div className="col-sm-auto sCart__i-col sCart__i-col--right">
           <div className="sCart__name-box">
-            <div className="sCart__name">{name}</div>
+            <Link className="sCart__name" to={`/prod/${id}`}>{name}</Link>
             {discount && (
               <div className="sCart__discount">{discount}</div>
             )}

@@ -1,16 +1,29 @@
 {
-  "allPossibleTags": ["Accounts", "Activations", "Keys", "Soft", "Gift", "Gift Card", "Top-UP", "PC", "PS", "Xbox", "Nintendo"],
-  "allPossibleProdTypes": ["accounts", "activations", "keys", "all"],
-  "allPossiblePlatforms": ["pc", "ps", "xBoxAndPC", "nintendo", "vpnAndStreaming", "all"],
+  "allPossibleProdTypes": ["accounts", "topUp", "currency", "keys", "all"],
   "feedBackFallBackId": "3403743",
-  "3262725" : {
-    "tags": ["Activations", "PC"],
-    "prodType": "activations",
-    "currentPlatform": "pc"
+  "3452912" : {
+    "tags": [
+      {
+        "txt": "Keys",
+        "color": "rgba(0, 183, 183, 0.7)"
+      },
+      {
+        "txt": "PC",
+        "color": "rgba(240, 105, 29, 0.7)"
+      }],
+    "prodType": "keys"
   },
-  "3264529": {
-    "tags": ["Keys", "PS"],
-    "prodType": "keys",
-    "currentPlatform": "pc"
+  "3383553" : {
+    "tags": [
+      {
+        "txt": "Keys",
+        "color": "rgba(0, 183, 183, 0.7)"
+      },
+      {
+        "txt": "PC",
+        "color": "rgba(240, 105, 29, 0.7)"
+      }
+    ],
+    "prodType": "keys"
   }
 }

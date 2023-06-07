@@ -166,6 +166,7 @@
     }
   }
   &__game-name{
+    word-break: break-word;
     @include ell(2);
     color: $white;
   }
