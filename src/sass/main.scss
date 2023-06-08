@@ -139,5 +139,8 @@ $output-bourbon-deprecation-warnings: false;
 @import '../blocks/GameInfo/_GameInfo.scss';
 @import '../blocks/CartPage/_CartPage.scss';
 
+//info page
+@import '../blocks/InfoBlock/_InfoBlock.scss';
+
 @import "media"; // Всегда в конце
 

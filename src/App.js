@@ -14,13 +14,14 @@ import {useLanguage} from "./Hooks/UseLang";
 import {useGetSubCategories} from "./Hooks/useGetSubCategories";
 import {useSelector} from "react-redux";
 import {getCatalogList} from "./Hooks/GetFunctions"
+import {InfoPage} from "./blocks/InfoPage/InfoPage";
 
 function App() {
   const lang = useLanguage();
   const getSubCategories = useGetSubCategories();
 
-  const config = useSelector(state => state);
-  const allCategories = getCatalogList(config);
+  // const config = useSelector(state => state);
+  // const allCategories = getCatalogList(config);
 
   return (
     <BrowserRouter>
@@ -37,6 +38,7 @@ function App() {
         <Route path="/catalog/currency" element={<CatalogPage productType="currency"/>}/>
         {/**/}
         <Route path="/prod/:id" element={<ProdCardPage/>}/>
+        <Route path="/info/:id" element={<InfoPage/>}/>
         <Route path="/cart" element={<CartPage/>}/>
         <Route path="/search" element={<SearchPage/>}/>
       </Routes>

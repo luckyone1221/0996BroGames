@@ -1,0 +1,78 @@
+{
+  "minecraft-problem": {
+    "en-US": {
+      "mainTitle": "Minecraft problem decision",
+      "list": [
+        {
+          "title": "Some text",
+          "descr": "To enter, we use Minecraft Launcher, you can install it on the site Minecraft.net You receive data in the format mail: mailpass pwd accpass",
+          "imgs": [
+            "https://wallpaperaccess.com/full/8647411.jpg",
+            "https://wallpaperaccess.com/full/8647411.jpg",
+            "https://wallpaperaccess.com/full/8647411.jpg"
+          ]
+        },
+        {
+          "title": "Some text",
+          "descr": "To enter, we use Minecraft Launcher, you can install it on the site Minecraft.net You receive data in the format mail: mailpass pwd accpass",
+          "imgs": [
+            "https://wallpaperaccess.com/full/8647411.jpg"
+          ]
+        },
+        {
+          "title": "Some text",
+          "descr": "To enter, we use Minecraft Launcher, you can install it on the site Minecraft.net You receive data in the format mail: mailpass pwd accpass"
+        },
+        {
+          "title": "Some text",
+          "descr": "To enter, we use Minecraft Launcher, you can install it on the site Minecraft.net You receive data in the format mail: mailpass pwd accpass",
+          "imgs": [
+            "https://wallpaperaccess.com/full/8647411.jpg",
+            "https://wallpaperaccess.com/full/8647411.jpg"
+          ]
+        },
+        {
+          "title": "Some text",
+          "descr": "To enter, we use Minecraft Launcher, you can install it on the site Minecraft.net You receive data in the format mail: mailpass pwd accpass"
+        }
+      ]
+    },
+    "ru-Ru": {
+      "mainTitle": "Minecraft решение проблем",
+      "list": [
+        {
+          "title": "Якийсь Текст",
+          "descr": "Для входа используем Minecraft Launcher, его можете установить на сайте Minecraft.net Данные получаете в формате mail:mailpass pwd accpass",
+          "imgs": [
+            "https://wallpaperaccess.com/full/8647411.jpg",
+            "https://wallpaperaccess.com/full/8647411.jpg",
+            "https://wallpaperaccess.com/full/8647411.jpg"
+          ]
+        },
+        {
+          "title": "Якийсь Текст",
+          "descr": "Для входа используем Minecraft Launcher, его можете установить на сайте Minecraft.net Данные получаете в формате mail:mailpass pwd accpass",
+          "imgs": [
+            "https://wallpaperaccess.com/full/8647411.jpg"
+          ]
+        },
+        {
+          "title": "Якийсь Текст",
+          "descr": "Для входа используем Minecraft Launcher, его можете установить на сайте Minecraft.net Данные получаете в формате mail:mailpass pwd accpass"
+        },
+        {
+          "title": "Якийсь Текст",
+          "descr": "Для входа используем Minecraft Launcher, его можете установить на сайте Minecraft.net Данные получаете в формате mail:mailpass pwd accpass",
+          "imgs": [
+            "https://wallpaperaccess.com/full/8647411.jpg",
+            "https://wallpaperaccess.com/full/8647411.jpg"
+          ]
+        },
+        {
+          "title": "Якийсь Текст",
+          "descr": "Для входа используем Minecraft Launcher, его можете установить на сайте Minecraft.net Данные получаете в формате mail:mailpass pwd accpass"
+        }
+      ]
+    }
+  }
+}
