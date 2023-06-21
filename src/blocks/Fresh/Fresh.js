@@ -43,6 +43,7 @@ export const Fresh = (props) => {
             <div className="sFresh__items">
               {tgData && tgData.messages && tgData.messages.map((item,index) => {
                 return <FreshItem
+                  img={index === 0 ? avatarImg : undefined}
                   key={index}
                   avatar={avatarImg}
                   name={'BroGamers'}
@@ -52,52 +53,6 @@ export const Fresh = (props) => {
                   content={item.message}
                 />
               })}
-              {false && (
-                <>
-                  <FreshItem
-                    img={gameImg}
-                    avatar={avatarImg}
-                    name={'Neaches'}
-                    date={'Apr 06 at 12:38'}
-                    viewMoreTxt={lang.viewMore}
-                    HideTxt={lang.hide}
-                    content={
-                      <>
-                        Выборка новостей:<br/><br/>
-                        - Скоро откроются предзаказы на Avatar: Frontiers of Pandora, в сети нашли намеки на дату выхода игры после Starfield.<br/><br/>
-                        - Слух: Disney скомпонует все вырезанные кадры <br/><br/>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aspernatur ea esse ipsa minus, suscipit. Aperiam atque consectetur distinctio doloribus est ex laudantium magni mollitia provident! Aliquid deserunt, dignissimos eligendi eos facere id in iusto magnam, maxime minus non placeat porro rem reprehenderit sint tempora tenetur, ut voluptate voluptates voluptatibus? Architecto, corporis debitis dicta dolore doloremque et eum explicabo fugit illum labore, magnam molestias necessitatibus numquam perferendis, placeat quaerat quisquam quo quos ratione rem sed similique totam voluptatem! Commodi eaque eligendi fugiat impedit incidunt inventore ipsa ipsum libero quas quia quibusdam quidem quo, quod, repellendus rerum sed tenetur. Perspiciatis, sapiente.
-                      </>
-                    }
-                  />
-                  <FreshItem
-                    avatar={avatarImg}
-                    name={'Neaches'}
-                    date={'Apr 06 at 12:38'}
-                    viewMoreTxt={lang.viewMore}
-                    HideTxt={lang.hide}
-                    content={
-                      <>
-                        Выборка новостей:<br/><br/>
-                        - Скоро откроются предзаказы на Avatar: Frontiers of Pandora, в сети нашли намеки на дату выхода игры после Starfield.<br/><br/>
-                        - Слух: Disney скомпонует все вырезанные кадры<br/><br/>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aspernatur ea esse ipsa minus, suscipit. Aperiam atque consectetur distinctio doloribus est ex laudantium magni mollitia provident! Aliquid deserunt, dignissimos eligendi eos facere id in iusto magnam, maxime minus non placeat porro rem reprehenderit sint tempora tenetur, ut voluptate voluptates voluptatibus? Architecto, corporis debitis dicta dolore doloremque et eum explicabo fugit illum labore, magnam molestias necessitatibus numquam perferendis, placeat quaerat quisquam quo quos ratione rem sed similique totam voluptatem! Commodi eaque eligendi fugiat impedit incidunt inventore ipsa ipsum libero quas quia quibusdam quidem quo, quod, repellendus rerum sed tenetur. Perspiciatis, sapiente.
-                      </>
-                    }
-                  />
-                  <FreshItem
-                    avatar={avatarImg}
-                    name={'Neaches'}
-                    date={'Apr 06 at 12:38'}
-                    viewMoreTxt={lang.viewMore}
-                    HideTxt={lang.hide}
-                    content={
-                      <>
-                        Short Message
-                      </>
-                    }
-                  />
-                </>)}
             </div>
           </div>
         </div>

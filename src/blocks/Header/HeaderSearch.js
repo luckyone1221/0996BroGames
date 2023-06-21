@@ -57,7 +57,7 @@ export const HeaderSearch = (props) => {
       {hasDropDown && DDIsVisiable && (
         <div className="search__dd search__dd--js">
           <div className="search__dd-inner">
-            {config.searchResults.length > 0 && config.searchResults.map((item, index) => {
+            {config.searchResults && config.searchResults.length > 0 && config.searchResults.map((item, index) => {
               if(index < 5){
                 return <SearchDDItem
                   itemId={item.id}
@@ -69,10 +69,10 @@ export const HeaderSearch = (props) => {
                 return <div className="search__dd-dots">...</div>
               }
             })}
-            {config.searchResults.length > 0 && (
+            {config.searchResults && config.searchResults.length > 0 && (
               <Link className="search__dd-link" to="/search">{lang.GotoSearchPage}</Link>
             )}
-            {config.searchResults.length === 0 && (
+            {config.searchResults && config.searchResults.length === 0 && (
               <div className="search__dd-link text-muted">{lang.nothingFound}</div>
             )}
           </div>

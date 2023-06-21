@@ -7,7 +7,7 @@ import 'swiper/css/effect-fade';
 import {ChevronLeft, ChevronRight} from "../../SvgSpriptes";
 import {useLanguage} from "../../Hooks/UseLang";
 import {useDispatch, useSelector} from "react-redux";
-import {getProducts, getCurrencySymb} from "../../Hooks/GetFunctions";
+import {getProducts, getCurrencySymb, getItemChars} from "../../Hooks/GetFunctions";
 import {Link, useNavigate} from "react-router-dom";
 import {addToCart} from "../../Hooks/cartFunctions";
 
@@ -23,7 +23,7 @@ export const HeaderBlock = (props) => {
     })
   }, [config.lang, config.currency])
 
-  //
+  //0
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   return (
@@ -106,6 +106,15 @@ const HeaderBlockSlide = (props) => {
   const config = useSelector(state => state);
   const dispatch = useDispatch();
 
+
+  //id
+  const [itemChars, setItemChars] = useState();
+  useEffect(() => {
+    getItemChars(config, id).then((data) => {
+      setItemChars(data);
+    });
+  }, [config.lang, config.currency, navigate]);
+
   return (
     <div className="headerBlock__slide" onClick={(e) => {
       if(!e.target.closest('.buy-now-js')){
@@ -114,7 +123,12 @@ const HeaderBlockSlide = (props) => {
       }
     }}>
       <div className="headerBlock__bg">
-        <img src={img} alt=""/>
+        {itemChars && !itemChars.product.preview_imgs[1] && (
+          <img src={img} alt=""/>
+        )}
+        {itemChars && itemChars.product.preview_imgs[1] && (
+          <img src={itemChars.product.preview_imgs[1].url} alt=""/>
+        )}
       </div>
       <div className="headerBlock__container container">
         <div className="headerBlock__box">

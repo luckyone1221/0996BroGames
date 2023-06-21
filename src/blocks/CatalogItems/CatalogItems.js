@@ -138,6 +138,7 @@ export const SortOrderSelect = (props) => {
     <CatalogItemsSelect
       value={getSortOrderOption(orderOptions, config.sortOrder)}
       options={orderOptions}
+      placeholder={lang.sortOrderPlaceholder}
       onChange={(e) => {
         dispatch({type: "CHANGE_SORTORDER", payload: e.value});
       }}
@@ -173,11 +174,12 @@ export const ProdTypeSelect = (props) => {
 }
 
 const CatalogItemsSelect = (props) => {
-  const {value, options, onChange} = props;
+  const {value, options, onChange, placeholder} = props;
 
   return(
     <div className="col-6 col-md-auto">
       <Select
+        placeholder={placeholder}
         classNames={
           {
             ...getSelectClasses(),

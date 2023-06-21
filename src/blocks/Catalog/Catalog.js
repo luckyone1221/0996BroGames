@@ -23,7 +23,7 @@ export const Catalog = (props) => {
 
   const [slider, setSlider] = useState(null);
   const [products, setProducts] = useState([]);
-  const [currentCatalog, setCurrentCatalog] = useState("-3");
+  const [currentCatalog, setCurrentCatalog] = useState("0");
 
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(-1);
@@ -60,7 +60,7 @@ export const Catalog = (props) => {
               <CatalogFilterBtn
                 currentCatalog={currentCatalog} setCurrentCatalog={setCurrentCatalog}
                 btnTxt={lang.top}
-                btnCategoryId={"-3"}
+                btnCategoryId={"0"}
               />
               {/*<CatalogFilterBtn*/}
               {/*  currentCatalog={currentCatalog} setCurrentCatalog={setCurrentCatalog}*/}
@@ -118,7 +118,6 @@ export const Catalog = (props) => {
           </div>
         </div>
         <Swiper
-
           onReachEnd={()=>{
             if(currentPage <= totalPages){
               getProducts(config, currentPage, currentCatalog, 16).then((data) => {
@@ -165,7 +164,7 @@ export const Catalog = (props) => {
           onSwiper={setSlider}
         >
           <SwiperSlide>
-            <Link className="prodCard sCatalog__steam-card">
+            <Link className="prodCard sCatalog__steam-card" to={'/prod/3788147'}>
               <div className="sCatalog__steam-img text-center">
                 <img loading="lazy" src={steam} alt=""/>
               </div>

@@ -98,6 +98,7 @@
     "currency": "Currency",
     "keys": "Keys",
     "topUp": "Top-UP",
+    "sortOrderPlaceholder": "Sort Order",
     "sortName": "name [A-Z]",
     "sortNameDesc": "name [Z-A]",
     "sortPrice": "price ↑",

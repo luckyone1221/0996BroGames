@@ -147,6 +147,8 @@
     }
   }
   &__view-more{
+    display: inline-block;
+    cursor: pointer;
     font-weight: 500;
     color: $primary;
   }

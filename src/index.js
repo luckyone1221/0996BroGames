@@ -36,7 +36,7 @@ const defaultState = {
 
   prodType: "all",
   currentPlatform: undefined,//?
-  sortOrder: "name",
+  sortOrder: "",
 
   //
   scrollTo: undefined,
