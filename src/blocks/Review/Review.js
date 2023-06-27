@@ -142,7 +142,7 @@ const ReviewItem = (props) => {
             {type === "good" && (<img loading="lazy" src={goodImg} alt=""/>)}
           </div>
           <div className="sReview__fb-img">
-            {type === "bad" && (<img loading="lazy" src={badImg} alt=""/>)}
+            {type === "bad" && (<img loading="lazy" className="bad" src={badImg} alt=""/>)}
           </div>
         </div>
       </div>
@@ -157,7 +157,6 @@ const ReviewItem = (props) => {
           <div className="sReview__game-name">{gameName}</div>
         </div>
       </div>
-
     </div>
   )
 }

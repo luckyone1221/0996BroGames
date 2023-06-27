@@ -28,10 +28,9 @@ export const ProdCardPage = (props) => {
   useEffect(() => {
     getItemChars(config, params.id).then((data) => {
       setItemChars(data);
-      console.log(data.product.seller);
+      // console.log(data.product.preview_videos);
     });
   }, [config.lang, config.currency, navigate]);
-
 
   return (
     <div className="main-wrapper">
@@ -39,9 +38,9 @@ export const ProdCardPage = (props) => {
       <main>
         {itemChars && (
           <>
-            <ProdCardHeaderBlock product={itemChars.product} imgArr={itemChars.product.preview_imgs}/>
+            <ProdCardHeaderBlock product={itemChars.product} videoArr={itemChars.product.preview_videos} imgArr={itemChars.product.preview_imgs}/>
             {/*<ProdGalery imgArr={itemChars.product.preview_imgs}/>*/}
-            <GameInfo info={itemChars.product.info}/>
+            <GameInfo info={itemChars.product.info} addInfo={itemChars.product.add_info}/>
             <AlsoLikeThis itemId={params.id}/>
             <Review itemId={params.id}/>
             {recentIdList.length > 4 && (

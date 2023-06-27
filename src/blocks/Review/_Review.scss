@@ -130,6 +130,10 @@
 
     img{
       width: 100%;
+
+      &.bad{
+        transform: rotate(180deg);
+      }
     }
   }
   &__txt{

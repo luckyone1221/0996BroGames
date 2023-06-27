@@ -55,18 +55,25 @@ export const CurrencyLang = () => {
           <div className="currency__dd-title">{lang.header.currency}</div>
           <div className="currency__box">
             <div className="currency__b-row row">
-              <div className="col-6">
+              <div className="col-4">
                 <div className={`currency__btn ${currency === 'USD' ? 'active' : ''}`} onClick={() => {
                   dispatch({type: "CHANGE_CURRENCY", payload: 'USD'})
                 }}>
                   <strong>$ - USD</strong>
                 </div>
               </div>
-              <div className="col-6">
+              <div className="col-4">
                 <div className={`currency__btn ${currency === 'RUB' ? 'active' : ''}`} onClick={() => {
                   dispatch({type: "CHANGE_CURRENCY", payload: 'RUB'})
                 }}>
                   <strong>₽ - Руб</strong>
+                </div>
+              </div>
+              <div className="col-4">
+                <div className={`currency__btn ${currency === 'UAH' ? 'active' : ''}`} onClick={() => {
+                  dispatch({type: "CHANGE_CURRENCY", payload: 'UAH'})
+                }}>
+                  <strong>₴ - Грн</strong>
                 </div>
               </div>
             </div>

@@ -31,7 +31,7 @@ export const Cart = (props) => {
                 </div>
               </div>
               <div className="col-auto">
-                <div className="sCart__amount">{config.cartResponse && Array.isArray(config.cartResponse.products) ? config.cartResponse.products.length : 0} {lang.items}</div>
+                <div className="sCart__amount">{lang.items}: {config.cartResponse && Array.isArray(config.cartResponse.products) ? config.cartResponse.products.length : 0}</div>
               </div>
             </div>
             <div className="sCart__items">

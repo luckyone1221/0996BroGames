@@ -55,6 +55,7 @@ export const PreOrder = (props) => {
                   <ProdCard
                     itemId={item.id}
                     name={item.name}
+                    isAvailable={item.is_available}
                     price={`${item.price} ${getCurrencySymb(item.currency)}`}
                   />
                 </SwiperSlide>

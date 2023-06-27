@@ -40,6 +40,7 @@ export const HeaderBlock = (props) => {
             return (
               <SwiperSlide key={index}>
                 <HeaderBlockSlide
+                  isAvailable={item.is_available}
                   img={`https://graph.digiseller.ru/img.ashx?id_d=${item.id}&w=1440&h=800&crop=true`}
                   id={item.id}
                   title={item.name}
@@ -100,7 +101,7 @@ const HeaderBlockThumb = (props) => {
 }
 
 const HeaderBlockSlide = (props) => {
-  const {img, title, subTitle, id, price, currency} = props;
+  const {img, title, subTitle, id, price, currency, isAvailable} = props;
   const lang = useLanguage();
   const navigate = useNavigate();
   const config = useSelector(state => state);
@@ -136,7 +137,7 @@ const HeaderBlockSlide = (props) => {
           <div className="headerBlock__subTitle" dangerouslySetInnerHTML={{__html: subTitle}}></div>
           <div className="headerBlock__btn-row row align-items-center">
             <div className="col-auto">
-              <button className="headerBlock__buy-btn buy-now-js" onClick={(e) => {
+              <button className={`headerBlock__buy-btn ${isAvailable === 0 ? "disabled" : ""} buy-now-js`} onClick={(e) => {
                 addToCart(id, config, 1).then((data) => {
                   dispatch({type: "CHANGE_CARTUID", payload: data.cart_uid});
                   dispatch({type: "SET_CARTRESPONSE", payload: data});

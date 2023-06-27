@@ -29,6 +29,7 @@ export const Search = (props) => {
               {config.searchResults.map((item, index) => {
                 return <div key={index} className="sItems__col col-sm-6 col-md-4 col-xl-3">
                   <ProdCard
+                    isAvailable={item.is_available}
                     itemId={item.id}
                     name={item.name}
                     price={`${item.price} ${getCurrencySymb(config.currency)}`}

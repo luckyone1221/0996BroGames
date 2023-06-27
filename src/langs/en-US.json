@@ -1,5 +1,6 @@
 {
   "general": {
+    "noAvailable": "Нет в Наличии",
     "buyNow": "buy now"
   },
   "header": {
@@ -107,6 +108,7 @@
     "loadingTxt": "Loading new products"
   },
   "ProdCardHeaderBlock": {
+    "noAvailable": "Нет в Наличии",
     "buyNow": "buy now",
     "howItWorks": "How it works?",
     "list": [

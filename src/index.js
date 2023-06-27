@@ -32,7 +32,7 @@ if(window.localStorage.getItem('BroGamesCartResponse')){
 
 const defaultState = {
   lang: 'en-US',//ru-Ru
-  currency: "RUB",//USD
+  currency: "RUB",//USD//UAH
 
   prodType: "all",
   currentPlatform: undefined,//?

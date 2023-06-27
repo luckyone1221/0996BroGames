@@ -10,8 +10,10 @@ import {
   getSelectClasses,
   getSortOrderOption
 } from "../../Hooks/GetFunctions";
+import ReactPaginate from 'react-paginate';
 import {useDispatch, useSelector} from "react-redux";
 import {ProdCard} from "../Catalog/ProdCard";
+import {ChevronLeftPagin, ChevronRightPagin} from "../../SvgSpriptes";
 
 
 export const CatalogItems = (props) => {
@@ -33,31 +35,9 @@ export const CatalogItems = (props) => {
   const [totalPages, setTotalPages] = useState(-1);
   const [currentPage, setCurrentPage] = useState(1);
   const [alertTxt, setAlertTxt] = useState(lang.loadingTxt);
-  const [products,SetProducts] = useState([]);
-  const [loadingMute, setLoadingMute] = useState(false);
-  const loadMore = useRef();
+  const [products, SetProducts] = useState([]);
 
-  const loadMoreFunc = () => {
-    if(loadMore.current){
-      let loadMoreIsVisible = window.scrollY + window.innerHeight > loadMore.current.getBoundingClientRect().top + window.scrollY;
-
-      if(!loadingMute && loadMoreIsVisible && currentPage < totalPages){
-        setLoadingMute(true);
-        getProducts(config, currentPage+1).then((data) => {
-          if(data.product){
-            setCurrentPage(currentPage+1);
-            SetProducts([...products, ...data.product]);
-
-            window.setTimeout(() => {
-              setLoadingMute(false);
-            }, 100);
-          }
-        })
-      }
-    }
-  }
-
-  //
+  //when list of products can change (changing category/subcategory)
   useEffect(() => {
     setCurrentPage(1);
 
@@ -71,14 +51,16 @@ export const CatalogItems = (props) => {
         setAlertTxt(lang.nothingFound);
       }
     })
-  }, [config.lang, config.currency, config.prodType, config.currentPlatform, config.sortOrder])
+  }, [config.prodType, config.currentPlatform])
 
+  //when refreshing data in products or changing page
   useEffect(() => {
-    window.addEventListener('scroll', loadMoreFunc, {passive: true})
-    return () => {
-      window.removeEventListener('scroll', loadMoreFunc)
-    }
-  }, [products])//currentPage??
+    getProducts(config, currentPage).then((data) => {
+      if(data.product){
+        SetProducts([...data.product]);
+      }
+    })
+  }, [config.lang, config.currency, config.sortOrder, currentPage]);
 
   return (
     <section className="sItems section">
@@ -89,7 +71,6 @@ export const CatalogItems = (props) => {
               <h1>{lang.title}</h1>
             </div>
           </div>
-          {/*new*/}
           {/*<ProdTypeSelect/>*/}
           <SortOrderSelect/>
         </div>
@@ -101,15 +82,25 @@ export const CatalogItems = (props) => {
                   <ProdCard
                     itemId={item.id}
                     name={item.name}
+                    isAvailable={item.is_available}
                     price={`${item.price} ${getCurrencySymb(item.currency)}`}
                   />
                 </div>
               })}
             </div>
-            {currentPage < totalPages && (
-              <div className="sItems__loading text-center" ref={loadMore}>
-                {lang.loadingTxt}
-              </div>
+            {totalPages > 1 && (
+              <ReactPaginate
+                className="pagination"
+                breakLabel="..."
+                nextLabel={<ChevronRightPagin/>}
+                onPageChange={(e) => {
+                  setCurrentPage(Number(e.selected));
+                }}
+                pageRangeDisplayed={5}
+                pageCount={Number(totalPages)}
+                previousLabel={<ChevronLeftPagin/>}
+                renderOnZeroPageCount={null}
+              />
             )}
           </>
         ) : (

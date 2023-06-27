@@ -210,6 +210,9 @@
     //
     //}
   }
+  &.muted{
+    opacity: 0.5;
+  }
 
   @include mt();
   background: #0B0B0B;
@@ -299,6 +302,11 @@
       }
     }
   }
+  &__no-available{
+    line-height: calc(20/16);
+    font-weight: 600;
+  }
+  &__{}
   &__{}
 }
 

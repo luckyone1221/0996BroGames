@@ -115,6 +115,16 @@
     //padding-top: calc(120/172 * 100%);
     height: rem(120);
     border-radius: rem(8);
+
+    & > svg{
+      position: absolute;
+      z-index: 2;
+      top: 50%;
+      left: 50%;
+      transform: translateY(-50%) translateX(-50%);
+      width: rem(60);
+      height: auto;
+    }
   }
   &__thumb-btn{
     position: absolute;
@@ -131,6 +141,16 @@
   }
 
   &__img{
+    &--video{
+      iframe{
+        position: absolute!important;
+        top: 0!important;
+        left: 0!important;
+        width: 100%!important;
+        height: 100% !important;
+      }
+    }
+
     @extend .accept-ratio-frame;
 
     border-radius: rem(8);
@@ -225,6 +245,11 @@
     @extend .btn-primary;
     text-transform: uppercase;
 
+    &.disabled{
+      background: $gray-600!important;
+      border-color: $gray-600!important;
+    }
+
     min-width: 100%;
     @include media-breakpoint-up(sm){
       min-width: rem(200);
@@ -235,6 +260,11 @@
     }
   }
   &__cart{
+    &.disabled{
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
     @include mt();
     cursor: pointer;
 

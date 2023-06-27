@@ -11,7 +11,16 @@ export function useTrackRecent(id){
 
   if(idList && Array.isArray(idList)){
     if(id && idList.indexOf(id) < 0){
-      idList.push(id);
+      idList.unshift(id);
+    }
+
+    //make them no more then 12
+    if(idList.length > 12){
+     let result = [];
+     for(let i = 0; i < 12; i++){
+       result.push(idList[i]);
+     }
+      idList = result;
     }
   }
   else{

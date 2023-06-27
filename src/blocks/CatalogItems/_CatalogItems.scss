@@ -165,3 +165,66 @@
     }
   }
 }
+
+.pagination{
+  display: flex;
+  gap: rem(4);
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+
+  li{
+
+    a{
+      @include mt();
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+
+      min-width: rem(24);
+      height: rem(24);
+      border-radius: rem(5);
+      padding: rem(4);
+
+      color: $white;
+      font-size: rem(14);
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    &.selected{
+      a{
+        background: $primary;
+      }
+    }
+    &:hover{
+      a{
+        background: rgba($primary, .8);
+      }
+    }
+    &.disabled{
+      pointer-events: none;
+    }
+
+    //&.previous,
+    //&.next{
+    //  a{
+    //    color: transparent;
+    //    background-position: center;
+    //    background-repeat: no-repeat;
+    //
+    //    //chevron-right
+    //    //chevron-left
+    //  }
+    //}
+    //
+    //&.previous a{
+    //  background-image: url(../../img/svg/chevron-left.svg);
+    //}
+    //&.next a{
+    //  background-image: url(../../img/svg/chevron-right.svg);
+    //}
+
+  }
+}

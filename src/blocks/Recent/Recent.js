@@ -21,6 +21,7 @@ export const Recent = (props) => {
     if(!Array.isArray(itemsList) || itemsList.length < 1){
       return
     }
+
     let productsArr = [];
     let promiseArr = [];
 
@@ -36,7 +37,7 @@ export const Recent = (props) => {
     Promise.all(promiseArr).then(() => {
       setProducts(productsArr);
     })
-  }, []);
+  }, [itemsList, config.currency, config.lang]);
 
   return(
     <section className="sResent section">
@@ -63,6 +64,7 @@ export const Recent = (props) => {
             return <SwiperSlide key={index}>
               <ProdCard
                 name={item.name}
+                isAvailable={item.is_available}
                 price={`${item.price} ${getCurrencySymb(item.currency)}`}
                 itemId={item.id}
               />

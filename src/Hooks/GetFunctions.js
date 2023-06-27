@@ -74,7 +74,7 @@ export const getSearchResults = async (config) => {
     console.log(e);
   }
 }
-export const getItemFeedbacks = async (config, itemId, type="good", page=1, amount=36) => {
+export const getItemFeedbacks = async (config, itemId, type="all", page=1, amount=36) => {
 
   try {
     const response = await axios({
@@ -220,6 +220,6 @@ export const getSelectClasses = (state) => {
 export const getCurrencySymb = (string) =>{
   return string
     .replace("RUR", "₽")
-    .replace("RUB", "₽")
+    .replace("UAH", "₴")
     .replace("USD", "$")
 }

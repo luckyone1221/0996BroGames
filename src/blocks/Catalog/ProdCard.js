@@ -5,17 +5,19 @@ import {useDispatch, useSelector} from "react-redux";
 import {useGetTags} from "../../Hooks/useGetTags";
 import {addToCart} from "../../Hooks/cartFunctions";
 import {useCartActiveClasses} from "../../Hooks/useCartActiveClasses";
+import {useLanguage} from "../../Hooks/UseLang";
 
 export const ProdCard = (props) => {
-  const {name, price, addClasses, itemId} = props;
+  const {name, price, addClasses, itemId, isAvailable} = props;
 
+  const lang = useLanguage();
   const config = useSelector(state => state);
   const dispatch = useDispatch();
   const tags = useGetTags(itemId);
   const btnClasses = useCartActiveClasses(itemId);
 
   return(
-    <div className={`prodCard ${addClasses ? addClasses : ''}`}>
+    <div className={`prodCard ${addClasses ? addClasses : ''} ${isAvailable === 0 ? "muted" : ""}`}>
       <Link className="prodCard__link" to={`/prod/${itemId}`} target="_blank"></Link>
       <div className="prodCard__img-box">
         <img loading="lazy" src={`https://graph.digiseller.ru/img.ashx?id_d=${itemId}&w=248&h=248&crop=true`} alt=""/>
@@ -30,21 +32,30 @@ export const ProdCard = (props) => {
         </div>
       </div>
       <div className="prodCard__name">{name}</div>
-      <div className="prodCard__price-row row">
-        <div className="col">
-          <div className="prodCard__price">{price}</div>
-        </div>
-        <div className="col-auto">
 
-          <div className={`prodCard__cart-btn ${btnClasses}`} onClick={() => {
-            addToCart(itemId, config).then((data) => {
-              dispatch({type: "CHANGE_CARTUID", payload: data.cart_uid});
-              dispatch({type: "SET_CARTRESPONSE", payload: data});
-            })
-          }}>
-            <CartIcon/>
+      <div className="prodCard__price-row row">
+        {isAvailable === 1 && (
+          <>
+            <div className="col">
+              <div className="prodCard__price">{price}</div>
+            </div>
+            <div className="col-auto">
+              <div className={`prodCard__cart-btn ${btnClasses}`} onClick={() => {
+                addToCart(itemId, config).then((data) => {
+                  dispatch({type: "CHANGE_CARTUID", payload: data.cart_uid});
+                  dispatch({type: "SET_CARTRESPONSE", payload: data});
+                })
+              }}>
+                <CartIcon/>
+              </div>
+            </div>
+          </>
+        )}
+        {isAvailable === 0 && (
+          <div className="prodCard__no-available col-12">
+            {lang.general.noAvailable}
           </div>
-        </div>
+        )}
       </div>
     </div>
   )
