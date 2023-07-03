@@ -13,11 +13,13 @@ import {Footer} from "../Footer/Footer";
 import {useLanguage} from "../../Hooks/UseLang";
 import {useTrackRecent} from "../../Hooks/useTrackRecent";
 import {useSelector} from "react-redux";
+import {useTrackLang} from "../../Hooks/useTrackLang";
 
 export const MainPage = (props) => {
   const content = useSelector(state => state.content);
   const lang = useLanguage();
   const recentIdList = useTrackRecent();
+  const trackLang = useTrackLang();
 
   return(
     <div className="main-wrapper">

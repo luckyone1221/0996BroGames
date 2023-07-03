@@ -56,7 +56,7 @@ export const PreOrder = (props) => {
                     itemId={item.id}
                     name={item.name}
                     isAvailable={item.is_available}
-                    price={`${item.price} ${getCurrencySymb(item.currency)}`}
+                    price={`${Math.ceil(item.price)} ${getCurrencySymb(item.currency)}`}
                   />
                 </SwiperSlide>
               })}

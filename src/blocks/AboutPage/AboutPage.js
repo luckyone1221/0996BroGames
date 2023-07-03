@@ -11,11 +11,14 @@ import {Fresh} from "../Fresh/Fresh";
 import {HowItWorks} from "../HowItWorks/HowItWorks";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
+import {useTrackLang} from "../../Hooks/useTrackLang";
 
 export const AboutPage = (props) => {
   const config = useSelector(state => state);
   const content = useSelector(state => state.content);
   const dispatch = useDispatch();
+
+  const trackLang = useTrackLang();
 
   useEffect(() => {
     if(config.scrollTo){

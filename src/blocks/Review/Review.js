@@ -18,7 +18,6 @@ export const Review = (props) => {
   //feedBackList
   const [gameName, setGameName] = useState('');
 
-
   const [feedBackList, setFeedBackList] = useState([]);
   const [slider, setSlider] = useState(null);
 
@@ -33,9 +32,9 @@ export const Review = (props) => {
         setGameName(data.product.name);
       }
       else{
-        console.log('//broken')
-        console.log(data.product)
-        console.log('//broken')
+        // console.log('//broken')
+        // console.log(data.product)
+        // console.log('//broken')
       }
 
     })

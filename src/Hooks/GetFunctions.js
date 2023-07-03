@@ -1,6 +1,69 @@
 import axios from "axios";
+import { sha256 } from 'js-sha256';
 
+//not working yet
+export const getApiToken = async (config) => {
+  let now = new Date().getTime();
+  let apiKey = '1108B8C48B1D410385AF6AB42301E5AE';
+  let sign = sha256(`${apiKey}${now}`);
 
+  try {
+
+    const response = await axios({
+      url : `https://api.digiseller.ru/api/apilogin?seller_id=${config.digIds.sellerId}&timestamp=${now}&sign=${sign}`,
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      data: {
+        seller_id: config.digIds.sellerId,
+        timestamp: now,
+        sign: sign
+      }
+    })
+
+    return response.data
+  }
+  catch (e){
+    console.log(e);
+  }
+}
+//not working yet too
+export const getStat = async (config, token) => {
+  let date = new Date();
+  let addZero = (num) => {
+    if(Number(num) >=0 && Number(num) <= 9){
+      return `0${num}`
+    }
+  }
+
+  try {
+    const response = await axios({
+      url : `https://api.digiseller.ru/api/seller-sells/v2?token=${token}`,
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      data: {
+        date_start: "2017-01-01 00:00:00",
+        date_finish: `${date.getFullYear()}-${addZero(date.getMonth()+1)}-${addZero(date.getDay()+1)} 00:00:00`,
+        returned: 0,
+        page: 1,
+      }
+    })
+
+    // console.log(response.data);
+
+    return response.data
+  }
+  catch (e){
+    console.log(e);
+  }
+}
+
+//works
 export const getTgData = async () => {
   try {
     const response = await axios({
@@ -222,4 +285,17 @@ export const getCurrencySymb = (string) =>{
     .replace("RUR", "₽")
     .replace("UAH", "₴")
     .replace("USD", "$")
+}
+
+export const getSubcategoryNameById = (id, config) => {
+  for (let subcategory of config.digIds.categories[config.prodType].subCategories){
+    if (subcategory.id === id){
+      return subcategory.name
+    }
+  }
+  return
+}
+
+export const getServerToLink = (str) => {
+  return str.replace("en-US", "en").replace("ru-Ru", "ru")
 }

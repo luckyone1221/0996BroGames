@@ -7,9 +7,10 @@ import 'swiper/css/effect-fade';
 import {ChevronLeft, ChevronRight} from "../../SvgSpriptes";
 import {useLanguage} from "../../Hooks/UseLang";
 import {useDispatch, useSelector} from "react-redux";
-import {getProducts, getCurrencySymb, getItemChars} from "../../Hooks/GetFunctions";
+import {getProducts, getCurrencySymb, getItemChars, getServerToLink} from "../../Hooks/GetFunctions";
 import {Link, useNavigate} from "react-router-dom";
 import {addToCart} from "../../Hooks/cartFunctions";
+import {useGetContent} from "../../Hooks/useGetContent";
 
 export const HeaderBlock = (props) => {
   const config = useSelector(state => state);
@@ -45,7 +46,7 @@ export const HeaderBlock = (props) => {
                   id={item.id}
                   title={item.name}
                   subTitle={item.info}
-                  price={item.price}
+                  price={Math.ceil(item.price)}
                   currency={getCurrencySymb(item.currency)}
                 />
               </SwiperSlide>
@@ -68,7 +69,7 @@ export const HeaderBlock = (props) => {
               {products.map((item, index) => {
                 return (
                   <SwiperSlide key={index}>
-                    <HeaderBlockThumb img={`https://graph.digiseller.ru/img.ashx?id_d=${item.id}&w=176&h=176&crop=true`}/>
+                    <HeaderBlockThumb id={item.id} img={`https://graph.digiseller.ru/img.ashx?id_d=${item.id}&w=176&h=176&crop=true`}/>
                   </SwiperSlide>
                 )
               })}
@@ -91,11 +92,17 @@ export const HeaderBlock = (props) => {
 }
 
 const HeaderBlockThumb = (props) => {
-  const {img} = props;
+  const {img, id} = props;
+  const content = useGetContent(id);
 
   return(
     <div className='headerBlock__thumb-slide'>
-      <img src={img} alt=""/>
+      {content.imgGallery && (
+        <img src={content.imgGallery[0]} alt=""/>
+      )}
+      {!content.imgGallery && (
+        <img src={img} alt=""/>
+      )}
     </div>
   )
 }
@@ -106,7 +113,7 @@ const HeaderBlockSlide = (props) => {
   const navigate = useNavigate();
   const config = useSelector(state => state);
   const dispatch = useDispatch();
-
+  const content = useGetContent(id);
 
   //id
   const [itemChars, setItemChars] = useState();
@@ -124,11 +131,14 @@ const HeaderBlockSlide = (props) => {
       }
     }}>
       <div className="headerBlock__bg">
-        {itemChars && !itemChars.product.preview_imgs[1] && (
+        {!content.imgGallery && itemChars && !itemChars.product.preview_imgs[1] && (
           <img src={img} alt=""/>
         )}
-        {itemChars && itemChars.product.preview_imgs[1] && (
+        {!content.imgGallery && itemChars && itemChars.product.preview_imgs[1] && (
           <img src={itemChars.product.preview_imgs[1].url} alt=""/>
+        )}
+        {content.imgGallery && (
+          <img src={content.imgGallery[1]} alt=""/>
         )}
       </div>
       <div className="headerBlock__container container">
@@ -142,7 +152,7 @@ const HeaderBlockSlide = (props) => {
                   dispatch({type: "CHANGE_CARTUID", payload: data.cart_uid});
                   dispatch({type: "SET_CARTRESPONSE", payload: data});
                 }).then(() => {
-                  navigate('/cart');
+                  navigate(`/${getServerToLink(config.lang)}/cart`);
                 })
               }}>{lang.general.buyNow}</button>
             </div>

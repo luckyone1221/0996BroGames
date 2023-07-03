@@ -2,7 +2,7 @@ import {Trash} from '../../SvgSpriptes'
 
 import {useLanguage} from "../../Hooks/UseLang";
 import {useDispatch, useSelector} from "react-redux";
-import {getCurrencySymb} from "../../Hooks/GetFunctions"
+import {getCurrencySymb, getServerToLink} from "../../Hooks/GetFunctions"
 import {addToCart, changeCartItemAmount} from "../../Hooks/cartFunctions";
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
@@ -52,7 +52,7 @@ export const Cart = (props) => {
               <div className="sCart__s-total-wrap">
                 <div className="sCart__s-total-txt">{lang.total}</div>
                 <div className="sCart__s-price">
-                  {config.cartResponse && config.cartResponse.amount}
+                  {config.cartResponse && Math.ceil(Number(config.cartResponse.amount.replace(',', '.')))}
                   {config.cartResponse && config.cartResponse.products && getCurrencySymb(config.cartResponse.currency)}</div>
               </div>
               {/*<div className="btn btn-danger">cleanUp</div>*/}
@@ -95,13 +95,13 @@ const CartItem = (props) => {
     <div className="sCart__item">
       <div className="sCart__i-row row align-items-center">
         <div className="col-sm-auto sCart__i-col sCart__i-col--left">
-          <Link className="sCart__img" to={`/prod/${id}`}>
+          <Link className="sCart__img" to={`/${getServerToLink(config.lang)}/prod/${id}`}>
             <img src={`https://graph.digiseller.ru/img.ashx?id_d=${id}&w=248&h=248&crop=true`} alt=""/>
           </Link>
         </div>
         <div className="col-sm-auto sCart__i-col sCart__i-col--right">
           <div className="sCart__name-box">
-            <Link className="sCart__name" to={`/prod/${id}`}>{name}</Link>
+            <Link className="sCart__name" to={`/${getServerToLink(config.lang)}/prod/${id}`}>{name}</Link>
             {discount && (
               <div className="sCart__discount">{discount}</div>
             )}
@@ -134,7 +134,7 @@ const CartItem = (props) => {
               {oldPrice && (
                 <div className="sCart__old-price">{oldPrice}</div>
               )}
-              <div className="sCart__price">{price} {getCurrencySymb(currency)}</div>
+              <div className="sCart__price">{Math.ceil(Number(price.replace(',', '.')))} {getCurrencySymb(currency)}</div>
             </div>
             <div className="col-auto ms-auto">
               <div className="sCart__trash" onClick={() => {

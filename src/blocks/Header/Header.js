@@ -8,7 +8,7 @@ import {CurrencyLang} from "./CurrencyLang";
 import {HeaderSearch} from "./HeaderSearch";
 import {HeaderMenu} from "./HeaderMenu";
 import {MobMenu} from "./MobMenu";
-import {getSearchResults} from "../../Hooks/GetFunctions";
+import {getSearchResults, getServerToLink} from "../../Hooks/GetFunctions";
 import {useDispatch, useSelector} from "react-redux";
 
 function useCalcHeaderHeight(header){
@@ -38,7 +38,7 @@ function useCalcHeaderHeight(header){
       window.removeEventListener('scroll', calcHeaderHeight);
       window.removeEventListener('resize', calcHeaderHeight);
     };
-  })
+  }, [])
 
   return headerAddClasses;
 }
@@ -108,7 +108,7 @@ export const Header = (props) => {
         <div className="container">
           <div className="header__row align-items-center row">
             <div className="col col-xl-auto">
-              <Link className="header__logo" to='/'>
+              <Link className="header__logo" to={`/${getServerToLink(config.lang)}/`}>
                 <img src={logo} alt="logo"/>
               </Link>
             </div>
@@ -119,7 +119,7 @@ export const Header = (props) => {
               <HeaderSearch hasDropDown={true}/>
             </div>
             <div className="col-auto">
-              <Link to="/cart" className={`header__cart ${config.cartResponse && config.cartResponse.products && config.cartResponse.products.length > 0 && "active"}`} data-count={config.cartResponse && config.cartResponse.products && config.cartResponse.products.length}>
+              <Link to={`/${getServerToLink(config.lang)}/cart`} className={`header__cart ${config.cartResponse && config.cartResponse.products && config.cartResponse.products.length > 0 && "active"}`} data-count={config.cartResponse && config.cartResponse.products && config.cartResponse.products.length}>
                 <CartIcon/>
               </Link>
             </div>

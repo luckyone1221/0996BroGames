@@ -15,10 +15,13 @@ import {AlsoLikeThis} from "../Recent/AlsoLikeThis";
 import {useTrackRecent} from "../../Hooks/useTrackRecent";
 import {useScrollTop} from "../../Hooks/useScrollTop";
 import {log} from "util";
+import {useTrackLang} from "../../Hooks/useTrackLang";
 
 export const ProdCardPage = (props) => {
-  const params = useParams();
   const srollTopOnUpdate = useScrollTop();
+  const trackLang = useTrackLang();
+
+  const params = useParams();
   const navigate = useNavigate();
   const recentIdList = useTrackRecent(params.id);
   const config = useSelector(state => state);
@@ -28,7 +31,6 @@ export const ProdCardPage = (props) => {
   useEffect(() => {
     getItemChars(config, params.id).then((data) => {
       setItemChars(data);
-      // console.log(data.product.preview_videos);
     });
   }, [config.lang, config.currency, navigate]);
 
@@ -40,7 +42,7 @@ export const ProdCardPage = (props) => {
           <>
             <ProdCardHeaderBlock product={itemChars.product} videoArr={itemChars.product.preview_videos} imgArr={itemChars.product.preview_imgs}/>
             {/*<ProdGalery imgArr={itemChars.product.preview_imgs}/>*/}
-            <GameInfo info={itemChars.product.info} addInfo={itemChars.product.add_info}/>
+            <GameInfo info={itemChars.product.info} addInfo={itemChars.product.add_info} id={params.id}/>
             <AlsoLikeThis itemId={params.id}/>
             <Review itemId={params.id}/>
             {recentIdList.length > 4 && (

@@ -3,9 +3,9 @@ import {Zoom} from "../../SvgSpriptes";
 import {useLanguage} from "../../Hooks/UseLang";
 import {useDispatch, useSelector} from "react-redux";
 import {ProdCard, TagBox} from "../Catalog/ProdCard";
-import {getCurrencySymb} from "../../Hooks/GetFunctions";
+import {getCurrencySymb, getServerToLink} from "../../Hooks/GetFunctions";
 import {Link, useNavigate} from "react-router-dom";
-import {useGetTags} from "../../Hooks/useGetTags";
+import {useGetContent} from "../../Hooks/useGetContent";
 
 export const HeaderSearch = (props) => {
   const {hasDropDown} = props;
@@ -46,7 +46,7 @@ export const HeaderSearch = (props) => {
           onBlur={() => {
             // setDDIsVisiable(false)
             if(!hasDropDown){
-              navigate('/search')
+              navigate(`/${getServerToLink(config.lang)}/search`)
             }
           }}
         />
@@ -62,7 +62,7 @@ export const HeaderSearch = (props) => {
                 return <SearchDDItem
                   itemId={item.id}
                   name={item.name}
-                  price={`${item.price} ${getCurrencySymb(config.currency)}`}
+                  price={`${Math.ceil(item.price)} ${getCurrencySymb(config.currency)}`}
                 />
               }
               if(index === 5){
@@ -70,7 +70,7 @@ export const HeaderSearch = (props) => {
               }
             })}
             {config.searchResults && config.searchResults.length > 0 && (
-              <Link className="search__dd-link" to="/search">{lang.GotoSearchPage}</Link>
+              <Link className="search__dd-link" to={`/${getServerToLink(config.lang)}/search`}>{lang.GotoSearchPage}</Link>
             )}
             {config.searchResults && config.searchResults.length === 0 && (
               <div className="search__dd-link text-muted">{lang.nothingFound}</div>
@@ -84,14 +84,20 @@ export const HeaderSearch = (props) => {
 
 const SearchDDItem = (props) => {
   const {name, price, itemId} = props;
-  const tags = useGetTags(itemId);
+  const content = useGetContent(itemId);
+  const config = useSelector(state => state);
 
   return(
-    <Link className="search__dd-item" to={`/prod/${itemId}`}>
+    <Link className="search__dd-item" to={`/${getServerToLink(config.lang)}/prod/${itemId}`}>
       <div className="search__dd-row row align-items-center">
         <div className="col-auto">
           <div className="search__item-img">
-            <img loading="lazy" src={`https://graph.digiseller.ru/img.ashx?id_d=${itemId}&w=48&h=48&crop=true`} alt=""/>
+            {!content.imgGallery && (
+              <img loading="lazy" src={`https://graph.digiseller.ru/img.ashx?id_d=${itemId}&w=48&h=48&crop=true`} alt=""/>
+            )}
+            {content.imgGallery && (
+              <img loading="lazy" src={content.imgGallery[0]} alt=""/>
+            )}
           </div>
         </div>
         <div className="col">
@@ -100,7 +106,7 @@ const SearchDDItem = (props) => {
         </div>
         <div className="col-auto">
           <div className="row align-items-center gx-3">
-            {tags.map((tag, index) => {
+            {content.tags.map((tag, index) => {
               return <div className="col-auto" key={index}>
                 <TagBox txt={tag.txt.trim()} color={tag.color}/>
               </div>

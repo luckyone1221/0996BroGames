@@ -3,6 +3,7 @@ import logo from "../../img/Logo.png"
 import {Discord, Mail, Telegram} from "../../SvgSpriptes";
 import {useLanguage} from "../../Hooks/UseLang";
 import {useSelector} from "react-redux";
+import {getServerToLink} from "../../Hooks/GetFunctions";
 
 export const Footer = (props) => {
   const config = useSelector(state => state);
@@ -13,19 +14,19 @@ export const Footer = (props) => {
       <div className="container">
         <div className="footer__row row align-items-center">
           <div className="footer__col--left col col-lg-auto">
-            <Link className="footer__logo" to="/">
+            <Link className="footer__logo" to={`/${getServerToLink(config.lang)}/`}>
               <img loading="lazy" src={logo} alt=""/>
               <span className="footer__logo-txt">BroGames</span>
             </Link>
           </div>
           <div className="footer__col--middle col-lg order-last order-lg-0">
             <div className="footer__menu">
-              <Link to="/catalog/accounts">{lang.accounts}</Link>
-              <Link to="/catalog/keys">{lang.keys}</Link>
-              <Link to="/catalog/topUp">{lang.topUp}</Link>
-              <Link to="/catalog/currency">{lang.currency}</Link>
-              <Link to="/about">{lang.about}</Link>
-              <Link to="/policy">{lang.policy}</Link>
+              <Link to={`/${getServerToLink(config.lang)}/catalog/accounts`}>{lang.accounts}</Link>
+              <Link to={`/${getServerToLink(config.lang)}/catalog/keys`}>{lang.keys}</Link>
+              <Link to={`/${getServerToLink(config.lang)}/catalog/topUp`}>{lang.topUp}</Link>
+              <Link to={`/${getServerToLink(config.lang)}/catalog/currency`}>{lang.currency}</Link>
+              <Link to={`/${getServerToLink(config.lang)}/about`}>{lang.about}</Link>
+              <Link to={`/${getServerToLink(config.lang)}/policy`}>{lang.policy}</Link>
             </div>
           </div>
           <div className="footer__col--right col-auto">

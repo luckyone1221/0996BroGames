@@ -1,6 +1,31 @@
 {
   "allPossibleProdTypes": ["accounts", "topUp", "currency", "keys", "all"],
   "feedBackFallBackId": "3403743",
+  "3771951" : {
+    "imgGallery": [
+      "https://wallpaperaccess.com/full/8647411.jpg",
+      "https://wallpaperaccess.com/full/8647411.jpg",
+      "https://wallpaperaccess.com/full/8647411.jpg"
+    ],
+    "tags": [
+      {
+        "txt": "KeysExample",
+        "color": "rgba(0, 183, 183, 0.7)"
+      },
+      {
+        "txt": "PCExample",
+        "color": "rgba(240, 105, 29, 0.7)"
+      }],
+    "ru-Ru": {
+      "descr": "Первинний дескрипшн",
+      "addDescr": "Вторинний дескрипшн"
+    },
+    "en-US": {
+      "descr": "Primary description",
+      "addDescr": "Secondary Description"
+    },
+    "prodType": "keys"
+  },
   "3452912" : {
     "tags": [
       {

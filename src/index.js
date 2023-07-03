@@ -31,7 +31,7 @@ if(window.localStorage.getItem('BroGamesCartResponse')){
 }
 
 const defaultState = {
-  lang: 'en-US',//ru-Ru
+  lang: 'ru-Ru',//ru-Ru
   currency: "RUB",//USD//UAH
 
   prodType: "all",

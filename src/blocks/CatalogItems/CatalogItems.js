@@ -1,4 +1,4 @@
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import React, {useEffect, useRef, useState} from 'react'
 import Select from 'react-select'
 
@@ -7,29 +7,24 @@ import {
   getCatalogList, getCurrencySymb,
   getProdTypeOption,
   getProducts,
-  getSelectClasses,
-  getSortOrderOption
+  getSelectClasses, getServerToLink,
+  getSortOrderOption, getSubcategoryNameById
 } from "../../Hooks/GetFunctions";
 import ReactPaginate from 'react-paginate';
 import {useDispatch, useSelector} from "react-redux";
 import {ProdCard} from "../Catalog/ProdCard";
 import {ChevronLeftPagin, ChevronRightPagin} from "../../SvgSpriptes";
+import {useTrackSubcategories} from "../../Hooks/useTrackSubcategories";
+import {log} from "util";
 
 
 export const CatalogItems = (props) => {
   const {productType} = props;
 
   const config = useSelector(state => state);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const lang = useLanguage().CatalogItems;
-  //
-  useEffect(() => {
-    dispatch({type: "CHANGE_PRODTYPE", payload: productType});
-    dispatch({type: "CHANGE_PLATFORM", payload: undefined});
-  }, [navigate])
-
-  //select options
+  const langAll = useLanguage();
+  const lang = langAll.CatalogItems;
+  const trackSubcategoriesDone = useTrackSubcategories(productType);
 
   //again
   const [totalPages, setTotalPages] = useState(-1);
@@ -39,28 +34,34 @@ export const CatalogItems = (props) => {
 
   //when list of products can change (changing category/subcategory)
   useEffect(() => {
-    setCurrentPage(1);
+    if(trackSubcategoriesDone){
+      setCurrentPage(1);
 
-    getProducts(config).then((data) => {
-      if(data.product){
-        setTotalPages(data.totalPages);
-        SetProducts([...data.product]);
-      }
-      else{
-        SetProducts([]);
-        setAlertTxt(lang.nothingFound);
-      }
-    })
-  }, [config.prodType, config.currentPlatform])
+      getProducts(config).then((data) => {
+        if(data.product){
+          setTotalPages(data.totalPages);
+          SetProducts([...data.product]);
+        }
+        else{
+          SetProducts([]);
+          setAlertTxt(lang.nothingFound);
+        }
+      })
+    }
+
+  }, [config.prodType, config.currentPlatform, trackSubcategoriesDone])
 
   //when refreshing data in products or changing page
   useEffect(() => {
-    getProducts(config, currentPage).then((data) => {
-      if(data.product){
-        SetProducts([...data.product]);
-      }
-    })
+    if(trackSubcategoriesDone) {
+      getProducts(config, currentPage).then((data) => {
+        if (data.product) {
+          SetProducts([...data.product]);
+        }
+      })
+    }
   }, [config.lang, config.currency, config.sortOrder, currentPage]);
+
 
   return (
     <section className="sItems section">
@@ -68,7 +69,14 @@ export const CatalogItems = (props) => {
         <div className="sItems__top-row row align-items-center">
           <div className="col-md">
             <div className="section-title">
-              <h1>{lang.title}</h1>
+              <h1>
+                {/*{config.currentPlatform ? config.currentPlatform : "all subcategories"}*/}
+                {config.prodType == "all" ? lang.title : (
+                  <>
+                  {!config.currentPlatform && (<>{lang.all} </>)}<span className={"text-capitalize"}>{config.prodType}</span> {config.currentPlatform ? (<>{lang.for} {getSubcategoryNameById(config.currentPlatform, config)}</>) : ""}
+                  </>
+                )}
+              </h1>
             </div>
           </div>
           {/*<ProdTypeSelect/>*/}
@@ -83,7 +91,7 @@ export const CatalogItems = (props) => {
                     itemId={item.id}
                     name={item.name}
                     isAvailable={item.is_available}
-                    price={`${item.price} ${getCurrencySymb(item.currency)}`}
+                    price={`${Math.ceil(item.price)} ${getCurrencySymb(item.currency)}`}
                   />
                 </div>
               })}
@@ -158,7 +166,7 @@ export const ProdTypeSelect = (props) => {
       options={productTypeOptions}
       onChange={(e) => {
         console.log()
-        onChangeHandler ? onChangeHandler(e) : navigate(e.value);
+        onChangeHandler ? onChangeHandler(e) : navigate(`/${getServerToLink(config.lang)}${e.value}`);
       }}
     />
   )

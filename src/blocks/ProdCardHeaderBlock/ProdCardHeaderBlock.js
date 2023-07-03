@@ -1,9 +1,9 @@
 import {CartIcon, ChevronLeft, ChevronRight, Vimeo, YouTube} from "../../SvgSpriptes";
 import {useLanguage} from "../../Hooks/UseLang";
 import {TagBox} from "../Catalog/ProdCard";
-import {useGetTags} from "../../Hooks/useGetTags";
+import {useGetContent} from "../../Hooks/useGetContent";
 import React, {useEffect, useState} from "react";
-import {getCurrencySymb} from "../../Hooks/GetFunctions";
+import {getCurrencySymb, getServerToLink} from "../../Hooks/GetFunctions";
 import {useDispatch, useSelector} from "react-redux";
 import {addToCart} from "../../Hooks/cartFunctions";
 import {useCartActiveClasses} from "../../Hooks/useCartActiveClasses";
@@ -22,12 +22,9 @@ export const ProdCardHeaderBlock = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const lang = useLanguage().ProdCardHeaderBlock;
-  const tags = useGetTags(product.id);
   const cartBtnActiveClasses = useCartActiveClasses(product.id);
-
+  const content = useGetContent(product.id);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  // console.log(videoArr)
-  //<iframe width="560" height="315" src="https://www.youtube.com/embed/dEUJsvHSK40" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
   return (
     <section className="section sProd">
@@ -50,7 +47,14 @@ export const ProdCardHeaderBlock = (props) => {
                   slidesPerView={1}
                   autoplay={true}
                 >
-                  {imgArr.map((item, index) => {
+                  {content.imgGallery && content.imgGallery.map((item,index) => {
+                    return <SwiperSlide key={index}>
+                      <div className="sProd__img">
+                        <img src={item} alt=""/>
+                      </div>
+                    </SwiperSlide>
+                  })}
+                  {!content.imgGallery && imgArr.map((item, index) => {
                     return <SwiperSlide key={index}>
                       <div className="sProd__img">
                         <img src={item.url} alt=""/>
@@ -87,7 +91,14 @@ export const ProdCardHeaderBlock = (props) => {
                     watchSlidesProgress
                     onSwiper={setThumbsSwiper}
                   >
-                    {imgArr.map((item, index) => {
+                    {content.imgGallery && content.imgGallery.map((item,index) => {
+                      return <SwiperSlide key={index}>
+                        <div className="sProd__thumb-img">
+                          <img src={item} alt=""/>
+                        </div>
+                      </SwiperSlide>
+                    })}
+                    {!content.imgGallery && imgArr.map((item, index) => {
                       return <SwiperSlide key={index}>
                         <div className="sProd__thumb-img">
                           <img src={item.url} alt=""/>
@@ -125,7 +136,7 @@ export const ProdCardHeaderBlock = (props) => {
                 <h1>{product.name}</h1>
               </div>
               <div className="sProd__tags-row row">
-                {tags.map((tag,index) => {
+                {content.tags.map((tag,index) => {
                   return <div key={index} className="col-auto">
                     <TagBox txt={tag.txt.trim()} color={tag.color}/>
                   </div>
@@ -139,7 +150,7 @@ export const ProdCardHeaderBlock = (props) => {
                       dispatch({type: "CHANGE_CARTUID", payload: data.cart_uid});
                       dispatch({type: "SET_CARTRESPONSE", payload: data});
                     }).then(() => {
-                      navigate('/cart');
+                      navigate(`/${getServerToLink(config.lang)}/cart`);
                     })
                   }}>
                     {product.is_available === 0 ? lang.noAvailable : lang.buyNow}
@@ -158,7 +169,7 @@ export const ProdCardHeaderBlock = (props) => {
                 <div className="col-auto">
                   <div className="sProd__how-txt" onClick={() => {
                     dispatch({type: "CHANGE_SCROLLTO", payload: "#sHow"});
-                    navigate('/about')
+                    navigate(`/${getServerToLink(config.lang)}/about`)
                   }}>
                     {lang.howItWorks}
                   </div>

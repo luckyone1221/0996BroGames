@@ -65,7 +65,7 @@ export const Recent = (props) => {
               <ProdCard
                 name={item.name}
                 isAvailable={item.is_available}
-                price={`${item.price} ${getCurrencySymb(item.currency)}`}
+                price={`${Math.ceil(item.price)} ${getCurrencySymb(item.currency)}`}
                 itemId={item.id}
               />
             </SwiperSlide>

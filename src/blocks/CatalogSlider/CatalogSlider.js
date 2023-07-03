@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import {EffectFade, Pagination, Autoplay} from "swiper";
 import {useLanguage} from "../../Hooks/UseLang";
 import {useEffect, useState} from "react";
-import {getProducts} from "../../Hooks/GetFunctions";
+import {getProducts, getServerToLink} from "../../Hooks/GetFunctions";
 import {useDispatch, useSelector} from "react-redux";
 import {addToCart} from "../../Hooks/cartFunctions";
 
@@ -76,7 +76,7 @@ const CatalogSlide = (props) => {
             dispatch({type: "CHANGE_CARTUID", payload: data.cart_uid});
             dispatch({type: "SET_CARTRESPONSE", payload: data});
           }).then(() => {
-            navigate('/cart');
+            navigate(`/${getServerToLink(config.lang)}/cart`);
           })
         }}>{lang.general.buyNow}</button>
       </div>

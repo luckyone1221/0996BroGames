@@ -11,7 +11,7 @@ import {Link} from "react-router-dom";
 import steam from '../../img/svg/steam.svg'
 import {useLanguage} from "../../Hooks/UseLang";
 import {ProdCard} from "./ProdCard";
-import {getCurrencySymb, getProducts} from "../../Hooks/GetFunctions";
+import {getCurrencySymb, getProducts, getServerToLink} from "../../Hooks/GetFunctions";
 import {useSelector} from "react-redux";
 
 export const Catalog = (props) => {
@@ -164,7 +164,7 @@ export const Catalog = (props) => {
           onSwiper={setSlider}
         >
           <SwiperSlide>
-            <Link className="prodCard sCatalog__steam-card" to={'/prod/3788147'}>
+            <Link className="prodCard sCatalog__steam-card" to={`/${getServerToLink(config.lang)}/prod/3788147`}>
               <div className="sCatalog__steam-img text-center">
                 <img loading="lazy" src={steam} alt=""/>
               </div>
@@ -180,7 +180,7 @@ export const Catalog = (props) => {
                 itemId={item.id}
                 name={item.name}
                 isAvailable={item.is_available}
-                price={`${item.price} ${getCurrencySymb(item.currency)}`}
+                price={`${Math.ceil(item.price)} ${getCurrencySymb(item.currency)}`}
               />
             </SwiperSlide>
           })}

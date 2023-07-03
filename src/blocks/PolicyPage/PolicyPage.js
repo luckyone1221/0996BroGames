@@ -1,7 +1,9 @@
 import {Header} from "../Header/Header";
 import {Footer} from "../Footer/Footer";
+import {useTrackLang} from "../../Hooks/useTrackLang";
 
 export const PolicyPage = (props) => {
+  const trackLang = useTrackLang();
 
   return(
     <div className="main-wrapper">
