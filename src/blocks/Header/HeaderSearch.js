@@ -43,14 +43,16 @@ export const HeaderSearch = (props) => {
           onFocus={() => {
             setDDIsVisiable(true)
           }}
-          onBlur={() => {
-            // setDDIsVisiable(false)
-            if(!hasDropDown){
-              navigate(`/${getServerToLink(config.lang)}/search`)
-            }
-          }}
+          // onBlur={() => {
+          //   // setDDIsVisiable(false)
+          //   if(!hasDropDown){
+          //     navigate(`/${getServerToLink(config.lang)}/search`)
+          //   }
+          // }}
         />
-        <div className="search__inp-icon">
+        <div className="search__inp-icon" onClick={() => {
+          navigate(`/${getServerToLink(config.lang)}/search`)
+        }}>
           <Zoom/>
         </div>
       </div>

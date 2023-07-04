@@ -116,12 +116,21 @@ export const getSearchResults = async (config) => {
     let content = response.data;//your xml string variable
     if (typeof content === 'string') {
       let parsed = new DOMParser().parseFromString(content, "text/xml");
+      console.log(parsed);
 
       let products = parsed.getElementsByTagName('product');
       for(let product of products){
-        let id = product.getElementsByTagName('id')[0].innerHTML;
-        let name = product.getElementsByTagName('name')[0].innerHTML;
-        let price = product.getElementsByTagName('price')[0].innerHTML;
+        let id;
+        let name;
+        let price;
+        try {
+          id = product.getElementsByTagName('id')[0].innerHTML;
+          name = product.getElementsByTagName('name')[0].innerHTML;
+          price = product.getElementsByTagName('price')[0].innerHTML;
+        }
+        catch (e){
+          console.log(e)
+        }
 
         result.push({
           id: id,
@@ -283,6 +292,7 @@ export const getSelectClasses = (state) => {
 export const getCurrencySymb = (string) =>{
   return string
     .replace("RUR", "₽")
+    .replace("RUB", "₽")
     .replace("UAH", "₴")
     .replace("USD", "$")
 }

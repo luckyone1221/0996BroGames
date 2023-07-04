@@ -76,6 +76,7 @@ function useMobMenu(){
 }
 
 export const Header = (props) => {
+  const {hideSearch} = props;
   const config = useSelector(state => state);
   const dispatch = useDispatch();
 
@@ -96,9 +97,11 @@ export const Header = (props) => {
 
   //search changes
   useEffect(() => {
-    getSearchResults(config).then((data) => {
-      dispatch({type: "CHANGE_SEARCH_RESULTS", payload: data});
-    })
+    if(!hideSearch){
+      getSearchResults(config).then((data) => {
+        dispatch({type: "CHANGE_SEARCH_RESULTS", payload: data});
+      })
+    }
   }, [navigate, config.searchTxt , config.lang, config.currency])
 
 
@@ -115,9 +118,11 @@ export const Header = (props) => {
             <div className="col d-none d-xl-block">
               <HeaderMenu currLocation={currLocation}/>
             </div>
-            <div className="col-auto d-none d-md-block">
-              <HeaderSearch hasDropDown={true}/>
-            </div>
+            {!hideSearch && (
+              <div className="col-auto d-none d-xl-block">
+                <HeaderSearch hasDropDown={true}/>
+              </div>
+            )}
             <div className="col-auto">
               <Link to={`/${getServerToLink(config.lang)}/cart`} className={`header__cart ${config.cartResponse && config.cartResponse.products && config.cartResponse.products.length > 0 && "active"}`} data-count={config.cartResponse && config.cartResponse.products && config.cartResponse.products.length}>
                 <CartIcon/>
@@ -137,7 +142,7 @@ export const Header = (props) => {
           </div>
         </div>
       </header>
-      <MobMenu isVible={mobMenuActive} currLocation={currLocation}/>
+      <MobMenu isVible={mobMenuActive} currLocation={currLocation} hideSearch={hideSearch}/>
     </>
   )
 }

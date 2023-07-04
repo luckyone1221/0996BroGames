@@ -185,7 +185,7 @@
     ]
   },
   "SearchPage": {
-    "title": "Search:",
+    "title": "Search",
     "totalResults": "Total result:",
     "nothingFound": "Nothing Found"
   }

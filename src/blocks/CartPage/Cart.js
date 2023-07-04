@@ -6,6 +6,7 @@ import {getCurrencySymb, getServerToLink} from "../../Hooks/GetFunctions"
 import {addToCart, changeCartItemAmount} from "../../Hooks/cartFunctions";
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+import {useGetContent} from "../../Hooks/useGetContent";
 
 export const Cart = (props) => {
   const {} = props;
@@ -19,6 +20,7 @@ export const Cart = (props) => {
     })
   }, [config.lang, config.currency])
 
+  console.log(config.cartResponse)
   return (
     <section className="section sCart">
       <div className="container">
@@ -52,7 +54,7 @@ export const Cart = (props) => {
               <div className="sCart__s-total-wrap">
                 <div className="sCart__s-total-txt">{lang.total}</div>
                 <div className="sCart__s-price">
-                  {config.cartResponse && Math.ceil(Number(config.cartResponse.amount.replace(',', '.')))}
+                  {config.cartResponse && config.cartResponse.amount && Math.ceil(Number(config.cartResponse.amount.replace(',', '.')))}
                   {config.cartResponse && config.cartResponse.products && getCurrencySymb(config.cartResponse.currency)}</div>
               </div>
               {/*<div className="btn btn-danger">cleanUp</div>*/}
@@ -90,13 +92,19 @@ const CartItem = (props) => {
   const [countBtnMute, setCountBtnMute] = useState(false);
   const config = useSelector(state => state);
   const dispatch = useDispatch();
+  const content = useGetContent(id);
 
   return(
     <div className="sCart__item">
       <div className="sCart__i-row row align-items-center">
         <div className="col-sm-auto sCart__i-col sCart__i-col--left">
           <Link className="sCart__img" to={`/${getServerToLink(config.lang)}/prod/${id}`}>
-            <img src={`https://graph.digiseller.ru/img.ashx?id_d=${id}&w=248&h=248&crop=true`} alt=""/>
+            {content.imgGallery && (
+              <img src={content.imgGallery[0]} alt=""/>
+            )}
+            {!content.imgGallery && (
+              <img src={`https://graph.digiseller.ru/img.ashx?id_d=${id}&w=248&h=248&crop=true`} alt=""/>
+            )}
           </Link>
         </div>
         <div className="col-sm-auto sCart__i-col sCart__i-col--right">

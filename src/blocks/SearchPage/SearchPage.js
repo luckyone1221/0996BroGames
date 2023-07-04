@@ -8,7 +8,7 @@ export const SearchPage = (props) => {
 
   return(
     <div className="main-wrapper main-wrapper--catalog">
-      <Header/>
+      <Header hideSearch={true}/>
       <main>
         <Search/>
       </main>

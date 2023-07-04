@@ -216,7 +216,8 @@
     }
     &__input{
       width: rem(280);
-      padding-left: rem(36);
+      height: rem(36);
+      padding-right: rem(48);
 
       border-radius: rem(60);
       font-size: 12px;
@@ -225,18 +226,35 @@
       border: none;
     }
     &__inp-icon{
+      @include mt();
+      cursor: pointer;
       position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      left: rem(12);
-      width: rem(16);
+      top: 0;
+      right: 0;
+      width: rem(36);
+      height: rem(36);
+      border-radius: 50%;
+      padding: rem(8);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
 
       & > *{
         max-width: 100%;
       }
 
+      background: rgba($black, .1);
       path{
         stroke: #7A7A7A!important;
+      }
+
+      &:hover{
+        background: $primary;
+        path{
+          stroke: white!important;
+        }
       }
     }
 

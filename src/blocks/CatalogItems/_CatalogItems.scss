@@ -75,6 +75,42 @@
 
     color: rgba($white, 0.5);
   }
+
+  //
+  &__input-wrap{
+    position: relative;
+    margin-bottom: rem(20);
+
+    border-radius: rem(8);
+    overflow: hidden;
+  }
+  &__input{
+    font-size: rem(18);
+    font-weight: 400;
+    background: #2D2A2A!important;
+    border: none!important;
+    padding-right: rem(60);
+  }
+  &__search-btn{
+    @extend .btn;
+    @extend .btn-primary;
+    top: 0;
+    right: 0;
+    position: absolute;
+    width: rem(50);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: rem(12);
+    border-radius: rem(8);
+
+    svg{
+      width: auto;
+      height: 100%;
+    }
+  }
+  &__{}
   &__{}
 }
 
